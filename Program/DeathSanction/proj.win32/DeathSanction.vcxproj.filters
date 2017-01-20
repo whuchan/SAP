@@ -103,6 +103,12 @@
     <Filter Include="src\Lib\Sound">
       <UniqueIdentifier>{8c5f913e-2dd7-4ed3-a5e5-b14fa1bb9119}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\Character\Weapon">
+      <UniqueIdentifier>{77c781f4-1f9b-4817-9210-7ba928f492f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Weapon">
+      <UniqueIdentifier>{da68186c-dea6-442e-9a27-d558f860e5cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

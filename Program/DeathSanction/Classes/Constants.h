@@ -75,6 +75,20 @@ void ClearAndSwap( Ty p_ ) { p_->clear() ; Ty().swap( *p_ ) ; }
 #define IMAGE_HATENABLOCK_GIMMICK "Images/hatenaBlock.png"
 
 
+//-------------------------------------------------------------------------
+//
+// 武器
+//
+//-------------------------------------------------------------------------
+//剣
+#define IMAGE_WEAPON_SWORD	"Images/Weapon/Weapon.png"
+//斧
+#define IMAGE_WEAPON_AX		"Images/Weapon/Weapon.png"
+//槍
+#define IMAGE_WEAPON_SPEAR	"Images/Weapon/Weapon.png"
+//ナイフ
+#define IMAGE_WEAPON_KNIFE	"Images/Weapon/Weapon.png"
+
 
 //=========================================================================
 //	サウンドファイルのマクロはここから書く
