@@ -20,6 +20,9 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
+	//ゲームメイン管理クラスの解放
+	CGameMainManager::removeInstance();
+
 	//音楽管理クラスの解放処理
 	CSoundManager::getInstance()->removeInstance();
 
@@ -86,7 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = CGameMain::createScene();
+    auto scene = CGameMainManager::getInstance()->createScene((int)CGameMainManager::STAGE_NUMBER::ONE);
 
     // run
     director->runWithScene(scene);

@@ -1,11 +1,3 @@
-//
-//  GameMain.h
-//  ActionGame
-//
-//  Created by 永瀬鈴久 on 2015/10/06.
-//
-//
-
 #pragma once
 
 //=========================================================================
@@ -18,157 +10,64 @@
 //=========================================================================
 //	前方宣言
 //=========================================================================
-class CCharacter;
-class CPlayerCharacter;
-class CEnemyLaunchData;
-class CGimmickLaunchData;
+class CStage;
 
-/*
- *	ゲームメインレイヤー
- *
- *		ゲームのメインとなるレイヤー
- *		初めはこの部分に全てを書いていく
- *
- */
-class CGameMain : public cocos2d::Layer
+//==========================================
+//
+// シングルトン
+//
+// Class: CGameMainManager
+//
+// ゲームメイン ステージ管理クラス   
+//
+// 2017/01/20
+//						Author Shinya Ueba
+//==========================================
+class CGameMainManager
 {
 public:
-	//=========================================================================
-	//	ここからは理解出来るまでは変更禁止
-	//=========================================================================
-
-	// デストラクタ
-	~CGameMain() ;
+	enum class STAGE_NUMBER : int
+	{
+		ONE = 0,
+		MAX_STAGE_NUMBER,
+	};
 	
+private:
 	/**
-	 *	@desc	シーンの生成
-	 *	@return	CMain レイヤーを内包したシーンクラスインスタンス
-	 *	@tips	静的メンバ関数
-	 */
-    static cocos2d::Scene* createScene() ;
-	
-	/*
-	 *	@desc	シーン生成時に初期化関数を処理
-	 *			初期化関数失敗時は NULL を返す
-	 */
-    CREATE_FUNC( CGameMain );
-	
-	/**
-	 *	@desc	キーボードのキーを押した際のイベント
-	 *	@param	キーコード
-	 *	@param	イベント
-	 */
-	virtual void onKeyPressed( cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event ) override ;
-	
-	/**
-	 *	@desc	キーボードのキーを離した際のイベント
-	 *	@param	キーコード
-	 *	@param	イベント
-	 */
-	virtual void onKeyReleased( cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* unused_event ) override ;
-	
-	/**
-	 *	@desc	初期化
-	 *	@return	true...成功	false...失敗
-	 */
-    virtual bool init() override ;
-	
-	/**
-	 *	@desc	更新処理
-	 *	@param	経過時間
-	 */
-	virtual void update( float deltaTime_ ) override ;
-	
-	//=========================================================================
-	//	ここまでは理解出来るまでは変更禁止
-	//=========================================================================
-	
-	/*
-	* @desc 画面スクロール
-	* @tips 今回は強制スクロールではなくキャラクターの移動による画面のスクロールとなる
+	* @desc コンストラクタ
 	*/
-	void scroll();
-
-
+	CGameMainManager();
 
 public:
-
-	//=========================================================================
-	//	メンバ宣言
-	//		ゲームメイン内で使用するメンバはここ以降に記述していく
-	//=========================================================================
-	//メインレイヤー
-	cocos2d::Layer* m_pMainLayer = NULL;
-	
-	//UI レイヤー
-	cocos2d::Layer* m_pUILayer = NULL;
-
-	//キャラクターの集まりの本体
-	std::vector<CCharacter*>* m_pCharacters = NULL;
-
-	//出撃スケジュール
-	std::vector<CLaunchTrigger*>* m_pLaunchSchedule = NULL;
-
-
 	/**
-	 *	@desc	チェックと取り外し処理 ( 単体 )
-	 *	@tips	有効フラグが false のインスタンスをレイヤーから取り外す
-	 */
-	template <typename Ty>
-	void checkAndRemove( Ty* pChara ) {
-		
-		if ( pChara->m_activeFlag == false ) {
-			pChara->removeFromParent() ;
-		}
-	}
-	
-	/**
-	 *	@desc	チェックと取り外し処理 ( 複数 )
-	 *	@tips	有効フラグが false のインスタンスをレイヤーと std::vector から取り外す
-	 */
-	template <typename Ty>
-	void checkAndRemove( std::vector<Ty*>* pCharas ) {
-	
-		// ローカル変数の型のテンプレート引数の指定として
-		// テンプレート引数を指定する場合は typename 指定をつけなければならない
-		typename std::vector<Ty*>::iterator itr = pCharas->begin() ;
-		while( itr != pCharas->end() ) {
-		
-			if ( (*itr)->m_activeFlag == false ) {
-			
-				(*itr)->removeFromParent() ;
-				itr = pCharas->erase( itr ) ;
-				
-			} else {
-				itr++ ;
-			}
-		}
-	}
-
-	/**
-	* @desc チェックと解放
-	* @tips 有効フラグがfalseのインスタンスを解放しstd::vectorから取り外す
+	* @desc デストラクタ
 	*/
-	template <typename Ty>
-	void checkAndDelete(std::vector<Ty*>* pVector)
-	{
-		//ローカル変数の型のテンプレート引数の指定として
-		//テンプレート引数を指定する場合はtypename指定をつけなければならない
-		typename std::vector<Ty*>::iterator itr = pVector->begin();
+	~CGameMainManager();
 
-		while (itr != pVector->end())
-		{
-			if ((*itr)->m_activeFlag == false)
-			{
-				SAFE_DELETE((*itr));
+	/**
+	* @desc		指定したステージのシーンを生成
+	* @param	ステージナンバー
+	* @return	ステージを取り付けたシーンインスタンス
+	*/
+	cocos2d::Scene* CGameMainManager::createScene(int intStageNumber);
 
-				itr = pVector->erase(itr);
-			}
-			else
-			{
-				itr++;
-			}
-		}
-	}
-} ;
+	/**
+	* @desc		共有インスタンス取得
+	* @return	共有インスタンス
+	*/
+	static CGameMainManager* getInstance(void);
 
+	/**
+	* @desc		共有インスタンス破棄
+	*/
+	static void removeInstance(void);
+
+private:
+	// 共有インスタンス
+	static CGameMainManager* m_pointerSharedGameMainManager;
+
+	CStage* m_pointerCurrentStage = NULL;
+
+};
+
+//EOF

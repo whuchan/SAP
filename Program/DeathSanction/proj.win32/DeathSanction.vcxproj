@@ -173,6 +173,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Map\Map.cpp" />
     <ClCompile Include="..\Classes\Scene\GameMain\GameMain.cpp" />
+    <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage.cpp" />
+    <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage1.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +208,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.h" />
     <ClInclude Include="..\Classes\Model\Map\Map.h" />
     <ClInclude Include="..\Classes\Scene\GameMain\GameMain.h" />
+    <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage.h" />
+    <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage1.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

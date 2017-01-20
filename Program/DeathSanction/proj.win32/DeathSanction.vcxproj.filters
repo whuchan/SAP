@@ -109,6 +109,12 @@
     <Filter Include="src\Model\Character\Factory\Weapon">
       <UniqueIdentifier>{da68186c-dea6-442e-9a27-d558f860e5cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene\GameMain\Stage">
+      <UniqueIdentifier>{a9522bef-920a-42c8-a62d-5890df320a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\GameMain\Stage\Stage1">
+      <UniqueIdentifier>{7cda6ad0-b470-442f-b5e0-8a4aaefb61fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -200,6 +206,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Lib\Sound\SoundManager.cpp">
       <Filter>src\Lib\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage.cpp">
+      <Filter>src\Scene\GameMain\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage1.cpp">
+      <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +307,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Lib\Sound\SoundManager.h">
       <Filter>src\Lib\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage.h">
+      <Filter>src\Scene\GameMain\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage1.h">
+      <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
