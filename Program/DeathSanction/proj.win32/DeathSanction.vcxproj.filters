@@ -10,6 +10,99 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{93169d44-fc07-4b8d-a8c3-2a01972d92a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\GameMain">
+      <UniqueIdentifier>{92f2f8d4-4fb6-4e3d-8a48-666446cbab41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model">
+      <UniqueIdentifier>{e6852a54-28ae-4be9-983a-acb238065545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character">
+      <UniqueIdentifier>{49521c57-692e-4d2a-9f83-8cc03ef57c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Map">
+      <UniqueIdentifier>{92d83112-bf1e-4ed1-b2a0-b48fa4e13f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory">
+      <UniqueIdentifier>{e389977b-7ab5-4259-b7ef-08ceb42209f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Player">
+      <UniqueIdentifier>{aa32b923-08e5-4913-a2a4-2b7cc6156a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Player">
+      <UniqueIdentifier>{2f5811dc-12b3-4986-9a7f-a539edd202f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Enemy">
+      <UniqueIdentifier>{ed922a88-af02-45fb-b407-401f67575b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Bullet">
+      <UniqueIdentifier>{b2247e0d-7b8e-4680-b7a2-f23bca55f863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Gimmick">
+      <UniqueIdentifier>{7531cf63-0d45-421f-aa88-7b6efad7a4fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Bullet">
+      <UniqueIdentifier>{248e8f9f-3390-498a-a1ca-3048d45739b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Enemy">
+      <UniqueIdentifier>{78527b81-eb3d-4e65-91d7-31a3304157ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick">
+      <UniqueIdentifier>{d1328532-ffbe-4a20-8319-c00a6e01f5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Bullet\FireBall">
+      <UniqueIdentifier>{478ac86c-e58f-4cb5-b979-86860b318323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick\DamageBlock">
+      <UniqueIdentifier>{3b0034d1-a0bf-4896-ac47-a7d7a7770fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick\HatenaBlock">
+      <UniqueIdentifier>{f79827c8-9112-4497-b0de-83deba981728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick\RollBlock">
+      <UniqueIdentifier>{6b88304d-a546-4c7f-9f2c-3e1cccb21f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick\NoteBlock">
+      <UniqueIdentifier>{6c5a4771-9dba-4c43-989f-f2c7c7861638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Gimmick\TikuwaBlock">
+      <UniqueIdentifier>{7fba1159-b624-4393-856e-9c5dfee1e597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib">
+      <UniqueIdentifier>{44349e17-a29e-4697-8e17-9df572e256c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data">
+      <UniqueIdentifier>{ca3b82a2-6bb3-4160-ad8d-ca88f1c7a1f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\ActionController">
+      <UniqueIdentifier>{67aed078-7546-499c-86fd-5ed24f582b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Animation">
+      <UniqueIdentifier>{19e3baf0-dcc7-4f7e-9ae7-a3b7fa56df9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Collision">
+      <UniqueIdentifier>{62e73419-c35d-401a-ad67-676485db88af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\LaunchData">
+      <UniqueIdentifier>{21e0a494-c783-4474-a0d6-0b2cdcb7274f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\LaunchTrigger">
+      <UniqueIdentifier>{d5b576cb-3e41-4b2a-8a9d-504a536ef47a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Move">
+      <UniqueIdentifier>{122b0b31-5628-47c0-ab95-2b62a0d8a650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Physical">
+      <UniqueIdentifier>{c261fdce-9715-471e-b86d-ec4b328c3c1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib\Input">
+      <UniqueIdentifier>{6e20138c-54e7-4c6a-bd43-cf271d43d915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib\Sound">
+      <UniqueIdentifier>{8c5f913e-2dd7-4ed3-a5e5-b14fa1bb9119}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,6 +114,84 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\GameMain\GameMain.cpp">
+      <Filter>src\Scene\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerFactory.cpp">
+      <Filter>src\Model\Character\Factory\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactory.cpp">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\BulletFactory.cpp">
+      <Filter>src\Model\Character\Factory\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\GimmickFactory.cpp">
+      <Filter>src\Model\Character\Factory\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\BulletCharacter.cpp">
+      <Filter>src\Model\Character\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\EnemyCharacter.cpp">
+      <Filter>src\Model\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\FireBallBulletCharacter.cpp">
+      <Filter>src\Model\Character\Bullet\FireBall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\GimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick\DamageBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\HatenaBlockGimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick\HatenaBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\RollBlockGimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick\RollBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\NoteBlockGimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick\NoteBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\PlayerCharacter.cpp">
+      <Filter>src\Model\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Character.cpp">
+      <Filter>src\Model\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.cpp">
+      <Filter>src\Model\Character\Gimmick\TikuwaBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\ActionController\ActionController.cpp">
+      <Filter>src\Data\ActionController</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Animation\Animation.cpp">
+      <Filter>src\Data\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Collision\Collision.cpp">
+      <Filter>src\Data\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Collision\CollisionArea.cpp">
+      <Filter>src\Data\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\LaunchData\LaunchData.cpp">
+      <Filter>src\Data\LaunchData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.cpp">
+      <Filter>src\Data\LaunchTrigger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Move\Move.cpp">
+      <Filter>src\Data\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Physical\Physical.cpp">
+      <Filter>src\Data\Physical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Lib\Input\InputManager.cpp">
+      <Filter>src\Lib\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Map\Map.cpp">
+      <Filter>src\Model\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -31,6 +202,87 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Constants.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\GameMain\GameMain.h">
+      <Filter>src\Scene\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerFactory.h">
+      <Filter>src\Model\Character\Factory\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactory.h">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\BulletFactory.h">
+      <Filter>src\Model\Character\Factory\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\GimmickFactory.h">
+      <Filter>src\Model\Character\Factory\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\BulletCharacter.h">
+      <Filter>src\Model\Character\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\EnemyCharacter.h">
+      <Filter>src\Model\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\FireBallBulletCharacter.h">
+      <Filter>src\Model\Character\Bullet\FireBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\GimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick\DamageBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\HatenaBlockGimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick\HatenaBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\RollBlockGimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick\RollBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\NoteBlockGimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick\NoteBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\PlayerCharacter.h">
+      <Filter>src\Model\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Character.h">
+      <Filter>src\Model\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.h">
+      <Filter>src\Model\Character\Gimmick\TikuwaBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\ActionController\ActionController.h">
+      <Filter>src\Data\ActionController</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Animation\Animation.h">
+      <Filter>src\Data\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Collision\Collision.h">
+      <Filter>src\Data\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Collision\CollisionArea.h">
+      <Filter>src\Data\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\LaunchData\LaunchData.h">
+      <Filter>src\Data\LaunchData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.h">
+      <Filter>src\Data\LaunchTrigger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Move\Move.h">
+      <Filter>src\Data\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Physical\Physical.h">
+      <Filter>src\Data\Physical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Lib\Input\InputManager.h">
+      <Filter>src\Lib\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Map\Map.h">
+      <Filter>src\Model\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
