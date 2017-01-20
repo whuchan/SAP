@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\Physical\Physical.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Lib\Input\InputManager.cpp" />
+    <ClCompile Include="..\Classes\Lib\Sound\SoundManager.cpp" />
     <ClCompile Include="..\Classes\Model\Character\BulletCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Character.cpp" />
     <ClCompile Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.cpp" />
@@ -187,6 +188,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\Physical\Physical.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Lib\Input\InputManager.h" />
+    <ClInclude Include="..\Classes\Lib\Sound\SoundManager.h" />
     <ClInclude Include="..\Classes\Model\Character\BulletCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\Character.h" />
     <ClInclude Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.h" />

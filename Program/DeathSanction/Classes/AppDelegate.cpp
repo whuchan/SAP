@@ -1,4 +1,10 @@
+//==========================================
+// ヘッダインクルード
+//==========================================
 #include "AppDelegate.h"
+
+#include "Lib\Sound\SoundManager.h"
+#include "Lib\Input\InputManager.h"
 #include "Scene/GameMain/GameMain.h"
 
 USING_NS_CC;
@@ -14,6 +20,11 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
+	//音楽管理クラスの解放処理
+	CSoundManager::getInstance()->removeInstance();
+
+	//入力管理クラスの解放処理
+	CInputManager::getInstance()->removeInstance();
 }
 
 //if you want a different context,just modify the value of glContextAttrs

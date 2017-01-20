@@ -198,6 +198,9 @@
     <ClCompile Include="..\Classes\Model\Map\Map.cpp">
       <Filter>src\Model\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Lib\Sound\SoundManager.cpp">
+      <Filter>src\Lib\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Map\Map.h">
       <Filter>src\Model\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Lib\Sound\SoundManager.h">
+      <Filter>src\Lib\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
