@@ -37,7 +37,7 @@ void ClearAndSwap( Ty p_ ) { p_->clear() ; Ty().swap( *p_ ) ; }
 // ウィンドウサイズ
 #define WINDOW_LEFT			(0)
 #define WINDOW_TOP			(480)
-#define WINDOW_RIGHT		(640)
+#define WINDOW_RIGHT		(854)
 #define WINDOW_BOTTOM		(0)
 
 //=========================================================================
@@ -88,4 +88,4 @@ void ClearAndSwap( Ty p_ ) { p_->clear() ; Ty().swap( *p_ ) ; }
 //=========================================================================
 //	その他の外部ファイルのマクロはここから書く
 //=========================================================================
-#define MAP_DATA_SAMPLE "MapData/sampleMapData.tmx"
+#define MAP_DATA_SAMPLE "MapData/Stage1_Test.tmx"

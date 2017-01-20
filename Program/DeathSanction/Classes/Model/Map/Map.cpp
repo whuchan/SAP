@@ -81,6 +81,11 @@ BLOCK_TYPE CMap::checkTile(float posX, float posY, LAYER_TYPE layerType)
 	//レイヤーを取得
 	cocos2d::TMXLayer* pLayer = this->getLayer(this->m_layerName[(int)layerType]);
 
+	if (!pLayer)
+	{	//レイヤーが存在しない場合
+		return BLOCK_TYPE::NONE;
+	}
+
 	//タイルの２次元配列上の座標を取得
 	cocos2d::Point tileCoord = this->getTileCoord(cocos2d::Point(posX, posY));
 
@@ -111,6 +116,13 @@ bool CMap::changeTile(int mapChipID, float posX, float posY, LAYER_TYPE layerTyp
 {
 	//レイヤーを取得
 	cocos2d::TMXLayer* pLayer = this->getLayer(this->m_layerName[(int)layerType]);
+
+	if (!pLayer)
+	{	//レイヤーが存在しない場合
+		return false;
+	}
+
+
 
 	//タイルの２次元配列上の座標を取得
 	cocos2d::Point tileCoord = this->getTileCoord(cocos2d::Point(posX, posY));
@@ -208,7 +220,7 @@ void CMap::checkGimmickLaunch(float posX, float posY)
 
 		float checkPosX = 0.0f;
 
-
+		//
 		if (tileSize.width * this->m_lauchGimmickLine >= WINDOW_RIGHT)
 		{
 			checkPosX = -pt.x + WINDOW_RIGHT;
@@ -217,7 +229,6 @@ void CMap::checkGimmickLaunch(float posX, float posY)
 		{	
 			checkPosX = -pt.x + this->m_lauchGimmickLine * tileSize.width;
 		}
-
 
 		//タイルの２次元配列上の座標を取得（X座標のみをチェック）
 		cocos2d::Point tileCoord = this->getTileCoord(cocos2d::Point(checkPosX, 0.0f));
@@ -263,6 +274,7 @@ void CMap::checkGimmickLaunch(float posX, float posY)
 			this->m_lauchGimmickLine++;
 		}
 	}
+	return;
 }
 
 

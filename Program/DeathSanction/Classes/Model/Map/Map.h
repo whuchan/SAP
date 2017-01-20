@@ -166,7 +166,7 @@ public:
 private:
 	//敵出撃ライン(マップの２次元配列上のタイルのｘ位置)
 	//２０は画面の端＋1つ分の
-	int m_lauchEnemyLine = 20;
+	int m_lauchEnemyLine = 27;
 
 	//ギミック出撃ライン(マップの２次元配列上のタイルのｘ位置)
 	//０は画面の左端
