@@ -81,14 +81,8 @@ CBulletCharacter*  CBulletCreateFactory::createBullet(void)
 	//弾キャラクター部品生成工場の生成
 	CBulletPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -115,16 +109,6 @@ CBulletPartsFactory::~CBulletPartsFactory()
 }
 
 /**
-* @desc アニメーションデータ群の取得
-* @return アニメーションデータ群
-*/
-std::vector<CAnimation*>* CBulletPartsFactory::getAnimations(void)
-{
-	//アニメーションデータ群の作成
-	return new std::vector<CAnimation*>();
-}
-
-/**
 * @desc 移動データの取得
 * @return 移動データ
 */
@@ -133,25 +117,7 @@ CMove*	CBulletPartsFactory::getMove(void)
 	//移動データの作成
 	return new CMove();
 }
-/**
-* @desc 物理演算データ群取得
-* @return 物理演算データ群
-*/
-std::vector<CPhysical*>* CBulletPartsFactory::getPhysicals(void)
-{
-	//適用させる物理演算作成
-	return new std::vector<CPhysical*>();
-}
 
-/**
-* @desc アクションデータ群の取得
-* @return アクションデータ群
-*/
-std::vector<CAction*>* CBulletPartsFactory::getActions(void)
-{
-	//行えるアクション群を作成
-	return new std::vector<CAction*>();
-}
 
 /**
 * @desc 実体データの取得
@@ -231,14 +197,14 @@ void CNormalBulletFactory::settingTexture(CBulletCharacter* pCharacter)
 */
 void CNormalBulletFactory::settingAnimations(CBulletCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 16, 16));
+	pointerAnimation->addChipData(new CChip(0, 0, 16, 16));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -254,13 +220,15 @@ void CNormalBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 */
 void CNormalBulletFactory::settingActions(CBulletCharacter* pCharacter)
 {
+	pCharacter->m_intActionState = 0;
+
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerActions = new std::vector<CAction*>();
+	
+	pointerActions->push_back(new CActionMoveStraight());
 
-	pActions->push_back(new CActionMoveStraight());
 
-	//弾死亡アクションを０番目で設定
-//	pActions->push_back(new CActionBulletDead(2.0f, 6.0f));
+	pCharacter->m_mapAction[0] = pointerActions;
 
 }
 /**
@@ -361,7 +329,7 @@ void CNormalBulletFactory::settingInitialize(CBulletCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 //=======================================================
@@ -420,14 +388,14 @@ void CCustomBulletFactory::settingTexture(CBulletCharacter* pCharacter)
 */
 void CCustomBulletFactory::settingAnimations(CBulletCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 16, 16));
+	pointerAnimation->addChipData(new CChip(0, 0, 16, 16));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -436,9 +404,15 @@ void CCustomBulletFactory::settingAnimations(CBulletCharacter* pCharacter)
 void CCustomBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 {
 	//物理演算データ群の取得
-	std::vector<CPhysical*>* pPhysicals = pCharacter->getPhysicals();
+	pCharacter->m_intPhysicalState = 0;
+	
+	std::vector<CPhysical*>*  pointerPhysical = new std::vector<CPhysical*>();
+
 	//重力演算の設定
-	pPhysicals->push_back(new CPhysicalGravity(-0.15f));
+	pointerPhysical->push_back(new CPhysicalGravity(-0.15f));
+
+	//重力演算の設定
+	pCharacter->m_mapPhysical[pCharacter->m_intPhysicalState] = pointerPhysical;
 }
 /**
 * @desc	 アクションデータ群を設定
@@ -446,14 +420,12 @@ void CCustomBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 */
 void CCustomBulletFactory::settingActions(CBulletCharacter* pCharacter)
 {
-	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
-	pActions->push_back(new CActionMoveStraight());
+	//
+	pointerAction->push_back(new CActionMoveStraight());
 
-	//弾死亡アクションを０番目で設定
-	//	pActions->push_back(new CActionBulletDead(2.0f, 6.0f));
-
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 
 /**
@@ -570,7 +542,7 @@ void CCustomBulletFactory::settingInitialize(CBulletCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -607,14 +579,8 @@ CFireBallBulletCharacter*  CFireBallBulletCreateFactory::createBullet(void)
 	//弾キャラクター部品生成工場の生成
 	CBulletPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -682,14 +648,15 @@ void CFireBallBulletFactory::settingTexture(CBulletCharacter* pCharacter)
 */
 void CFireBallBulletFactory::settingAnimations(CBulletCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーション
-	pAnimations->push_back(new CChipListAnimation(10, true));
-	//直立アニメーションに設定するためのチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 16, 16));
-	(*pAnimations)[0]->addChipData(new CChip(16, 0, 16,16));
+	CAnimation* pointerAnimation = new CChipListAnimation(10, true);
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(0, 0, 16, 16));
+	pointerAnimation->addChipData(new CChip(16, 0, 16, 16));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -697,12 +664,16 @@ void CFireBallBulletFactory::settingAnimations(CBulletCharacter* pCharacter)
 */
 void CFireBallBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 {
-	
 	//物理演算データ群の取得
-	std::vector<CPhysical*>* pPhysicals = pCharacter->getPhysicals();
+	pCharacter->m_intPhysicalState = 0;
+
+	std::vector<CPhysical*>*  pointerPhysical = new std::vector<CPhysical*>();
+
 	//重力演算の設定
-	pPhysicals->push_back(new CPhysicalGravity(-0.15f));
-	
+	pointerPhysical->push_back(new CPhysicalGravity(-0.15f));
+
+	//重力演算の設定
+	pCharacter->m_mapPhysical[pCharacter->m_intPhysicalState] = pointerPhysical;	
 }
 /**
 * @desc	 アクションデータ群を設定
@@ -711,11 +682,14 @@ void CFireBallBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 void CFireBallBulletFactory::settingActions(CBulletCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
-	pActions->push_back(new CActionJump(3.0f, 4));
+	//
+	pointerAction->push_back(new CActionJump(3.0f, 4));
 
-	pActions->push_back(new CActionMoveStraight());
+	pointerAction->push_back(new CActionMoveStraight());
+
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 
 /**
@@ -833,7 +807,7 @@ void CFireBallBulletFactory::settingInitialize(CBulletCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 

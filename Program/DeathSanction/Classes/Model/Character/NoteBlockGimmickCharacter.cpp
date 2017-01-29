@@ -52,10 +52,10 @@ void CNoteBlockGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		// ジャンプアクションの再起動
 		//=====================================================================
 		//ジャンプアクションの再起動
-		CActionJump* pAction = (CActionJump*)(*pChara->m_pActions)[0];
+		CActionJump* pAction = (CActionJump*)(*pChara->m_mapAction[pChara->m_intActionState])[0];
 		pAction->m_floatCorrectionValue = 1.5f;
 
-		(*pChara->m_pActions)[0]->restart(pChara);
+		(*pChara->m_mapAction[pChara->m_intActionState])[0]->restart(pChara);
 
 		this->m_state = (int)STATE::HIT_TOP;
 	}

@@ -90,7 +90,7 @@ public:
 	void collisionBottomCallback(int event)
 	{
 		//ƒWƒƒƒ“ƒv‚ð’âŽ~‚³‚¹‚é
-		(*this->m_pActions)[(int)ACTION::JUMP]->stop();
+		(*this->m_mapAction[this->m_intActionState])[(int)ACTION::JUMP]->stop();
 	}
 };
 

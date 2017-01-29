@@ -22,6 +22,6 @@ CFireBallBulletCharacter::~CFireBallBulletCharacter()
 void CFireBallBulletCharacter::collisionBottomCallback(int event)
 {
 	//ƒWƒƒƒ“ƒv‚ğÄŠJ‚³‚¹‚é
-	(*this->m_pActions)[0]->restart(this);
+	(*this->m_mapAction[this->m_intActionState])[0]->restart(this);
 }
 

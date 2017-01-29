@@ -84,14 +84,8 @@ CEnemyCharacter*  CEnemyCreateFactory::createEnemy(void)
 	//敵キャラクター部品生成工場の生成
 	CEnemyPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -117,15 +111,6 @@ CEnemyPartsFactory::~CEnemyPartsFactory()
 
 }
 
-/**
-* @desc アニメーションデータ群の取得
-* @return アニメーションデータ群
-*/
-std::vector<CAnimation*>* CEnemyPartsFactory::getAnimations(void)
-{
-	//アニメーションデータ群の作成
-	return new std::vector<CAnimation*>();
-}
 
 /**
 * @desc 移動データの取得
@@ -136,25 +121,7 @@ CMove*	CEnemyPartsFactory::getMove(void)
 	//移動データの作成
 	return new CMove();
 }
-/**
-* @desc 物理演算データ群取得
-* @return 物理演算データ群
-*/
-std::vector<CPhysical*>* CEnemyPartsFactory::getPhysicals(void)
-{
-	//適用させる物理演算作成
-	return new std::vector<CPhysical*>();
-}
 
-/**
-* @desc アクションデータ群の取得
-* @return アクションデータ群
-*/
-std::vector<CAction*>* CEnemyPartsFactory::getActions(void)
-{
-	//行えるアクション群を作成
-	return new std::vector<CAction*>();
-}
 
 /**
 * @desc 実体データの取得
@@ -227,14 +194,14 @@ void CKuriboFactory::settingTexture(CEnemyCharacter* pCharacter)
 */
 void CKuriboFactory::settingAnimations(CEnemyCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
-	
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	pCharacter->m_intAnimationState = 0;
+
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 64, 64));	
+	pointerAnimation->addChipData(new CChip(0, 0, 64, 64));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -243,9 +210,15 @@ void CKuriboFactory::settingAnimations(CEnemyCharacter* pCharacter)
 void CKuriboFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 {
 	//物理演算データ群の取得
-	std::vector<CPhysical*>* pPhysicals = pCharacter->getPhysicals();
+	pCharacter->m_intPhysicalState = 0;
+
+	std::vector<CPhysical*>*  pointerPhysical = new std::vector<CPhysical*>();
+
 	//重力演算の設定
-	pPhysicals->push_back(new CPhysicalGravity());
+	pointerPhysical->push_back(new CPhysicalGravity());
+
+	//重力演算の設定
+	pCharacter->m_mapPhysical[pCharacter->m_intPhysicalState] = pointerPhysical;
 }
 /**
 * @desc	 アクションデータ群を設定
@@ -254,11 +227,12 @@ void CKuriboFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CKuriboFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
-	//敵死亡アクションを０番目で設定
-	pActions->push_back(new CActionEnemyDead(2.0f, 6.0f));
+	//
+	pointerAction->push_back(new CActionEnemyDead(2.0f, 6.0f));
 
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 /**
 * @desc	 実体データを設定
@@ -360,7 +334,7 @@ void CKuriboFactory::settingInitialize(CEnemyCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -422,14 +396,15 @@ void CGreenNokoNokoFactory::settingTexture(CEnemyCharacter* pCharacter)
 */
 void CGreenNokoNokoFactory::settingAnimations(CEnemyCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
+
+	CAnimation* pointerAnimation = new CChipListAnimation(10, true);
 
 	//歩行アニメーション
-	CAnimation* pAnimation = new CChipListAnimation(10,true);
-	pAnimation->addChipData(new CChip(0,0,32,54));
-	pAnimation->addChipData(new CChip(32, 0, 32, 54));
-	pAnimations->push_back(pAnimation);
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 54));
+	pointerAnimation->addChipData(new CChip(32, 0, 32, 54));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -438,9 +413,15 @@ void CGreenNokoNokoFactory::settingAnimations(CEnemyCharacter* pCharacter)
 void CGreenNokoNokoFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 {
 	//物理演算データ群の取得
-	std::vector<CPhysical*>* pPhysicals = pCharacter->getPhysicals();
+	pCharacter->m_intPhysicalState = 0;
+
+	std::vector<CPhysical*>*  pointerPhysical = new std::vector<CPhysical*>();
+
 	//重力演算の設定
-	pPhysicals->push_back(new CPhysicalGravity());
+	pointerPhysical->push_back(new CPhysicalGravity());
+
+	//重力演算の設定
+	pCharacter->m_mapPhysical[pCharacter->m_intPhysicalState] = pointerPhysical;
 }
 /**
 * @desc	 アクションデータ群を設定
@@ -449,10 +430,12 @@ void CGreenNokoNokoFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CGreenNokoNokoFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
 	//敵死亡アクションを０番目で設定
-	pActions->push_back(new CActionEnemyDead(2.0f, 6.0f));
+	pointerAction->push_back(new CActionEnemyDead(2.0f, 6.0f));
+
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 /**
 * @desc	 実体データを設定
@@ -554,7 +537,7 @@ void CGreenNokoNokoFactory::settingInitialize(CEnemyCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -612,15 +595,15 @@ void CGreenPataPataFactory::settingTexture(CEnemyCharacter* pCharacter)
 */
 void CGreenPataPataFactory::settingAnimations(CEnemyCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
+	CAnimation* pointerAnimation = new CChipListAnimation(10, true);
 
-	//直立アニメーション
-	pAnimations->push_back(new CChipListAnimation(10, true));
-	//直立アニメーションに設定するためのチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 56, 56));
-	(*pAnimations)[0]->addChipData(new CChip(56, 0, 56, 56));
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(0, 0, 56, 56));
+	pointerAnimation->addChipData(new CChip(56, 0, 56, 56));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -636,15 +619,17 @@ void CGreenPataPataFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CGreenPataPataFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
 	//敵死亡アクションを設定
 	//敵キャラクターのアクションに敵死亡＆敵生成アクションを取り付ける（ノコノコを設定）
-	pActions->push_back(new CActionEnemyDeadAndCreateEnemy((int)ENEMY_TYPE::NOKONOKO));
-	
+	pointerAction->push_back(new CActionEnemyDeadAndCreateEnemy((int)ENEMY_TYPE::NOKONOKO));
+
 	//上下移動アクションの取り付け
 	//基準点を初期位置に設定する
-	pActions->push_back(new CActionUpAndDownMove(pCharacter->m_pMove->m_pos,100,0.02f));
+	pointerAction->push_back(new CActionUpAndDownMove(pCharacter->m_pMove->m_pos, 100, 0.02f));
+
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 /**
 * @desc	 実体データを設定
@@ -748,7 +733,7 @@ void CGreenPataPataFactory::settingInitialize(CEnemyCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -811,14 +796,14 @@ void CKillerFactory::settingTexture(CEnemyCharacter* pCharacter)
 */
 void CKillerFactory::settingAnimations(CEnemyCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(32, 0, 32, 32));
+	pointerAnimation->addChipData(new CChip(32, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -835,10 +820,11 @@ void CKillerFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CKillerFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
-	//敵死亡アクションを０番目で設定
-	pActions->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
+	pointerAction->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
+
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 /**
 * @desc	 実体データを設定
@@ -896,7 +882,7 @@ void CKillerFactory::settingInitialize(CEnemyCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -951,14 +937,14 @@ void CKillerBatteryFactory::settingTexture(CEnemyCharacter* pCharacter)
 */
 void CKillerBatteryFactory::settingAnimations(CEnemyCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -974,17 +960,17 @@ void CKillerBatteryFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 */
 void CKillerBatteryFactory::settingActions(CEnemyCharacter* pCharacter)
 {
-	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pCharacter->getActions();
+	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
 
-	pActions->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
+	//
+	pointerAction->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
 
+	pointerAction->push_back(new CActionIntervalCreateEnemy(
+															(int)ENEMY_TYPE::KILLER,
+															30,
+															cocos2d::Point(-16.0f, 0.0f)));
 
-	//定期的敵生成アクションを設定
-	pActions->push_back(new CActionIntervalCreateEnemy(
-														(int)ENEMY_TYPE::KILLER,
-														30,
-														cocos2d::Point(-16.0f,0.0f)));
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
 }
 /**
 * @desc	 実体データを設定
@@ -1042,7 +1028,7 @@ void CKillerBatteryFactory::settingInitialize(CEnemyCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 

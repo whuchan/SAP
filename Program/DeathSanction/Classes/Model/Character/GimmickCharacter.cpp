@@ -50,16 +50,22 @@ bool CGimmickCharacter::init(float posX, float posY)
 //移動処理
 void CGimmickCharacter::moveFunc()
 {
-	//取り付けられているアクションの更新
-	for (CAction* pAction : (*m_pActions))
+	// アクション
+	if (this->m_mapAction[this->m_intActionState])
 	{
-		pAction->update(this);
+		for (CAction* pointerAction : (*this->m_mapAction[this->m_intActionState]))
+		{
+			pointerAction->update(this);
+		}
 	}
 
 	//物理計算
-	for (CPhysical* pPhysical : (*m_pPhysicals))
+	if (this->m_mapPhysical[this->m_intPhysicalState])
 	{
-		pPhysical->update(this->m_pMove);
+		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
+		{
+			pointerPhysical->update(this->m_pMove);
+		}
 	}
 
 	//移動計算
@@ -70,7 +76,10 @@ void CGimmickCharacter::moveFunc()
 void CGimmickCharacter::animationFunc()
 {
 	//アニメーション
-	(*this->m_pAnimations)[this->m_intAnimationState]->update();
+	if (this->m_mapAnimation[this->m_intAnimationState])
+	{
+		this->m_mapAnimation[this->m_intAnimationState]->update();
+	}
 }
 
 /**
@@ -115,7 +124,7 @@ void CGimmickCharacter::applyFunc()
 	this->setPosition(this->m_pMove->m_pos);
 
 	//チップデータを反映
-	this->setTextureRect((*this->m_pAnimations)[this->m_intAnimationState]->getCurrentChip());
+	this->setTextureRect(this->m_mapAnimation[this->m_intAnimationState]->getCurrentChip());
 
 }
 
@@ -205,7 +214,7 @@ void CGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		//最終敵に戻す値
 		pChara->m_pMove->m_pos.y -= boundary;
 
-		(*pChara->m_pActions)[0]->stop();
+		(*pChara->m_mapAction[pChara->m_intActionState])[0]->stop();
 
 		//リセットする値
 		pChara->m_pMove->m_vel.y = 0.0f;

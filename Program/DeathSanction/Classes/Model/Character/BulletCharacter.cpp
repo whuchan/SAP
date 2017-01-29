@@ -49,18 +49,23 @@ bool CBulletCharacter::init(float posX, float posY)
 //移動処理
 void CBulletCharacter::moveFunc()
 {
-	//取り付けられているアクションの更新
-	for (CAction* pAction : (*m_pActions))
+	// アクション
+	if (this->m_mapAction[this->m_intActionState])
 	{
-		pAction->update(this);
+		for (CAction* pointerAction : (*this->m_mapAction[this->m_intActionState]))
+		{
+			pointerAction->update(this);
+		}
 	}
 
 	//物理計算
-	for (CPhysical* pPhysical : (*m_pPhysicals))
+	if (this->m_mapPhysical[this->m_intPhysicalState])
 	{
-		pPhysical->update(this->m_pMove);
+		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
+		{
+			pointerPhysical->update(this->m_pMove);
+		}
 	}
-
 	//移動計算
 	this->m_pMove->moveBy();
 }
@@ -69,7 +74,10 @@ void CBulletCharacter::moveFunc()
 void CBulletCharacter::animationFunc()
 {
 	//アニメーション
-	(*this->m_pAnimations)[this->m_state]->update();
+	if (this->m_mapAnimation[this->m_intAnimationState])
+	{
+		this->m_mapAnimation[this->m_intAnimationState]->update();
+	}
 }
 
 /**
@@ -127,8 +135,7 @@ void CBulletCharacter::applyFunc()
 	this->setPosition(this->m_pMove->m_pos);
 
 	//チップデータを反映
-	this->setTextureRect((*this->m_pAnimations)[this->m_state]->getCurrentChip());
-
+	this->setTextureRect(this->m_mapAnimation[this->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -191,7 +198,7 @@ void CBulletCharacter::hits(CCharacter* pChara)
 		this->m_isAlive = false;
 
 		//敵死亡アクションを起動する
-		(*this->m_pActions)[0]->start();
+		(*this->m_mapAction[this->m_intActionState])[0]->start();
 
 		//=====================================================================
 		// めり込んだ分戻す
@@ -206,7 +213,7 @@ void CBulletCharacter::hits(CCharacter* pChara)
 		// ジャンプアクションの再起動
 		//=====================================================================
 		//ジャンプアクションの再起動
-		(*pChara->m_pActions)[0]->restart(pChara);
+		(*pChara->m_mapAction[pChara->m_intActionState])[0]->restart(pChara);
 
 	}
 	else

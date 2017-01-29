@@ -312,12 +312,6 @@ void CActionEnemyDeadAndAddGravity::update(CCharacter* pChara)
 		//アクション開始
 
 
-		//物理演算データ群の取得
-		std::vector<CPhysical*>* pPhysicals = pChara->getPhysicals();
-		//重力演算の設定
-		pPhysicals->push_back(new CPhysicalGravity());
-
-
 		//アクション中のフラグを立てる
 		this->m_inAction = true;
 

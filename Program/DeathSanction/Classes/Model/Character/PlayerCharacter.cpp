@@ -45,51 +45,9 @@ void CPlayerCharacter::update(float deltaTime)
 */
 void CPlayerCharacter::inputFunc()
 {
-	if (inputflag.m_left == true)
-	{
-		this->m_pMove->m_accele.x = -0.7f;
-	}
 
-	if (inputflag.m_right == true)
-	{
-		this->m_pMove->m_accele.x = 0.7f;
-	}
 
-	if (inputflag.m_up == true)
-	{
-		//ジャンプを開始させる
-		(*this->m_pActions)[(int)ACTION::JUMP]->start();
-	}
 
-	//弾を発射する
-	if (inputflag.m_z == true)
-	{
-
-		if (this->getScaleX() >= 0)
-		{
-			this->m_shotLaunchVector = cocos2d::Vec2(1.0, 0.0f);
-		}
-		else
-		{
-			this->m_shotLaunchVector = cocos2d::Vec2(-1.0, 0.0f);
-		}
-		(*this->m_pActions)[(int)ACTION::SHOT_FIREBALL_BULLET]->start();
-	}
-
-	//弾を発射する
-	if (inputflag.m_x == true)
-	{
-		if (this->getScaleX() >= 0)
-		{
-			this->m_shotLaunchVector = cocos2d::Vec2(1.0, 1.0f);
-		}
-		else
-		{
-			this->m_shotLaunchVector = cocos2d::Vec2(-1.0, 1.0f);
-		}
-
-		(*this->m_pActions)[(int)ACTION::SHOT_CUSTOM_BULLET]->start();
-	}
 }
 
 /**
@@ -97,22 +55,22 @@ void CPlayerCharacter::inputFunc()
 */
 void CPlayerCharacter::moveFunc()
 {
-	/*
-	* 入力処理
-	*　今回入力は入力による移動というカテゴリで扱う
-	*/
-	this->inputFunc();
-
-	//アクション計算
-	for (CAction* pAction : (*this->m_pActions))
+	// アクション
+	if (this->m_mapAction[this->m_intActionState])
 	{
-		pAction->update(this);
+		for (CAction* pointerAction : (*this->m_mapAction[this->m_intActionState]))
+		{
+			pointerAction->update(this);
+		}
 	}
 
 	//物理計算
-	for (CPhysical* pPhysical : (*m_pPhysicals))
+	if (this->m_mapPhysical[this->m_intPhysicalState])
 	{
-		pPhysical->update(this->m_pMove);
+		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
+		{
+			pointerPhysical->update(this->m_pMove);
+		}
 	}
 
 	//移動計算
@@ -123,7 +81,10 @@ void CPlayerCharacter::moveFunc()
 void CPlayerCharacter::animationFunc()
 {
 	//アニメーション
-	(*this->m_pAnimations)[m_state]->update();
+	if (this->m_mapAnimation[this->m_intAnimationState])
+	{
+		this->m_mapAnimation[this->m_intAnimationState]->update();
+	}
 }
 
 /**
@@ -200,7 +161,7 @@ void CPlayerCharacter::applyFunc()
 	this->setPosition(this->m_pMove->m_pos);
 
 	//チップデータを反映
-	this->setTextureRect((*this->m_pAnimations)[m_state]->getCurrentChip());
+	this->setTextureRect(this->m_mapAnimation[this->m_intAnimationState]->getCurrentChip());
 }
 
 /**

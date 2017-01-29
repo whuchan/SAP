@@ -27,9 +27,6 @@ void CTikuwaBlockGimmickCharacter::checkState()
 		{
 			this->m_pMove->m_pos.set(this->m_vec2BasePosition);
 			this->m_state = (int)STATE::NORMAL;
-			int i = this->m_pPhysicals->size();
-			SAFE_DELETE((*this->m_pPhysicals)[0]);
-			this->m_pPhysicals->pop_back();
 
 			this->m_pMove->m_vel.setZero();
 		}
@@ -78,8 +75,6 @@ void CTikuwaBlockGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		{
 			this->m_state = (int)STATE::FALL;
 
-			//d—Í‰‰ŽZ‚ÌÝ’è
-			this->m_pPhysicals->push_back(new CPhysicalGravity());
 		}
 		else
 		{

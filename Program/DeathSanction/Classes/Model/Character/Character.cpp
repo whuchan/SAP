@@ -15,26 +15,55 @@ CCharacter::~CCharacter()
 	}
 
 	SAFE_DELETE(this->m_pBody);
-	
-	for (CAction* pAction : (*m_pActions))
-	{
-		SAFE_DELETE(pAction);
+
+	//アクション群データの削除
+	std::map<int, std::vector<CAction*>* >::iterator iteratorActionIndex = this->m_mapAction.begin();
+	while (iteratorActionIndex != this->m_mapAction.end()) {
+
+		if (iteratorActionIndex->second)
+		{
+			std::vector<CAction*>* pointerActions = iteratorActionIndex->second;
+
+			for (CAction* pointerTarget : *pointerActions)
+			{
+				SAFE_DELETE(pointerTarget);
+			}
+			//クラスのインスタンスを削除
+			SAFE_DELETE(iteratorActionIndex->second);
+		}
+		//イテレーターを更新
+		iteratorActionIndex++;
 	}
 
-	SAFE_DELETE(this->m_pActions);
-	for (CPhysical* pPhysical : (*m_pPhysicals))
-	{
-		SAFE_DELETE(pPhysical);
+	//物理演算データ群の削除
+	std::map<int, std::vector<CPhysical*>* >::iterator iteratorPhysicalIndex = this->m_mapPhysical.begin();
+	while (iteratorPhysicalIndex != this->m_mapPhysical.end()) {
+
+		if (iteratorPhysicalIndex->second)
+		{
+			std::vector<CPhysical*>* pointerPhysicals = iteratorPhysicalIndex->second;
+
+			for (CPhysical* pointerTarget : *pointerPhysicals)
+			{
+				SAFE_DELETE(pointerTarget);
+			}
+			//クラスのインスタンスを削除
+			SAFE_DELETE(iteratorPhysicalIndex->second);
+		}
+		//イテレーターを更新
+		iteratorPhysicalIndex++;
 	}
 
-	SAFE_DELETE(this->m_pPhysicals);
+	//アニメーションデータ群の削除
+	std::map<int, CAnimation* >::iterator iteratorIndexAnimation = this->m_mapAnimation.begin();
+	while (iteratorIndexAnimation != this->m_mapAnimation.end()) {
+		//クラスのインスタンスを削除
+		SAFE_DELETE(iteratorIndexAnimation->second);
+		//イテレーターを更新
+		iteratorIndexAnimation++;
+	}
+
 	SAFE_DELETE(this->m_pMove);
-
-	for (CAnimation* pAnimation : (*m_pAnimations))
-	{
-		SAFE_DELETE(pAnimation);
-	}
-	SAFE_DELETE(this->m_pAnimations);
 }
 
 //初期化処理
@@ -77,15 +106,7 @@ void CCharacter::update(float deltaTime)
 */
 void CCharacter::addAnimations(std::vector<CAnimation*>* pAnimations)
 {
-	//既にデータが入っていたら警告する
-	if (this->m_pAnimations != NULL )
-	{
-		CCLOG("もう既に設定されています");
-		return;
-	}
-
-	//新しいデータを設定する
-	this->m_pAnimations = pAnimations;
+	
 }
 /**
 * @desc  移動データの追加
@@ -109,15 +130,7 @@ void CCharacter::addMove(CMove* pMove)
 */
 void CCharacter::addPhysicals(std::vector<CPhysical*>* pPhysicals)
 { 
-	//既にデータが入っていたら警告する
-	if (this->m_pPhysicals != NULL)
-	{
-		CCLOG("もう既に設定されています");
-		return;
-	}
-
-	//新しいデータを設定する
-	this->m_pPhysicals = pPhysicals;
+	
 }
 /**
 * @desc		アクションデータ群の追加
@@ -125,15 +138,7 @@ void CCharacter::addPhysicals(std::vector<CPhysical*>* pPhysicals)
 */
 void CCharacter::addActions(std::vector<CAction*>* pActions)
 { 
-	//既にデータが入っていたら警告する
-	if (this->m_pActions != NULL)
-	{
-		CCLOG("もう既に設定されています");
-		return;
-	}
-	
-	//新しいデータを設定する
-	this->m_pActions = pActions;
+
 }
 /**
 * @desc	実体データの追加
@@ -169,17 +174,6 @@ void CCharacter::addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas
 	this->m_pCollisionAreas = pCollisionAreas;
 }
 
-
-/**
-* @desc アニメーションデータ群の取得
-* @return アニメーションデータ群
-*/
-std::vector<CAnimation*>* CCharacter::getAnimations(void)
-{
-	return this->m_pAnimations;
-}
-
-
 /**
 * @desc 移動データの取得
 * @return 移動データ
@@ -189,23 +183,6 @@ CMove* CCharacter::getMove(void)
 	return this->m_pMove;
 }
 
-/**
-* @desc 物理演算データの取得
-* @return 物理演算データ
-*/
-std::vector<CPhysical*>* CCharacter::getPhysicals(void)
-{
-	return this->m_pPhysicals;
-}
-
-/**
-* @desc アクションデータの取得
-* @return アクションデータ
-*/
-std::vector<CAction*>*	CCharacter::getActions(void)
-{
-	return this->m_pActions;
-}
 
 /**
 * @desc 実体データの取得

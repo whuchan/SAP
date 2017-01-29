@@ -26,7 +26,7 @@ void CRollBlockGimmickCharacter::checkState()
 		}
 		else
 		{
-			if ((*this->m_pAnimations)[this->m_intAnimationState]->getCurrentFrame()==3)
+			if ((this->m_mapAnimation)[this->m_intAnimationState]->getCurrentFrame()==3)
 			{
 				this->m_state = (int)STATE::NORMAL;
 				this->m_intAnimationState = (int)STATE::NORMAL;

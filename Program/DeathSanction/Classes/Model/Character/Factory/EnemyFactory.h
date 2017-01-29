@@ -19,28 +19,12 @@ public:
 	*/
 	~CEnemyPartsFactory();
 
-	/**
-	* @desc アニメーションデータ群の取得
-	* @return アニメーションデータ群
-	*/
-	std::vector<CAnimation*>*	getAnimations(void)override;
+
 	/**
 	* @desc 移動データの取得
 	* @return 移動データ
 	*/
 	CMove*						getMove(void)override;
-
-	/**
-	* @desc 物理演算データ群取得
-	* @return 物理演算データ群
-	*/
-	std::vector<CPhysical*>*	getPhysicals(void)override;
-
-	/**
-	* @desc アクションデータ群の取得
-	* @return アクションデータ群
-	*/
-	std::vector<CAction*>*		getActions(void)override;
 
 	/**
 	* @desc 実体データの取得

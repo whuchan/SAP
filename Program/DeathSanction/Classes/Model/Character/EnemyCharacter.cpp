@@ -49,16 +49,22 @@ bool CEnemyCharacter::init(float posX, float posY)
 //移動処理
 void CEnemyCharacter::moveFunc()
 {
-	//取り付けられているアクションの更新
-	for (CAction* pAction : (*m_pActions))
+	// アクション
+	if (this->m_mapAction[this->m_intActionState])
 	{
-		pAction->update(this);
+		for (CAction* pointerAction : (*this->m_mapAction[this->m_intActionState]))
+		{
+			pointerAction->update(this);
+		}
 	}
 
 	//物理計算
-	for (CPhysical* pPhysical : (*m_pPhysicals))
+	if (this->m_mapPhysical[this->m_intPhysicalState])
 	{
-		pPhysical->update(this->m_pMove);
+		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
+		{
+			pointerPhysical->update(this->m_pMove);
+		}
 	}
 
 	//移動計算
@@ -69,7 +75,10 @@ void CEnemyCharacter::moveFunc()
 void CEnemyCharacter::animationFunc()
 {
 	//アニメーション
-	(*this->m_pAnimations)[this->m_state]->update();
+	if (this->m_mapAnimation[this->m_intAnimationState])
+	{
+		this->m_mapAnimation[this->m_intAnimationState]->update();
+	}
 }
 
 /**
@@ -142,7 +151,7 @@ void CEnemyCharacter::applyFunc()
 	this->setPosition(this->m_pMove->m_pos);
 
 	//チップデータを反映
-	this->setTextureRect((*this->m_pAnimations)[this->m_state]->getCurrentChip());
+	this->setTextureRect(this->m_mapAnimation[this->m_intAnimationState]->getCurrentChip());
 
 }
 
@@ -201,15 +210,13 @@ void CEnemyCharacter::hitsPlayerCharacter(CCharacter* pChara)
 	float posY = playerFeetPosY - enePosY;
 	if (posY > 0.0f)
 	{
-		//上だった
-		CCLOG("Win");
-
+	
 		//敵の死亡フラグを立てる
 		//つまり生きていいるか死んでいるかのフラグにfalseを入れる
 		this->m_isAlive = false;
 
 		//敵死亡アクションを起動する
-		(*this->m_pActions)[0]->start();
+		(*this->m_mapAction[this->m_intActionState])[0]->start();
 
 		//=====================================================================
 		// めり込んだ分戻す
@@ -224,13 +231,12 @@ void CEnemyCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		// ジャンプアクションの再起動
 		//=====================================================================
 		//ジャンプアクションの再起動
-		(*pChara->m_pActions)[0]->restart(pChara);
+		(*pChara->m_mapAction[pChara->m_intActionState])[0]->restart(pChara);
 
 	}
 	else
 	{
-		//下だった
-		CCLOG("Lose");
+	
 	}
 }
 
@@ -248,7 +254,7 @@ void CEnemyCharacter::hitsBulletCharacter(CCharacter* pChara)
 	this->m_isAlive = false;
 
 	//敵死亡アクションを起動する
-	(*this->m_pActions)[0]->start();
+	(*this->m_mapAction[this->m_intActionState])[0]->start();
 }
 
 

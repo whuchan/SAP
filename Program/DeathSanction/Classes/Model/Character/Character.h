@@ -39,20 +39,11 @@ public:
 	//更新処理
 	virtual void update(float deltaTime)override;
 
-	//アニメーションデータ群
-	std::vector<CAnimation*>* m_pAnimations = NULL;
-
 	//移動データ
 	CMove* m_pMove = NULL;
 
 	//弾の発射方向のベクトル
 	cocos2d::Vec2 m_shotLaunchVector = cocos2d::Vec2(0.0f,0.0f);
-
-	//適用させる物理演算群
-	std::vector<CPhysical*>*	m_pPhysicals = NULL;
-
-	//行えるアクション群
-	std::vector<CAction*>*		m_pActions = NULL;
 
 	//実体データ（衝突判定データの元となるデータ)
 	CBody* m_pBody = NULL;
@@ -60,11 +51,29 @@ public:
 	//衝突判定空間群
 	std::vector <CCollisionArea*>* m_pCollisionAreas = NULL;
 
+	//アニメションデータ群マップ配列
+	std::map<int,CAnimation*>				m_mapAnimation;
+
+	//適用させる物理演算群マップ配列
+	std::map<int, std::vector<CPhysical*>*> m_mapPhysical;
+
+	//アクションデータ群マップ配列
+	std::map<int, std::vector<CAction*>*> m_mapAction;
+
+
 	//状態（派生先によってタイプが変化する）
 	int m_state = 0;
 
+	//適用させる物理演算の状態（派生先によってタイプが変化する）
+	int m_intPhysicalState = 0;
+	
+	//行えるアクションの状態（派生先によってタイプが変化する）
+	int m_intActionState = 0;
+
 	//アニメーションの状態（派生先によってタイプが変化する）
 	int m_intAnimationState = 0;
+
+
 
 	//有効フラグ
 	bool m_activeFlag = false;
@@ -180,12 +189,6 @@ public:
 	void addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas);
 
 
-	/**
-	* @desc アニメーションデータ群の取得
-	* @return アニメーションデータ群
-	*/
-	std::vector<CAnimation*>* getAnimations(void);
-
 
 	/**
 	* @desc 移動データの取得
@@ -193,17 +196,6 @@ public:
 	*/
 	CMove* getMove(void);
 
-	/**
-	* @desc 物理演算データの取得
-	* @return 物理演算データ
-	*/
-	std::vector<CPhysical*>*	getPhysicals(void);
-
-	/**
-	* @desc アクションデータの取得
-	* @return アクションデータ
-	*/
-	std::vector<CAction*>*		getActions(void);
 
 	/**
 	* @desc 実体データの取得
@@ -328,10 +320,7 @@ public:
 // 純粋仮想関数
 //
 //==============================================================
-	virtual std::vector<CAnimation*>*	getAnimations(void)	= 0;
 	virtual CMove*						getMove(void)		= 0;
-	virtual std::vector<CPhysical*>*	getPhysicals(void)	= 0;
-	virtual std::vector<CAction*>*		getActions(void)	= 0;
 	virtual CBody*						getBody(void)		= 0;
 	virtual std::vector<CCollisionArea*>* getCollisionAreas(void) = 0;
 };

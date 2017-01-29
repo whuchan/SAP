@@ -83,14 +83,8 @@ CGimmickCharacter*  CDamageBlockGimmickCreateFactory::createGimmick(void)
 	//ギミックキャラクター部品生成工場の生成
 	CGimmickPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -117,16 +111,6 @@ CGimmickPartsFactory::~CGimmickPartsFactory()
 }
 
 /**
-* @desc アニメーションデータ群の取得
-* @return アニメーションデータ群
-*/
-std::vector<CAnimation*>* CGimmickPartsFactory::getAnimations(void)
-{
-	//アニメーションデータ群の作成
-	return new std::vector<CAnimation*>();
-}
-
-/**
 * @desc 移動データの取得
 * @return 移動データ
 */
@@ -134,25 +118,6 @@ CMove*	CGimmickPartsFactory::getMove(void)
 {
 	//移動データの作成
 	return new CMove();
-}
-/**
-* @desc 物理演算データ群取得
-* @return 物理演算データ群
-*/
-std::vector<CPhysical*>* CGimmickPartsFactory::getPhysicals(void)
-{
-	//適用させる物理演算作成
-	return new std::vector<CPhysical*>();
-}
-
-/**
-* @desc アクションデータ群の取得
-* @return アクションデータ群
-*/
-std::vector<CAction*>* CGimmickPartsFactory::getActions(void)
-{
-	//行えるアクション群を作成
-	return new std::vector<CAction*>();
 }
 
 /**
@@ -230,33 +195,34 @@ void CDamageBlockGimmickFactory::settingTexture(CGimmickCharacter* pCharacter)
 */
 void CDamageBlockGimmickFactory::settingAnimations(CGimmickCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	pCharacter->m_intAnimationState = 0;
 
+	CAnimation* pointerAnimation = new CChipNotAnimation();
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(0, 0, 16, 16));
 
 	switch ((TYPE)this->m_type)
 	{
 	case TYPE::LEFT:	//直立アニメーションに設定する為のチップデータの設定
-						(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+						pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
 						break;
 
 	case TYPE::UP:		//直立アニメーションに設定する為のチップデータの設定
-						(*pAnimations)[0]->addChipData(new CChip(32, 0, 32, 32));
+						pointerAnimation->addChipData(new CChip(32, 0, 32, 32));
 						break;
 
 	case TYPE::RIGHT:	//直立アニメーションに設定する為のチップデータの設定
-						(*pAnimations)[0]->addChipData(new CChip(64, 0, 32, 32));
+						pointerAnimation->addChipData(new CChip(64, 0, 32, 32));
 						break;
 
 	case TYPE::DOWN:	//直立アニメーションに設定する為のチップデータの設定
-						(*pAnimations)[0]->addChipData(new CChip(96, 0, 32, 32));
+						pointerAnimation->addChipData(new CChip(96, 0, 32, 32));
 						break;
 	}
 
-	
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -377,7 +343,7 @@ void CDamageBlockGimmickFactory::settingInitialize(CGimmickCharacter* pCharacter
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 //=======================================================
@@ -413,14 +379,8 @@ CGimmickCharacter*  CRollBlockGimmickCreateFactory::createGimmick(void)
 	//ギミックキャラクター部品生成工場の生成
 	CGimmickPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -485,19 +445,20 @@ void CRollBlockGimmickFactory::settingTexture(CGimmickCharacter* pCharacter)
 */
 void CRollBlockGimmickFactory::settingAnimations(CGimmickCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipAnimation(10,4,true));
-	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[1]->addChipData(new CChip(0, 0, 32, 32));
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
+
+	pointerAnimation = new CChipAnimation(10, 4, true);
+
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[1] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -618,7 +579,7 @@ void CRollBlockGimmickFactory::settingInitialize(CGimmickCharacter* pCharacter)
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 //=======================================================
@@ -654,14 +615,8 @@ CGimmickCharacter*  CTikuwaBlockGimmickCreateFactory::createGimmick(void)
 	//ギミックキャラクター部品生成工場の生成
 	CGimmickPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -722,14 +677,14 @@ void CTikuwaBlockGimmickFactory::settingTexture(CGimmickCharacter* pCharacter)
 */
 void CTikuwaBlockGimmickFactory::settingAnimations(CGimmickCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	CAnimation* pointerAnimation = new CChipNotAnimation();
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -801,7 +756,7 @@ void CTikuwaBlockGimmickFactory::settingInitialize(CGimmickCharacter* pCharacter
 	
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 
@@ -838,14 +793,8 @@ CGimmickCharacter*  CNoteBlockGimmickCreateFactory::createGimmick(void)
 	//ギミックキャラクター部品生成工場の生成
 	CGimmickPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -909,14 +858,14 @@ void CNoteBlockGimmickFactory::settingTexture(CGimmickCharacter* pCharacter)
 */
 void CNoteBlockGimmickFactory::settingAnimations(CGimmickCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipAnimation(10,4,true));
+	CAnimation* pointerAnimation = new CChipAnimation(10, 4, true);
 
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -1039,7 +988,7 @@ void CNoteBlockGimmickFactory::settingInitialize(CGimmickCharacter* pCharacter)
 	((CNoteBlockGimmickCharacter*)pCharacter)->m_vec2BasePosition = pCharacter->getPosition();
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 //=======================================================
@@ -1075,14 +1024,8 @@ CGimmickCharacter*  CHatenaBlockGimmickCreateFactory::createGimmick(void)
 	//ギミックキャラクター部品生成工場の生成
 	CGimmickPartsFactory factory;
 
-	//アニメーションデータ群の設定
-	pCharacter->addAnimations(factory.getAnimations());
 	//移動データの設定
 	pCharacter->addMove(factory.getMove());
-	//物理演算データ群の設定
-	pCharacter->addPhysicals(factory.getPhysicals());
-	//アクションデータ群の設定
-	pCharacter->addActions(factory.getActions());
 	//実体データの設定
 	pCharacter->addBody(factory.getBody());
 	//衝突判定データ群の設定
@@ -1146,20 +1089,21 @@ void CHatenaBlockGimmickFactory::settingTexture(CGimmickCharacter* pCharacter)
 */
 void CHatenaBlockGimmickFactory::settingAnimations(CGimmickCharacter* pCharacter)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pCharacter->getAnimations();
+	pCharacter->m_intAnimationState = 0;
 
-	//通常アニメーションの設定
-	pAnimations->push_back(new CChipAnimation(10,4,true));
+	CAnimation* pointerAnimation = new CChipAnimation(10, 4, true);
 
-	//通常アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[0]->addChipData(new CChip(0, 0, 32, 32));
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(0, 0, 32, 32));
 
-	//衝突後アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
+	pCharacter->m_mapAnimation[0] = pointerAnimation;
 
-	//衝突後アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[1]->addChipData(new CChip(128, 0, 32, 32));
+	pointerAnimation = new CChipNotAnimation();
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(128, 0, 32, 32));
+
+	pCharacter->m_mapAnimation[1] = pointerAnimation;
 
 }
 /**
@@ -1281,7 +1225,7 @@ void CHatenaBlockGimmickFactory::settingInitialize(CGimmickCharacter* pCharacter
 	pCharacter->setPosition(pCharacter->m_pMove->m_pos);
 
 	//チップデータを反映
-	pCharacter->setTextureRect((*pCharacter->m_pAnimations)[pCharacter->m_state]->getCurrentChip());
+	pCharacter->setTextureRect(pCharacter->m_mapAnimation[pCharacter->m_intAnimationState]->getCurrentChip());
 }
 
 

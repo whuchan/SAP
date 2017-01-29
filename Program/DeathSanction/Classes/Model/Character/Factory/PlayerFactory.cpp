@@ -91,14 +91,8 @@ CPlayerCharacter*  CPlayerCreateFactory::createPlayer(void)
 	//プレイヤーキャラクター部品生成工場の生成
 	CCharacterPartsFactory* pFactory = new CPlayerPartsFactory();
 
-	//アニメーションデータ群の設定
-	pPlayer->addAnimations(pFactory->getAnimations());
 	//移動データの設定
 	pPlayer->addMove(pFactory->getMove());
-	//物理演算データ群の設定
-	pPlayer->addPhysicals(pFactory->getPhysicals());
-	//アクションデータ群の設定
-	pPlayer->addActions(pFactory->getActions());
 	//実体データの設定
 	pPlayer->addBody(pFactory->getBody());
 	//衝突判定データ群の設定
@@ -129,25 +123,6 @@ CPlayerPartsFactory::~CPlayerPartsFactory()
 
 }
 
-/**
-* @desc アニメーションデータ群の取得
-* @return アニメーションデータ群
-*/
-std::vector<CAnimation*>* CPlayerPartsFactory::getAnimations(void)
-{
-	//アニメーションデータ群の作成
-	std::vector<CAnimation*>* pAnimations = new std::vector<CAnimation*>;
-	//直立アニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
-	//歩行アニメーションの設定
-	pAnimations->push_back(new CChipListAnimation(10, true));
-	//ダメージを受けたときのアニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
-	//落ちているときのアニメーションの設定
-	pAnimations->push_back(new CChipNotAnimation());
-
-	return pAnimations;
-}
 
 /**
 * @desc 移動データの取得
@@ -157,26 +132,6 @@ CMove*	CPlayerPartsFactory::getMove(void)
 {
 	//移動データの作成
 	return new CMove();
-}
-/**
-* @desc 物理演算データ群取得
-* @return 物理演算データ群
-*/
-std::vector<CPhysical*>* CPlayerPartsFactory::getPhysicals(void)
-{
-	//適用させる物理演算作成
-	return new std::vector<CPhysical*>;
-}
-
-/**
-* @desc アクションデータ群の取得
-* @return アクションデータ群
-*/
-std::vector<CAction*>* CPlayerPartsFactory::getActions(void)
-{
-	//行えるアクション群を作成
-	return new std::vector<CAction*>;
-	
 }
 
 /**
@@ -244,18 +199,37 @@ void CBasePlayerFactory::settingTexture(CPlayerCharacter* pPlayer)
 */
 void CBasePlayerFactory::settingAnimations(CPlayerCharacter* pPlayer)
 {
-	//アニメーションデータ群の取得
-	std::vector<CAnimation*>* pAnimations = pPlayer->getAnimations();
+	pPlayer->m_intAnimationState = 0;
+
+	CAnimation* pointerAnimation = new CChipNotAnimation();
+
 	//直立アニメーションに設定する為のチップデータの設定
-	(*pAnimations)[(int)CPlayerCharacter::STATE::STAND]->addChipData(new CChip(0, 0, 64, 64));
-	//歩行アニメーションに設定する１枚目のチップデータの作成
-	(*pAnimations)[(int)CPlayerCharacter::STATE::WALK]->addChipData(new CChip(64, 0, 64, 64));
-	//歩行アニメーションに設定する２枚目のチップデータの作成
-	(*pAnimations)[(int)CPlayerCharacter::STATE::WALK]->addChipData(new CChip(128, 0, 64, 64));
-	//ダメージを受けたときのアニメーションに設定する為のチップデータの設定
-	(*pAnimations)[(int)CPlayerCharacter::STATE::HIT]->addChipData(new CChip(192, 0, 64, 64));
-	//落ちているときのアニメーションに設定する為のチップデータの設定
-	(*pAnimations)[(int)CPlayerCharacter::STATE::FALING]->addChipData(new CChip(256, 0, 64, 64));
+	pointerAnimation->addChipData(new CChip(0, 0, 64, 64));
+
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::STAND] = pointerAnimation;
+
+	pointerAnimation = new CChipListAnimation(10, true);
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(64, 0, 64, 64));
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(128, 0, 64, 64));
+
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::WALK] = pointerAnimation;
+
+	pointerAnimation = new CChipNotAnimation();
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(192, 0, 64, 64));
+
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::HIT] = pointerAnimation;
+
+	pointerAnimation = new CChipNotAnimation();
+
+	//直立アニメーションに設定する為のチップデータの設定
+	pointerAnimation->addChipData(new CChip(128, 0, 64, 64));
+
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::FALING] = pointerAnimation;
 }
 /**
 * @desc	 物理演算データ群を設定
@@ -263,12 +237,17 @@ void CBasePlayerFactory::settingAnimations(CPlayerCharacter* pPlayer)
 */
 void CBasePlayerFactory::settingPhysicals(CPlayerCharacter* pPlayer)
 {
+
 	//物理演算データ群の取得
-	std::vector<CPhysical*>* pPhysicals = pPlayer->getPhysicals();
+	pPlayer->m_intPhysicalState = 0;
+
+	std::vector<CPhysical*>*  pointerPhysical = new std::vector<CPhysical*>();
+
 	//重力演算の設定
-	pPhysicals->push_back(new CPhysicalGravity());
-	//摩擦演算の設定
-	pPhysicals->push_back(new CPhysicalFriction(6.0f));
+	pointerPhysical->push_back(new CPhysicalGravity());
+	pointerPhysical->push_back(new CPhysicalFriction(6.0f));
+	//重力演算の設定
+	pPlayer->m_mapPhysical[pPlayer->m_intPhysicalState] = pointerPhysical;
 }
 /**
 * @desc	 アクションデータ群を設定
@@ -276,20 +255,25 @@ void CBasePlayerFactory::settingPhysicals(CPlayerCharacter* pPlayer)
 */
 void CBasePlayerFactory::settingActions(CPlayerCharacter* pPlayer)
 {
+	pPlayer->m_intActionState = 0;
+
 	//アクションデータ群の取得
-	std::vector<CAction*>* pActions = pPlayer->getActions();
+	std::vector<CAction*>* pointerActions = new std::vector<CAction*>();
 
 	//ジャンプアクションを設定
-	pActions->push_back(new CActionJump(3.0f, 4));
+	pointerActions->push_back(new CActionJump(3.0f, 4));
 
 	//通常弾発射アクションを設定
-	pActions->push_back(new CActionShotBullet((int)BULLET_TYPE::NORMAL,20));
+	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20));
 
 	//カスタム弾発射アクションを設定
-	pActions->push_back(new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20));
+	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20));
 
 	//ファイアーボール弾発射アクションを設定
-	pActions->push_back(new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20));
+	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20));
+
+	pPlayer->m_mapAction[pPlayer->m_intActionState] = pointerActions;
+	
 }
 /**
 * @desc	 実体データを設定
