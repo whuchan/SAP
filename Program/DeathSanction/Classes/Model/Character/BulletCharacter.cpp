@@ -52,9 +52,15 @@ void CBulletCharacter::moveFunc()
 	// ƒAƒNƒVƒ‡ƒ“
 	if (this->m_mapAction[this->m_intActionState])
 	{
-		for (CAction* pointerAction : (*this->m_mapAction[this->m_intActionState]))
+		std::map<int, CAction*>::iterator itaratorAction = this->m_mapAction[this->m_intActionState]->begin();
+
+		while (itaratorAction != this->m_mapAction[this->m_intActionState]->end())
 		{
-			pointerAction->update(this);
+			if (itaratorAction->second)
+			{
+				itaratorAction->second->update(this);
+			}
+			itaratorAction++;
 		}
 	}
 

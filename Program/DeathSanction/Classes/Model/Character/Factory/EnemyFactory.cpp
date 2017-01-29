@@ -227,12 +227,11 @@ void CKuriboFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CKuriboFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//
-	pointerAction->push_back(new CActionEnemyDead(2.0f, 6.0f));
+	(*mapAction)[0] = new CActionEnemyDead(2.0f, 6.0f);
 
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定
@@ -430,12 +429,12 @@ void CGreenNokoNokoFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CGreenNokoNokoFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//敵死亡アクションを０番目で設定
-	pointerAction->push_back(new CActionEnemyDead(2.0f, 6.0f));
+	(*mapAction)[0] = new CActionEnemyDead(2.0f, 6.0f);
 
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
+
 }
 /**
 * @desc	 実体データを設定
@@ -619,17 +618,12 @@ void CGreenPataPataFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CGreenPataPataFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//敵死亡アクションを設定
-	//敵キャラクターのアクションに敵死亡＆敵生成アクションを取り付ける（ノコノコを設定）
-	pointerAction->push_back(new CActionEnemyDeadAndCreateEnemy((int)ENEMY_TYPE::NOKONOKO));
+	(*mapAction)[0] = new CActionEnemyDeadAndCreateEnemy((int)ENEMY_TYPE::NOKONOKO);
+	(*mapAction)[1] = new CActionUpAndDownMove(pCharacter->m_pMove->m_pos, 100, 0.02f);
 
-	//上下移動アクションの取り付け
-	//基準点を初期位置に設定する
-	pointerAction->push_back(new CActionUpAndDownMove(pCharacter->m_pMove->m_pos, 100, 0.02f));
-
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定
@@ -820,11 +814,11 @@ void CKillerFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 void CKillerFactory::settingActions(CEnemyCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	pointerAction->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
+	(*mapAction)[0] = new CActionEnemyDeadAndAddGravity(2.0f, 6.0f);
 
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定
@@ -960,17 +954,15 @@ void CKillerBatteryFactory::settingPhysicals(CEnemyCharacter* pCharacter)
 */
 void CKillerBatteryFactory::settingActions(CEnemyCharacter* pCharacter)
 {
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	//アクションデータ群の取得
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//
-	pointerAction->push_back(new CActionEnemyDeadAndAddGravity(2.0f, 6.0f));
+	(*mapAction)[0] = new CActionEnemyDeadAndAddGravity(2.0f, 6.0f);
+	(*mapAction)[1] = new CActionIntervalCreateEnemy((int)ENEMY_TYPE::KILLER,
+														30,
+														cocos2d::Point(-16.0f, 0.0f));
 
-	pointerAction->push_back(new CActionIntervalCreateEnemy(
-															(int)ENEMY_TYPE::KILLER,
-															30,
-															cocos2d::Point(-16.0f, 0.0f)));
-
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定

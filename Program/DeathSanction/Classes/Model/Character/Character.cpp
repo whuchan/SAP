@@ -17,24 +17,26 @@ CCharacter::~CCharacter()
 	SAFE_DELETE(this->m_pBody);
 
 	//アクション群データの削除
-	std::map<int, std::vector<CAction*>* >::iterator iteratorActionIndex = this->m_mapAction.begin();
-	while (iteratorActionIndex != this->m_mapAction.end()) {
+	std::map<int, std::map<int,CAction*>*>::iterator iteratorActionStateIndex = this->m_mapAction.begin();
+	while (iteratorActionStateIndex != this->m_mapAction.end()) {
 
-		if (iteratorActionIndex->second)
+		if (iteratorActionStateIndex->second)
 		{
-			std::vector<CAction*>* pointerActions = iteratorActionIndex->second;
+			std::map<int, CAction*>::iterator iteratorActionIndex = iteratorActionStateIndex->second->begin();
 
-			for (CAction* pointerTarget : *pointerActions)
-			{
-				SAFE_DELETE(pointerTarget);
+			while (iteratorActionIndex != iteratorActionStateIndex->second->end()) {
+
+				//クラスのインスタンスを削除
+				SAFE_DELETE(iteratorActionIndex->second);
+
+				iteratorActionIndex++;
 			}
 			//クラスのインスタンスを削除
-			SAFE_DELETE(iteratorActionIndex->second);
+			SAFE_DELETE(iteratorActionStateIndex->second);
 		}
-		//イテレーターを更新
-		iteratorActionIndex++;
+		iteratorActionStateIndex++;
 	}
-
+	
 	//物理演算データ群の削除
 	std::map<int, std::vector<CPhysical*>* >::iterator iteratorPhysicalIndex = this->m_mapPhysical.begin();
 	while (iteratorPhysicalIndex != this->m_mapPhysical.end()) {

@@ -223,13 +223,11 @@ void CNormalBulletFactory::settingActions(CBulletCharacter* pCharacter)
 	pCharacter->m_intActionState = 0;
 
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerActions = new std::vector<CAction*>();
-	
-	pointerActions->push_back(new CActionMoveStraight());
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
+	(*mapAction)[0] = new CActionMoveStraight();
 
-	pCharacter->m_mapAction[0] = pointerActions;
-
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定
@@ -420,12 +418,13 @@ void CCustomBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 */
 void CCustomBulletFactory::settingActions(CBulletCharacter* pCharacter)
 {
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	//アクションデータ群の取得
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//
-	pointerAction->push_back(new CActionMoveStraight());
+	(*mapAction)[0] = new CActionMoveStraight();
 
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
+
 }
 
 /**
@@ -682,14 +681,12 @@ void CFireBallBulletFactory::settingPhysicals(CBulletCharacter* pCharacter)
 void CFireBallBulletFactory::settingActions(CBulletCharacter* pCharacter)
 {
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerAction = new std::vector<CAction*>();
+	std::map<int, CAction*>* mapAction = new std::map<int, CAction*>();
 
-	//
-	pointerAction->push_back(new CActionJump(3.0f, 4));
+	(*mapAction)[0] = new CActionJump(3.0f, 4);
+	(*mapAction)[1] = new CActionMoveStraight();
 
-	pointerAction->push_back(new CActionMoveStraight());
-
-	pCharacter->m_mapAction[pCharacter->m_intActionState] = pointerAction;
+	pCharacter->m_mapAction[pCharacter->m_intActionState] = mapAction;
 }
 
 /**

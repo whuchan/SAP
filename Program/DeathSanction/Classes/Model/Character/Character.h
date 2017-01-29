@@ -58,7 +58,7 @@ public:
 	std::map<int, std::vector<CPhysical*>*> m_mapPhysical;
 
 	//アクションデータ群マップ配列
-	std::map<int, std::vector<CAction*>*> m_mapAction;
+	std::map<int, std::map<int,CAction*>*> m_mapAction;
 
 
 	//状態（派生先によってタイプが変化する）

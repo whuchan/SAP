@@ -258,22 +258,21 @@ void CBasePlayerFactory::settingActions(CPlayerCharacter* pPlayer)
 	pPlayer->m_intActionState = 0;
 
 	//アクションデータ群の取得
-	std::vector<CAction*>* pointerActions = new std::vector<CAction*>();
+	std::map<int,CAction*>* mapAction = new std::map<int,CAction*>();
 
 	//ジャンプアクションを設定
-	pointerActions->push_back(new CActionJump(3.0f, 4));
+	(*mapAction)[(int)CPlayerCharacter::ACTION::JUMP] = new CActionJump(3.0f, 4);
 
 	//通常弾発射アクションを設定
-	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20));
+	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_NORMAL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20);
 
 	//カスタム弾発射アクションを設定
-	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20));
+	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_CUSTOM_BULLET] = new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20);
 
 	//ファイアーボール弾発射アクションを設定
-	pointerActions->push_back(new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20));
+	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_FIREBALL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20);
 
-	pPlayer->m_mapAction[pPlayer->m_intActionState] = pointerActions;
-	
+	pPlayer->m_mapAction[pPlayer->m_intActionState] = mapAction;
 }
 /**
 * @desc	 実体データを設定
