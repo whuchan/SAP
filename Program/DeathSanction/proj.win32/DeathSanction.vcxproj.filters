@@ -37,12 +37,6 @@
     <Filter Include="src\Model\Character\Factory\Enemy">
       <UniqueIdentifier>{ed922a88-af02-45fb-b407-401f67575b77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Model\Character\Factory\Bullet">
-      <UniqueIdentifier>{b2247e0d-7b8e-4680-b7a2-f23bca55f863}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Model\Character\Factory\Gimmick">
-      <UniqueIdentifier>{7531cf63-0d45-421f-aa88-7b6efad7a4fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Model\Character\Bullet">
       <UniqueIdentifier>{248e8f9f-3390-498a-a1ca-3048d45739b5}</UniqueIdentifier>
     </Filter>
@@ -115,6 +109,9 @@
     <Filter Include="src\Scene\GameMain\Stage\Stage1">
       <UniqueIdentifier>{7cda6ad0-b470-442f-b5e0-8a4aaefb61fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine">
+      <UniqueIdentifier>{37da48dd-1385-441e-9cac-caa193b488ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -134,12 +131,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactory.cpp">
       <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Model\Character\Factory\BulletFactory.cpp">
-      <Filter>src\Model\Character\Factory\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Model\Character\Factory\GimmickFactory.cpp">
-      <Filter>src\Model\Character\Factory\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\BulletCharacter.cpp">
       <Filter>src\Model\Character\Bullet</Filter>
@@ -213,6 +204,12 @@
     <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage1.cpp">
       <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\StateMachine.cpp">
+      <Filter>src\Data\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\CharacterFactory.cpp">
+      <Filter>src\Model\Character\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -235,12 +232,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactory.h">
       <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Model\Character\Factory\BulletFactory.h">
-      <Filter>src\Model\Character\Factory\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Model\Character\Factory\GimmickFactory.h">
-      <Filter>src\Model\Character\Factory\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\BulletCharacter.h">
       <Filter>src\Model\Character\Bullet</Filter>
@@ -313,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage1.h">
       <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\StateMachine.h">
+      <Filter>src\Data\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\CharacterFactory.h">
+      <Filter>src\Model\Character\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

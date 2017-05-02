@@ -208,74 +208,74 @@ void CMap::checkEnemyLaunch(float posX, float posY)
 /**
 * @desc ギミックの出撃判定
 */
-void CMap::checkGimmickLaunch(float posX, float posY)
-{
-	while (this->m_lauchGimmickLine < this->m_lauchEnemyLine)
-	{
-		//レイヤーの位置を取得
-		cocos2d::Point pt = cocos2d::Point(posX, posY);
-
-		//マップチップのサイズを取得(32,32)
-		cocos2d::Size tileSize = this->getTileSize();
-
-		float checkPosX = 0.0f;
-
-		//
-		if (tileSize.width * this->m_lauchGimmickLine >= WINDOW_RIGHT)
-		{
-			checkPosX = -pt.x + WINDOW_RIGHT;
-		}
-		else
-		{	
-			checkPosX = -pt.x + this->m_lauchGimmickLine * tileSize.width;
-		}
-
-		//タイルの２次元配列上の座標を取得（X座標のみをチェック）
-		cocos2d::Point tileCoord = this->getTileCoord(cocos2d::Point(checkPosX, 0.0f));
-
-		//現在参照中の敵出撃ラインのチェック
-		if (this->m_lauchGimmickLine == tileCoord.x)
-		{
-			//下から順にタイルサイズ分づつタイルをチェックしていく
-			for (float y = tileSize.height * 0.5f; y < WINDOW_TOP; y += tileSize.height)
-			{
-				//チェックするタイルの座標を設定（xは固定でy座標をチェックしていく）
-				cocos2d::Point tilePos(checkPosX, y);
-
-				//そのｘ座標の２次元配列上のｙ位置にある全てのタイルを取得
-				//そのタイルのタイルタイプ（＝敵タイプ）を取得
-				GIMMICK_TYPE gimmickType = (GIMMICK_TYPE)this->checkTile(tilePos.x, tilePos.y, CMap::LAYER_TYPE::LAUNCH_GIMMICK);
-
-				//敵のタイプがNONEじゃなかったら出撃
-				if (gimmickType != GIMMICK_TYPE::NONE)
-				{
-					//敵出撃データ（出撃の情報）の生成
-					CGimmickLaunchData* pLaunchData = new CGimmickLaunchData(
-						gimmickType,
-						tilePos
-					);
-
-					if (pLaunchData)
-					{
-						//敵出撃後の敵出撃レイヤーのタイルを削除
-						this->removeLaunchGimmickBlock(pLaunchData);
-
-						//出撃トリガーを生成し、敵出撃データを設定
-						CGimmickLaunchTrigger* pTrigger = new CGimmickLaunchTrigger(pLaunchData);
-
-						//出撃トリガーを出撃スケジュールとして追加する
-						CLaunchScheduler::getInstance()->m_pLauncher->add(pTrigger);
-
-						
-					}
-				}
-			}
-			//ギミック出撃ラインの更新
-			this->m_lauchGimmickLine++;
-		}
-	}
-	return;
-}
+//void CMap::checkGimmickLaunch(float posX, float posY)
+//{
+//	while (this->m_lauchGimmickLine < this->m_lauchEnemyLine)
+//	{
+//		//レイヤーの位置を取得
+//		cocos2d::Point pt = cocos2d::Point(posX, posY);
+//
+//		//マップチップのサイズを取得(32,32)
+//		cocos2d::Size tileSize = this->getTileSize();
+//
+//		float checkPosX = 0.0f;
+//
+//		//
+//		if (tileSize.width * this->m_lauchGimmickLine >= WINDOW_RIGHT)
+//		{
+//			checkPosX = -pt.x + WINDOW_RIGHT;
+//		}
+//		else
+//		{	
+//			checkPosX = -pt.x + this->m_lauchGimmickLine * tileSize.width;
+//		}
+//
+//		//タイルの２次元配列上の座標を取得（X座標のみをチェック）
+//		cocos2d::Point tileCoord = this->getTileCoord(cocos2d::Point(checkPosX, 0.0f));
+//
+//		//現在参照中の敵出撃ラインのチェック
+//		if (this->m_lauchGimmickLine == tileCoord.x)
+//		{
+//			//下から順にタイルサイズ分づつタイルをチェックしていく
+//			for (float y = tileSize.height * 0.5f; y < WINDOW_TOP; y += tileSize.height)
+//			{
+//				//チェックするタイルの座標を設定（xは固定でy座標をチェックしていく）
+//				cocos2d::Point tilePos(checkPosX, y);
+//
+//				//そのｘ座標の２次元配列上のｙ位置にある全てのタイルを取得
+//				//そのタイルのタイルタイプ（＝敵タイプ）を取得
+//				GIMMICK_TYPE gimmickType = (GIMMICK_TYPE)this->checkTile(tilePos.x, tilePos.y, CMap::LAYER_TYPE::LAUNCH_GIMMICK);
+//
+//				//敵のタイプがNONEじゃなかったら出撃
+//				if (gimmickType != GIMMICK_TYPE::NONE)
+//				{
+//					//敵出撃データ（出撃の情報）の生成
+//					CGimmickLaunchData* pLaunchData = new CGimmickLaunchData(
+//						gimmickType,
+//						tilePos
+//					);
+//
+//					if (pLaunchData)
+//					{
+//						//敵出撃後の敵出撃レイヤーのタイルを削除
+//						this->removeLaunchGimmickBlock(pLaunchData);
+//
+//						//出撃トリガーを生成し、敵出撃データを設定
+//						CGimmickLaunchTrigger* pTrigger = new CGimmickLaunchTrigger(pLaunchData);
+//
+//						//出撃トリガーを出撃スケジュールとして追加する
+//						CLaunchScheduler::getInstance()->m_pLauncher->add(pTrigger);
+//
+//						
+//					}
+//				}
+//			}
+//			//ギミック出撃ラインの更新
+//			this->m_lauchGimmickLine++;
+//		}
+//	}
+//	return;
+//}
 
 
 
@@ -296,14 +296,14 @@ void CMap::removeLaunchEnemyBlock(CEnemyLaunchData* pLaunchData)
 * @desc ギミック出撃後の敵出撃レイヤーのタイルの削除
 * @param ギミック出撃データ
 */
-void CMap::removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData)
-{
-	//出撃した場所のギミック出撃レイヤーのマップチップをGIMMICK_TYPE::NONEにする
-	this->changeTile((int)GIMMICK_TYPE::NONE,
-		pLaunchData->m_pos.x,
-		pLaunchData->m_pos.y,
-		CMap::LAYER_TYPE::LAUNCH_GIMMICK);
-}
+//void CMap::removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData)
+//{
+//	//出撃した場所のギミック出撃レイヤーのマップチップをGIMMICK_TYPE::NONEにする
+//	this->changeTile((int)GIMMICK_TYPE::NONE,
+//		pLaunchData->m_pos.x,
+//		pLaunchData->m_pos.y,
+//		CMap::LAYER_TYPE::LAUNCH_GIMMICK);
+//}
 
 
 

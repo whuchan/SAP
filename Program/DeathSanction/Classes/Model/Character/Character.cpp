@@ -9,6 +9,9 @@ CCharacter::CCharacter()
 //デストラクタ
 CCharacter::~CCharacter()
 {
+	//状態遷移マシンの削除
+	SAFE_DELETE(this->m_stateMachine);
+
 	for (CCollisionArea* pCollisionArea : (*this->m_pCollisionAreas))
 	{
 		SAFE_DELETE(pCollisionArea);
@@ -175,6 +178,23 @@ void CCharacter::addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas
 	//新しいデータを設定する
 	this->m_pCollisionAreas = pCollisionAreas;
 }
+
+/**
+* @desc	状態遷移マシンの追加
+* @param　状態遷移マシン
+*/
+void CCharacter::addStateMachine(CStateMachine* pStateMachine)
+{
+	//既にデータが入っていたら警告する
+	if (this->m_stateMachine != NULL)
+	{
+		CCLOG("もう既に設定されています");
+		return;
+	}
+	//新しいデータを設定する
+	this->m_stateMachine = pStateMachine;
+}
+
 
 /**
 * @desc 移動データの取得

@@ -191,7 +191,9 @@ void CStage::scroll()
 		//スクロールが行われた時に敵の出撃判定を行う
 		CMap* pMap = CMapManager::getInstance()->getMap();
 		pMap->checkEnemyLaunch(pt.x, pt.y);
-		pMap->checkGimmickLaunch(pt.x, pt.y);
+
+		//スクロールが行われた時にギミックの出撃判定を行う
+		//		pMap->checkGimmickLaunch(pt.x, pt.y);
 	}
 	else if (pt.x < (WINDOW_RIGHT / 3.0) - pPlayerChara->m_pMove->m_pos.x)
 	{

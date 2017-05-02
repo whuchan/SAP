@@ -142,7 +142,14 @@ std::vector<CCollisionArea*>* CEnemyPartsFactory::getCollisionAreas(void)
 	return new std::vector<CCollisionArea*>();
 }
 
-
+/**
+* @desc 状態遷移マシンの取得
+* @return 状態遷移マシンのインスタンス
+*/
+CStateMachine* CEnemyPartsFactory::getStateMachine(void)
+{
+	return new CStateMachine();
+}
 
 
 /**

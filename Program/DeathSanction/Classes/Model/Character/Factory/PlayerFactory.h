@@ -1,6 +1,11 @@
 #pragma once
 
+#include "CharacterFactory.h"
 #include "../PlayerCharacter.h"
+
+//=======================================================
+// 前方宣言
+//=======================================================
 
 //=======================================================
 //
@@ -38,6 +43,11 @@ public:
 	*/
 	std::vector<CCollisionArea*>* getCollisionAreas(void)override;
 
+	/**
+	* @desc 状態遷移マシンの取得
+	* @return 状態遷移マシンのインスタンス
+	*/
+	CStateMachine* getStateMachine(void)override;
 };
 
 //=======================================================
@@ -105,6 +115,13 @@ protected:
 	* @param 衝突判定領域データ群
 	*/
 	virtual void settingCollisionAreas(CPlayerCharacter* pCharacter) = 0;
+
+	/**
+	* @desc 状態遷移マシンの設定
+	* @param 取り付けるキャラクターインスタンスのアドレス
+	*/
+	virtual void settingStateMachine(CPlayerCharacter* pCharacter)=0;
+
 	/**
 	* @desc 初期化処理
 	* @param プレイヤーキャラクターインスタンスのアドレス
@@ -192,6 +209,13 @@ public:
 	* @param 衝突判定領域データ群
 	*/
 	void settingCollisionAreas(CPlayerCharacter* pCharacter)override;
+
+	/**
+	* @desc 状態遷移マシンの設定
+	* @param 取り付けるキャラクターインスタンスのアドレス
+	*/
+	void settingStateMachine(CPlayerCharacter* pCharacter)override;
+
 	/**
 	* @desc	 初期化処理
 	* @param プレイヤーキャラクターインスタンスのアドレス

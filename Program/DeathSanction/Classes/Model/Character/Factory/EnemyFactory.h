@@ -1,4 +1,5 @@
 #pragma once
+#include "CharacterFactory.h"
 #include"../EnemyCharacter.h"
 #include "Model\Map\Map.h"
 
@@ -37,6 +38,12 @@ public:
 	* @return 衝突判定領域データ群
 	*/
 	std::vector<CCollisionArea*>* getCollisionAreas(void)override;
+
+	/**
+	* @desc 状態遷移マシンの取得
+	* @return 状態遷移マシンのインスタンス
+	*/
+	virtual CStateMachine* getStateMachine(void)override;
 
 };
 

@@ -94,9 +94,12 @@ bool CStage1::init() {
 
 	//スクロールが行われた時に敵の出撃判定を行う
 	CMap* pMap = CMapManager::getInstance()->getMap();
+
+	//スクロールが行われた時にギミックの出撃判定を行う
+
 	//マップの位置を取得
-	cocos2d::Point pt = this->m_pMainLayer->getPosition();
-	pMap->checkGimmickLaunch(pt.x, pt.y);
+	//cocos2d::Point pt = this->m_pMainLayer->getPosition();
+	//	pMap->checkGimmickLaunch(pt.x, pt.y);
 
 	return true;
 

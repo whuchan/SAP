@@ -153,6 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.cpp" />
     <ClCompile Include="..\Classes\Data\Move\Move.cpp" />
     <ClCompile Include="..\Classes\Data\Physical\Physical.cpp" />
+    <ClCompile Include="..\Classes\Data\StateMachine\StateMachine.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Lib\Input\InputManager.cpp" />
     <ClCompile Include="..\Classes\Lib\Sound\SoundManager.cpp" />
@@ -160,9 +161,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Model\Character\Character.cpp" />
     <ClCompile Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\EnemyCharacter.cpp" />
-    <ClCompile Include="..\Classes\Model\Character\Factory\BulletFactory.cpp" />
+    <ClCompile Include="..\Classes\Model\Character\Factory\CharacterFactory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactory.cpp" />
-    <ClCompile Include="..\Classes\Model\Character\Factory\GimmickFactory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\PlayerFactory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\FireBallBulletCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\GimmickCharacter.cpp" />
@@ -188,6 +188,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.h" />
     <ClInclude Include="..\Classes\Data\Move\Move.h" />
     <ClInclude Include="..\Classes\Data\Physical\Physical.h" />
+    <ClInclude Include="..\Classes\Data\StateMachine\StateMachine.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Lib\Input\InputManager.h" />
     <ClInclude Include="..\Classes\Lib\Sound\SoundManager.h" />
@@ -195,9 +196,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Model\Character\Character.h" />
     <ClInclude Include="..\Classes\Model\Character\DamageBlockGimmickCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\EnemyCharacter.h" />
-    <ClInclude Include="..\Classes\Model\Character\Factory\BulletFactory.h" />
+    <ClInclude Include="..\Classes\Model\Character\Factory\CharacterFactory.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactory.h" />
-    <ClInclude Include="..\Classes\Model\Character\Factory\GimmickFactory.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\PlayerFactory.h" />
     <ClInclude Include="..\Classes\Model\Character\FireBallBulletCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\GimmickCharacter.h" />

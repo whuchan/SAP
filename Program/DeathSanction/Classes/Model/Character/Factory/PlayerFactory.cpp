@@ -98,7 +98,8 @@ CPlayerCharacter*  CPlayerCreateFactory::createPlayer(void)
 	//衝突判定データ群の設定
 	pPlayer->addCollisionAreas(pFactory->getCollisionAreas());
 
-
+	//状態遷移マシンの設定
+	pPlayer->addStateMachine(pFactory->getStateMachine());
 
 	//プレイヤーキャラクター部品生成工場の解放
 	SAFE_DELETE(pFactory);
@@ -153,6 +154,15 @@ std::vector<CCollisionArea*>* CPlayerPartsFactory::getCollisionAreas(void)
 	return new std::vector<CCollisionArea*>;
 }
 
+
+/**
+* @desc 状態遷移マシンの取得
+* @return 状態遷移マシンのインスタンス
+*/
+CStateMachine* CPlayerPartsFactory::getStateMachine()
+{
+	return new CStateMachine();
+}
 
 /**
 * @desc コンストラクタ
@@ -264,16 +274,18 @@ void CBasePlayerFactory::settingActions(CPlayerCharacter* pPlayer)
 	(*mapAction)[(int)CPlayerCharacter::ACTION::JUMP] = new CActionJump(3.0f, 4);
 
 	//通常弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_NORMAL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20);
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_NORMAL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20);
 
-	//カスタム弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_CUSTOM_BULLET] = new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20);
+	////カスタム弾発射アクションを設定
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_CUSTOM_BULLET] = new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20);
 
-	//ファイアーボール弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_FIREBALL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20);
+	////ファイアーボール弾発射アクションを設定
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_FIREBALL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20);
 
 	pPlayer->m_mapAction[pPlayer->m_intActionState] = mapAction;
 }
+
+
 /**
 * @desc	 実体データを設定
 * @param プレイヤーキャラクターインスタンスのアドレス
@@ -364,6 +376,16 @@ void CBasePlayerFactory::settingCollisionAreas(CPlayerCharacter* pCharacter)
 	//画面端の衝突判定空間を取り付ける
 	pCollisionAreas->push_back(pMapArea);
 }
+
+/**
+* @desc 状態遷移マシンの設定
+* @param 取り付けるキャラクターインスタンスのアドレス
+*/
+void CBasePlayerFactory::settingStateMachine(CPlayerCharacter* pCharacter)
+{
+
+}
+
 /**
 * @desc	 初期化処理
 * @param プレイヤーキャラクターインスタンスのアドレス

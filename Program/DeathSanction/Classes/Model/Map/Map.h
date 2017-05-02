@@ -48,7 +48,7 @@ enum class GIMMICK_TYPE :int
 // 前方宣言
 //================================================================
 class CEnemyLaunchData;
-class CGimmickLaunchData;
+//class CGimmickLaunchData;
 
 //================================================================
 // マップクラス
@@ -147,7 +147,7 @@ public:
 	/**
 	* @desc ギミックの出撃判定
 	*/
-	void checkGimmickLaunch(float posX, float posY);
+//	void checkGimmickLaunch(float posX, float posY);
 
 
 	/**
@@ -160,7 +160,7 @@ public:
 	* @desc ギミック出撃後の敵出撃レイヤーのタイルの削除
 	* @param ギミック出撃データ
 	*/
-	void removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData);
+//	void removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData);
 
 
 private:
@@ -170,7 +170,7 @@ private:
 
 	//ギミック出撃ライン(マップの２次元配列上のタイルのｘ位置)
 	//０は画面の左端
-	int m_lauchGimmickLine = 0;
+//	int m_lauchGimmickLine = 0;
 };
 
 //==============================================================

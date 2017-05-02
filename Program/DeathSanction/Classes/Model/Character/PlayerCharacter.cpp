@@ -119,6 +119,14 @@ void CPlayerCharacter::collision()
 */
 void CPlayerCharacter::checkState()
 {
+	if (this->m_stateMachine)
+	{
+		//状態遷移マシンの更新
+		this->m_stateMachine->update();
+	}
+	
+
+	/*
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)
 	{
@@ -156,6 +164,7 @@ void CPlayerCharacter::checkState()
 		//立っている
 		this->m_state = (int)STATE::STAND;
 	}
+	*/
 }
 
 /**

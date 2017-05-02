@@ -93,4 +93,4 @@ public:
 		(*this->m_mapAction[this->m_intActionState])[(int)ACTION::JUMP]->stop();
 	}
 };
-
+//EOF

@@ -4,6 +4,7 @@
 #include "Data/ActionController/ActionController.h"
 #include "Data/Collision/Collision.h"
 #include "Data\Collision\CollisionArea.h"
+#include "Data\StateMachine\StateMachine.h"
 
 //==============================================
 // キャラクタータイプ
@@ -63,6 +64,9 @@ public:
 
 	//状態（派生先によってタイプが変化する）
 	int m_state = 0;
+
+	//状態遷移マシン
+	CStateMachine* m_stateMachine = NULL;
 
 	//適用させる物理演算の状態（派生先によってタイプが変化する）
 	int m_intPhysicalState = 0;
@@ -188,6 +192,11 @@ public:
 	*/
 	void addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas);
 
+	/**
+	* @desc	状態遷移マシンの追加
+	* @param　状態遷移マシン
+	*/
+	void addStateMachine(CStateMachine* pStateMachine);
 
 
 	/**
@@ -291,38 +300,4 @@ public:
 	*/
 	int getSize(void);
 };
-
-
-//===============================================
-//
-// CCharacter生成工場クラス（抽象クラス）
-//
-//===============================================
-class CCharacterPartsFactory
-{
-public:
-	/**
-	* コンストラクタ
-	*/
-	CCharacterPartsFactory() 
-	{
-
-	}
-	/**
-	* デストラクタ
-	*/
-	virtual ~CCharacterPartsFactory()
-	{
-	
-	}
-//==============================================================
-//
-// 純粋仮想関数
-//
-//==============================================================
-	virtual CMove*						getMove(void)		= 0;
-	virtual CBody*						getBody(void)		= 0;
-	virtual std::vector<CCollisionArea*>* getCollisionAreas(void) = 0;
-};
-
-
+//EOF

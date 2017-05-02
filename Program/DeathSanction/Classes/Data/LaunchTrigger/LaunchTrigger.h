@@ -102,91 +102,91 @@ public:
 
 };
 
-//=============================================
+////=============================================
+////
+//// ギミック出撃トリガー
+////　ギミック出撃データをトリガーとしてギミック出撃というイベントを実行させる
+////
+////=============================================
+//class CGimmickLaunchTrigger :public CLaunchTrigger
+//{
+//private:
+//	//出撃データ
+//	CGimmickLaunchData* m_pLaunchData = NULL;
 //
-// ギミック出撃トリガー
-//　ギミック出撃データをトリガーとしてギミック出撃というイベントを実行させる
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	* @param 敵出撃データ
+//	* @tips 敵出撃データをトリガーとして設定する
+//	*/
+//	CGimmickLaunchTrigger(CGimmickLaunchData* pLaunchData)
+//		: m_pLaunchData(pLaunchData)
+//	{
 //
-//=============================================
-class CGimmickLaunchTrigger :public CLaunchTrigger
-{
-private:
-	//出撃データ
-	CGimmickLaunchData* m_pLaunchData = NULL;
-
-public:
-	/**
-	* @desc コンストラクタ
-	* @param 敵出撃データ
-	* @tips 敵出撃データをトリガーとして設定する
-	*/
-	CGimmickLaunchTrigger(CGimmickLaunchData* pLaunchData)
-		: m_pLaunchData(pLaunchData)
-	{
-
-	}
-
-	//デストラクタ
-	~CGimmickLaunchTrigger();
-
-
-	/**
-	* @desc 設定されているトリガーがイベントを行えるかどうか
-	* @param true...イベントの実行が可能
-	* @tips イベントの実行可能条件は派生クラスによって変化する
-	*/
-	bool isTrigger()override;
-
-	/**
-	* @desc トリガーイベントの実行
-	*		ここでのイベントはキャラクターの生成
-	*/
-	virtual CCharacter* action()override;
-
-};
-
-
-
-//=============================================
+//	}
 //
-// 弾出撃トリガー
-//　弾出撃データをトリガーとして弾出撃というイベントを実行させる
+//	//デストラクタ
+//	~CGimmickLaunchTrigger();
 //
-//=============================================
-
-class CBulletLaunchTrigger :public CLaunchTrigger
-{
-private:
-	//出撃データ
-	CBulletLaunchData* m_pLaunchData = NULL;
-
-public:
-	/**
-	* @desc コンストラクタ
-	* @param 敵出撃データ
-	* @tips 敵出撃データをトリガーとして設定する
-	*/
-
-	CBulletLaunchTrigger(CBulletLaunchData* pLaunchData);
-
-	//デストラクタ
-	~CBulletLaunchTrigger();
+//
+//	/**
+//	* @desc 設定されているトリガーがイベントを行えるかどうか
+//	* @param true...イベントの実行が可能
+//	* @tips イベントの実行可能条件は派生クラスによって変化する
+//	*/
+//	bool isTrigger()override;
+//
+//	/**
+//	* @desc トリガーイベントの実行
+//	*		ここでのイベントはキャラクターの生成
+//	*/
+//	virtual CCharacter* action()override;
+//
+//};
 
 
-	/**
-	* @desc 設定されているトリガーがイベントを行えるかどうか
-	* @param true...イベントの実行が可能
-	* @tips イベントの実行可能条件は派生クラスによって変化する
-	*/
-	bool isTrigger()override;
 
-	/**
-	* @desc トリガーイベントの実行
-	*		ここでのイベントはキャラクターの生成
-	*/
-	virtual CCharacter* action()override;
-
-};
+////=============================================
+////
+//// 弾出撃トリガー
+////　弾出撃データをトリガーとして弾出撃というイベントを実行させる
+////
+////=============================================
+//
+//class CBulletLaunchTrigger :public CLaunchTrigger
+//{
+//private:
+//	//出撃データ
+//	CBulletLaunchData* m_pLaunchData = NULL;
+//
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	* @param 敵出撃データ
+//	* @tips 敵出撃データをトリガーとして設定する
+//	*/
+//
+//	CBulletLaunchTrigger(CBulletLaunchData* pLaunchData);
+//
+//	//デストラクタ
+//	~CBulletLaunchTrigger();
+//
+//
+//	/**
+//	* @desc 設定されているトリガーがイベントを行えるかどうか
+//	* @param true...イベントの実行が可能
+//	* @tips イベントの実行可能条件は派生クラスによって変化する
+//	*/
+//	bool isTrigger()override;
+//
+//	/**
+//	* @desc トリガーイベントの実行
+//	*		ここでのイベントはキャラクターの生成
+//	*/
+//	virtual CCharacter* action()override;
+//
+//};
 
 
 //=============================================
