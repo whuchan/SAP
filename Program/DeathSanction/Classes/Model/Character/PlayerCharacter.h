@@ -65,7 +65,7 @@ public:
 	//空間との衝突判定処理
 	virtual void collision()override;
 	//状態チェック
-	void checkState()override;
+	void checkState(float deltaTime)override;
 	//反映処理
 	void applyFunc()override;
 	

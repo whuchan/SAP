@@ -44,7 +44,7 @@ public:
 	/**
 	* @desc 更新処理
 	*/
-	virtual void execute(void) = 0;
+	virtual void execute(float deltaTime) = 0;
 
 	/**
 	* @desc 状態が変わるときの処理
@@ -96,7 +96,7 @@ public:
 	/**
 	* @desc 更新処理
 	*/
-	void update(void);
+	void update(float deltaTime);
 	
 	/**
 	* @desc 状態を登録する

@@ -38,12 +38,15 @@ void CPlayerStateLineDown::enter(void)
 	ScaleTo* pOrder = ScaleTo::create(1.0, 1.0f - this->m_pOwner->m_intCurrentLine * 0.2f);
 	this->m_pAction = this->m_pOwner->runAction(pOrder);
 	CC_SAFE_RETAIN(this->m_pAction); // 勝手に開放されないように参照カウンタを増やす
+
+
+	this->m_pOwner->m_pMove->m_vel.y = sqrtf(((CPhysicalGravity::GRAVITY * 30.0f) * (CPhysicalGravity::GRAVITY * 30.0f)) / 2.0f);
 }
 
 /**
 * @desc	更新処理
 */
-void CPlayerStateLineDown::execute(void)
+void CPlayerStateLineDown::execute(float deltaTime)
 {
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player: LineDown");
@@ -54,6 +57,7 @@ void CPlayerStateLineDown::execute(void)
 		this->toIdle();
 		return;
 	}
+
 }
 
 /**

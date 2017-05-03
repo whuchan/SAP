@@ -132,7 +132,7 @@ void CEnemyCharacter::endOfScreen()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CEnemyCharacter::checkState()
+void CEnemyCharacter::checkState(float deltaTime)
 {
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)

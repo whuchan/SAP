@@ -39,7 +39,7 @@ void CStateBase::enter(void)
 /**
 * @desc 更新処理
 */
-void CStateBase::execute(void)
+void CStateBase::execute(float deltaTime)
 {
 
 
@@ -106,7 +106,7 @@ CStateMachine::~CStateMachine(void)
 /**
 * @desc 更新処理
 */
-void CStateMachine::update(void)
+void CStateMachine::update(float deltaTime)
 {
 	if (!this->m_pNowState)
 	{
@@ -114,7 +114,7 @@ void CStateMachine::update(void)
 	}
 	
 	//現在の状態を更新
-	this->m_pNowState->execute();
+	this->m_pNowState->execute(deltaTime);
 
 	//次の状態へ移れるか確認
 	if (this->m_pNowState->isNext())

@@ -100,7 +100,7 @@ protected:
 	//空間との衝突判定処理
 	virtual void collision() = 0;
 	//状態チェック
-	virtual void checkState() = 0;
+	virtual void checkState(float deltaTime) = 0;
 	//反映処理
 	virtual void applyFunc() = 0;
 

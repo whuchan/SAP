@@ -116,7 +116,7 @@ void CBulletCharacter::collision()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CBulletCharacter::checkState()
+void CBulletCharacter::checkState(float deltaTime)
 {
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)

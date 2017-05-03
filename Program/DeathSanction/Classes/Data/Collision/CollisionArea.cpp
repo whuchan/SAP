@@ -719,7 +719,7 @@ void CCollisionAreaLine::collision(CCharacter* pChara)
 	}
 }
 
-
+#include"Model\Character\PlayerCharacter.h"
 //======================================
 // 下にあるラインとの衝突判定
 //======================================
@@ -730,6 +730,7 @@ void CCollisionAreaLine::collision(CCharacter* pChara)
 */
 void CCollisionTerritoryLineBottom::collision(CCharacter* pChara, cocos2d::Point basePt)
 {
+
 	//下に移動しているかどうかをチェック
 	if (pChara->m_pMove->m_vel.y < 0.0f)
 	{

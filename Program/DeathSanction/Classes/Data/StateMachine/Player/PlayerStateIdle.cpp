@@ -38,7 +38,7 @@ void CPlayerStateIdle::enter(void)
 /**
 * @desc	XVˆ—
 */
-void CPlayerStateIdle::execute(void)
+void CPlayerStateIdle::execute(float deltaTime)
 {
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player; Idle");

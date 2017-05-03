@@ -101,7 +101,7 @@ public:
 	virtual void collision()override;
 
 	//状態チェック
-	void checkState()override;
+	void checkState(float deltaTime)override;
 
 	//反映処理
 	void applyFunc()override;

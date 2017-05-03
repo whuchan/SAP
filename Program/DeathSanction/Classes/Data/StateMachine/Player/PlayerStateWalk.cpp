@@ -38,7 +38,7 @@ void CPlayerStateWalk::enter(void)
 /**
 * @desc	XVˆ—
 */
-void CPlayerStateWalk::execute(void)
+void CPlayerStateWalk::execute(float deltaTime)
 {
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player: Walk");

@@ -16,7 +16,7 @@ CRollBlockGimmickCharacter::~CRollBlockGimmickCharacter()
 }
 
 //状態チェック
-void CRollBlockGimmickCharacter::checkState()
+void CRollBlockGimmickCharacter::checkState(float deltaTime)
 {
 	if (this->m_state == (int)STATE::THROUGH)
 	{

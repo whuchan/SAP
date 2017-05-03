@@ -32,7 +32,7 @@ public:
 	/**
 	* @desc	XVˆ—
 	*/
-	void execute(void)override;
+	void execute(float deltaTime)override;
 
 	/**
 	* @desc	ó‘Ô‚ª•Ï‚í‚é‚Æ‚«‚Ìˆ—

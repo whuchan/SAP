@@ -114,12 +114,12 @@ void CPlayerCharacter::collision()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CPlayerCharacter::checkState()
+void CPlayerCharacter::checkState(float deltaTime)
 {
 	if (this->m_stateMachine)
 	{
 		//状態遷移マシンの更新
-		this->m_stateMachine->update();
+		this->m_stateMachine->update(deltaTime);
 	}
 	
 

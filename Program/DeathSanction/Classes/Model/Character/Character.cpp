@@ -99,7 +99,7 @@ void CCharacter::update(float deltaTime)
 	this->collision();
 
 	//状態チェック
-	this->checkState();
+	this->checkState(deltaTime);
 
 	//反映処理
 	this->applyFunc();
