@@ -94,9 +94,9 @@ public:
 
 protected:
 	//移動処理
-	virtual void moveFunc() = 0;
+	virtual void moveFunc(float deltaTime) = 0;
 	//アニメーション処理
-	virtual void animationFunc() = 0;
+	virtual void animationFunc(float deltaTime) = 0;
 	//空間との衝突判定処理
 	virtual void collision() = 0;
 	//状態チェック

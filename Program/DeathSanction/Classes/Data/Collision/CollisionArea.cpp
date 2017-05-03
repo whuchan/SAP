@@ -719,7 +719,7 @@ void CCollisionAreaLine::collision(CCharacter* pChara)
 	}
 }
 
-#include"Model\Character\PlayerCharacter.h"
+
 //======================================
 // ‰º‚É‚ ‚éƒ‰ƒCƒ“‚Æ‚ÌÕ“Ë”»’è
 //======================================

@@ -50,7 +50,7 @@ void CPlayerCharacter::inputFunc()
 /**
 * @desc 移動処理
 */
-void CPlayerCharacter::moveFunc()
+void CPlayerCharacter::moveFunc(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -72,16 +72,16 @@ void CPlayerCharacter::moveFunc()
 	{
 		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
 		{
-			pointerPhysical->update(this->m_pMove);
+			pointerPhysical->update(deltaTime,this->m_pMove);
 		}
 	}
 
 	//移動計算
-	this->m_pMove->moveBy();
+	this->m_pMove->moveBy(deltaTime);
 }
 
 //アニメーション処理
-void CPlayerCharacter::animationFunc()
+void CPlayerCharacter::animationFunc(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])

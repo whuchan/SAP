@@ -261,7 +261,7 @@ void CBasePlayerFactory::settingPhysicals(CPlayerCharacter* pPlayer)
 
 	//d—Í‰‰ŽZ‚ÌÝ’è
 	pointerPhysical->push_back(new CPhysicalGravity());
-	pointerPhysical->push_back(new CPhysicalFriction(6.0f));
+	//pointerPhysical->push_back(new CPhysicalFriction(2.0f));
 	//d—Í‰‰ŽZ‚ÌÝ’è
 	pPlayer->m_mapPhysical[pPlayer->m_intPhysicalState] = pointerPhysical;
 }

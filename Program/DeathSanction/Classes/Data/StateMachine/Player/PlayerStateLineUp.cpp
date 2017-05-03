@@ -44,7 +44,7 @@ void CPlayerStateLineUp::enter(void)
 	//ジャンプアクションのスタート関数を開始
 	//(*this->m_pOwner->m_mapAction[(int)CPlayerCharacter::ACTION::JUMP])[0]->start();
 
-	this->m_pOwner->m_pMove->m_vel.y = sqrtf(((CPhysicalGravity::GRAVITY * 30.0f) * (CPhysicalGravity::GRAVITY * 30.0f)) / 2.0f);
+	this->m_pOwner->m_pMove->m_vel.y = sqrtf(((CPhysicalGravity::GRAVITY * 0.6f) * (CPhysicalGravity::GRAVITY * 0.6f)) / 2.0f);
 }
 
 /**
@@ -55,25 +55,23 @@ void CPlayerStateLineUp::execute(float deltaTime)
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player: LineUp");
 #endif //_DEBUG_PLAYER_STATE
+
+	if (inputflag.m_d)
+	{
+		this->m_pOwner->m_pMove->m_vel.x = 100.0f;
+	}
+	else if (inputflag.m_a)
+	{
+		this->m_pOwner->m_pMove->m_vel.x = -100.0f;
+	}
+
+
 	if (this->m_pAction->isDone())
 	{
 		//待機状態へ移行
 		this->toIdle();
 		return;
 	}
-
-	static float vel = 0.0f;
-
-	//this->m_pOwner->m_pMove->m_vel.y = sqrtf(((CPhysicalGravity::GRAVITY * 1.0f) * (CPhysicalGravity::GRAVITY * 1.0f))/2.0f) * deltaTime;
-
-	//this->m_pOwner->m_pMove->m_vel.y *= 300.0f;
-
-	//vel += this->m_pOwner->m_pMove->m_vel.y;
-
-	//log("速度%f", this->m_pOwner->m_pMove->m_vel.y);
-
-	//ジャンプアクションのスタート関数を開始
-	//(*this->m_pOwner->m_mapAction[(int)CPlayerCharacter::ACTION::JUMP])[0]->start();
 }
 
 /**

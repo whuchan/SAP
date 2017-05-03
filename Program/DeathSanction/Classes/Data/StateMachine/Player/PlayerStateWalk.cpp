@@ -49,13 +49,13 @@ void CPlayerStateWalk::execute(float deltaTime)
 
 	if (inputflag.m_d)
 	{
-		this->m_pOwner->m_pMove->m_accele.x = 0.7f;
+		this->m_pOwner->m_pMove->m_vel.x = 200.0f;
 		return;
 	}
 
 	if (inputflag.m_a)
 	{
-		this->m_pOwner->m_pMove->m_accele.x = -0.7f;
+		this->m_pOwner->m_pMove->m_vel.x = -200.0f;
 		return;
 	}
 
@@ -86,6 +86,6 @@ void CPlayerStateWalk::exit(void)
 {
 	this->m_isNext = false;
 
-	this->m_pOwner->m_pMove->m_accele.x = 0.0f;
+	this->m_pOwner->m_pMove->m_vel.x = 0.0f;
 }
 //EOF

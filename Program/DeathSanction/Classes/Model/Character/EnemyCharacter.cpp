@@ -47,7 +47,7 @@ bool CEnemyCharacter::init(float posX, float posY)
 
 
 //移動処理
-void CEnemyCharacter::moveFunc()
+void CEnemyCharacter::moveFunc(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -69,16 +69,16 @@ void CEnemyCharacter::moveFunc()
 	{
 		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
 		{
-			pointerPhysical->update(this->m_pMove);
+			pointerPhysical->update(deltaTime,this->m_pMove);
 		}
 	}
 
 	//移動計算
-	this->m_pMove->moveBy();
+	this->m_pMove->moveBy(deltaTime);
 }
 
 //アニメーション処理
-void CEnemyCharacter::animationFunc()
+void CEnemyCharacter::animationFunc(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
