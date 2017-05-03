@@ -43,14 +43,12 @@ void CPlayerStateIdle::execute(void)
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player; Idle");
 #endif//_DEBUG_PLAYER_STATE
-	
-
 	if (inputflag.m_d || inputflag.m_a)
 	{
 		this->toWalk();
 		return;
 	}
-	log("Player; Idle");
+
 	if (inputflag.getTrigger(kInputType::W) &&
 		this->m_pOwner->m_intCurrentLine < STAGE_MAX_LINE)
 	{

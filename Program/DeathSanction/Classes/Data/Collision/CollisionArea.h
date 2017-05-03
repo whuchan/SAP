@@ -528,3 +528,54 @@ public:
 	*/
 	void collision(CCharacter* pChara)override;
 };
+
+
+//======================================
+// 画面上にある全てのマップチップとの衝突判定空間
+// （マップとの衝突判定空間）
+//======================================
+class CCollisionAreaLine : public CCollisionArea
+{
+public:
+	//コンストラクタ
+	CCollisionAreaLine()
+	{
+
+	}
+
+	//デストラクタ
+	~CCollisionAreaLine()
+	{
+
+	}
+
+	/**
+	* @desc 衝突判定
+	* @param 衝突判定のキャラクター
+	*/
+	void collision(CCharacter* pChara)override;
+};
+
+
+//======================================
+// 下にあるラインとの衝突判定
+//======================================
+class CCollisionTerritoryLineBottom :public CCollisionTerritory
+{
+public:
+	/**
+	* @desc コンストラクタ
+	* 領域タイプの設定を初期化子でTERRITORY_TYPE::BOTTOMに設定しておく
+	*/
+	CCollisionTerritoryLineBottom() : CCollisionTerritory(TERRITORY_TYPE::BOTTOM)
+	{
+
+	}
+
+	/**
+	* @desc 衝突判定
+	* @param 衝突対象
+	* @param 基準点
+	*/
+	virtual void collision(CCharacter* pChara, cocos2d::Point basePt)override;
+};

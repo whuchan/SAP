@@ -336,51 +336,72 @@ void CBasePlayerFactory::settingCollisionAreas(CPlayerCharacter* pCharacter)
 	//画面端の衝突空間を取り付ける
 	pCollisionAreas->push_back(pEndOfScreenArea);
 
+	////========================================
+	//// マップ衝突空間の生成
+	////========================================
+	//CCollisionArea* pMapArea = new CCollisionAreaMap();
+
+	////マップチップ衝突空間に領域を設定
+
+	////下のマップチップ領域を生成
+	//CCollisionTerritory* pMapChipBottomTerritory = new CCollisionTerritoryMapChipBottom();
+	////下のマップチップ領域と衝突した際のイベントコールバックを設定
+	//pMapChipBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
+	////下のマップチップ領域を設定
+	//pMapArea->addTerritory(pMapChipBottomTerritory);
+	////上のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipTop());
+	////右のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipRight());
+	////左のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipLeft());
+
+
+	////基準点の設定
+	////下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
+	////下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
+
+	////上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(16, 32)));
+	////上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(-16, 32)));
+
+	////右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, 16)));
+	////右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, -16)));
+
+	////左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, 16)));
+	////左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, -16)));
+
+
 	//========================================
-	// マップ衝突空間の生成
+	// ライン衝突空間の生成
 	//========================================
-	CCollisionArea* pMapArea = new CCollisionAreaMap();
+	CCollisionArea* pLineArea = new CCollisionAreaLine();
 
 	//マップチップ衝突空間に領域を設定
 
 	//下のマップチップ領域を生成
-	CCollisionTerritory* pMapChipBottomTerritory = new CCollisionTerritoryMapChipBottom();
+	CCollisionTerritory* pLineBottomTerritory = new CCollisionTerritoryLineBottom();
 	//下のマップチップ領域と衝突した際のイベントコールバックを設定
-	pMapChipBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
+	pLineBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
 	//下のマップチップ領域を設定
-	pMapArea->addTerritory(pMapChipBottomTerritory);
-	//上のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipTop());
-	//右のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipRight());
-	//左のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipLeft());
+	pLineArea->addTerritory(pLineBottomTerritory);
 
-
-	//基準点の設定
 	//下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
+	pLineArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
 	//下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
+	pLineArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
 
-	//上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(16, 32)));
-	//上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(-16, 32)));
-
-	//右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, 16)));
-	//右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, -16)));
-
-	//左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, 16)));
-	//左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, -16)));
 
 
 	//画面端の衝突判定空間を取り付ける
-	pCollisionAreas->push_back(pMapArea);
+	pCollisionAreas->push_back(pLineArea);
 }
 
 /**
