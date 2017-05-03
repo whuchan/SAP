@@ -1,4 +1,6 @@
 #include"PlayerStateWalk.h"
+#include"Model\Character\PlayerCharacter.h"
+#include "Lib\Input\InputManager.h"
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -38,7 +40,25 @@ void CPlayerStateWalk::enter(void)
 */
 void CPlayerStateWalk::execute(void)
 {
+	this->m_pOwner->m_pMove->m_accele.x = 0.0f;
+
 	log("Player: Walk");
+
+	if (inputflag.m_d)
+	{
+		this->m_pOwner->m_pMove->m_accele.x = 0.7f;
+		return;
+	}
+
+	if (inputflag.m_a)
+	{
+		this->m_pOwner->m_pMove->m_accele.x = -0.7f;
+		return;
+	}
+	
+	//‰½‚à‚µ‚È‚©‚Á‚½‚çA‘Ò‹@ó‘Ô‚Ö
+	this->toIdle();
+	return;
 }
 
 /**
@@ -47,5 +67,7 @@ void CPlayerStateWalk::execute(void)
 void CPlayerStateWalk::exit(void)
 {
 	this->m_isNext = false;
+
+	this->m_pOwner->m_pMove->m_accele.x = 0.0f;
 }
 //EOF

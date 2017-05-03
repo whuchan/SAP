@@ -28,6 +28,7 @@ void CInputFlag::clear() {
 	this->m_x = false ;
 	this->m_c = false ;
 	
+	this->m_w = false;
 	this->m_a = false ;
 	this->m_s = false ;
 	this->m_d = false ;
@@ -52,6 +53,7 @@ void CInputFlag::up( kInputType keyType_ ) {
 		case kInputType::X : this->m_x = true ; break ;
 		case kInputType::C : this->m_c = true ; break ;
 		
+		case kInputType::W: this->m_w = true; break;
 		case kInputType::A : this->m_a = true ; break ;
 		case kInputType::S : this->m_s = true ; break ;
 		case kInputType::D : this->m_d = true ; break ;
@@ -76,6 +78,7 @@ void CInputFlag::down( kInputType keyType_ ) {
 		case kInputType::X : this->m_x = false ; break ;
 		case kInputType::C : this->m_c = false ; break ;
 		
+		case kInputType::W: this->m_z = false; break;
 		case kInputType::A : this->m_a = false ; break ;
 		case kInputType::S : this->m_s = false ; break ;
 		case kInputType::D : this->m_d = false ; break ;
@@ -105,6 +108,7 @@ bool CInputFlag::isKeyPressed( kInputType keyType_ ) {
 		case kInputType::X : return this->m_x ; break ;
 		case kInputType::C : return this->m_c ; break ;
 		
+		case kInputType::W: return this->m_w; break;
 		case kInputType::A : return this->m_a ; break ;
 		case kInputType::S : return this->m_s ; break ;
 		case kInputType::D : return this->m_d ; break ;
@@ -218,6 +222,12 @@ kInputType CInputManager::changeToInputTypeFromKeyCode( cocos2d::EventKeyboard::
 	{
 		// C キーを返す
 		return kInputType::C ;
+	}
+	// A キーかどうか判定
+	else if (cocos2d::EventKeyboard::KeyCode::KEY_W == keyCode_)
+	{
+		// A キーを返す
+		return kInputType::W;
 	}
 	// A キーかどうか判定
 	else if ( cocos2d::EventKeyboard::KeyCode::KEY_A == keyCode_ )

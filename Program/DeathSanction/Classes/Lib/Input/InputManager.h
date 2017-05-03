@@ -27,6 +27,7 @@ enum class kInputType : int {
 	A		= 9,
 	S		= 10,
 	D		= 11,
+	W		= 12,
 } ;
 
 /*
@@ -45,6 +46,7 @@ public:
 	bool m_x = false ;		// x キー
 	bool m_c = false ;		// c キー
 	
+	bool m_w = false;		// w キー
 	bool m_a = false ;		// a キー
 	bool m_s = false ;		// s キー
 	bool m_d = false ;		// d キー

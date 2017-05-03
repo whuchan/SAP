@@ -1,5 +1,6 @@
 #include"PlayerStateIdle.h"
 #include"cocos2d.h"
+#include "Lib\Input\InputManager.h"
 
 using namespace cocos2d;
 
@@ -39,6 +40,22 @@ void CPlayerStateIdle::enter(void)
 void CPlayerStateIdle::execute(void)
 {
 	log("Player; Idle");
+
+	if (inputflag.m_d || inputflag.m_a)
+	{
+		this->toWalk();
+		return;
+	}
+
+	if (inputflag.m_w)
+	{
+		return;
+	}
+
+	if (inputflag.m_s)
+	{
+		return;
+	}
 }
 
 /**

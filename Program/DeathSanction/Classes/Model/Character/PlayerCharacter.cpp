@@ -31,9 +31,6 @@ bool CPlayerCharacter::init()
 
 void CPlayerCharacter::update(float deltaTime)
 {
-	//x軸の加速度の初期化
-	this->m_pMove->m_accele.x = 0.0f;
-
 	//キャラクターの更新処理呼び出し
 	CCharacter::update(deltaTime);
 
