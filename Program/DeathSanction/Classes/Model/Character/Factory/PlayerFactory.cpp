@@ -1,5 +1,7 @@
 #include"PlayerFactory.h"
 #include"Model\Character\BulletCharacter.h"
+#include "Data\StateMachine\Player\PlayerStateIdle.h"
+#include "Data\StateMachine\Player\PlayerStateWalk.h"
 
 
 /**
@@ -41,6 +43,8 @@ CPlayerCharacter* CPlayerFactory::create(void)
 	this->settingTexture(pPlayer);
 	//衝突判定データ群の設定
 	this->settingCollisionAreas(pPlayer);
+	//状態遷移マシンの設定
+	this->settingStateMachine(pPlayer);
 	//初期設定
 	this->settingInitialize(pPlayer);
 
@@ -216,7 +220,7 @@ void CBasePlayerFactory::settingAnimations(CPlayerCharacter* pPlayer)
 	//直立アニメーションに設定する為のチップデータの設定
 	pointerAnimation->addChipData(new CChip(0, 0, 64, 64));
 
-	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::STAND] = pointerAnimation;
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::IDLE] = pointerAnimation;
 
 	pointerAnimation = new CChipListAnimation(10, true);
 
@@ -383,7 +387,15 @@ void CBasePlayerFactory::settingCollisionAreas(CPlayerCharacter* pCharacter)
 */
 void CBasePlayerFactory::settingStateMachine(CPlayerCharacter* pCharacter)
 {
+	//待機状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::IDLE, new CPlayerStateIdle(pCharacter));
 
+	//歩行状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::WALK, new CPlayerStateWalk(pCharacter));
+
+
+	//初期状態の設定
+	pCharacter->m_stateMachine->setStartState((int)CPlayerCharacter::STATE::IDLE);
 }
 
 /**

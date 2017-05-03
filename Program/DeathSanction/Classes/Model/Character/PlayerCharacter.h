@@ -16,7 +16,7 @@ public:
 	//ƒvƒŒƒCƒ„[‚Ìó‘Ô
 	enum class STATE :int
 	{
-		STAND = 0,
+		IDLE = 0,
 		JUMPING = 0,
 		WALK = 1,
 		HIT = 2,

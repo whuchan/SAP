@@ -30,7 +30,7 @@ CStateBase::~CStateBase(void)
 /**
 * @desc	開始処理
 */
-void CStateBase::start(void)
+void CStateBase::enter(void)
 {
 
 
@@ -39,7 +39,7 @@ void CStateBase::start(void)
 /**
 * @desc 更新処理
 */
-void CStateBase::update(void)
+void CStateBase::execute(void)
 {
 
 
@@ -48,7 +48,7 @@ void CStateBase::update(void)
 /**
 * @desc 状態が変わるときの処理
 */
-void CStateBase::onChangeEvent(void)
+void CStateBase::exit(void)
 {
 
 }
@@ -114,13 +114,13 @@ void CStateMachine::update(void)
 	}
 	
 	//現在の状態を更新
-	this->m_pNowState->update();
+	this->m_pNowState->execute();
 
 	//次の状態へ移れるか確認
 	if (this->m_pNowState->isNext())
 	{
 		//現在のステートの終了処理を行う
-		this->m_pNowState->onChangeEvent();
+		this->m_pNowState->exit();
 
 		std::map<int, CStateBase* >::iterator itr = this->m_mapState.find(this->m_pNowState->getNextKey());
 		if (itr == this->m_mapState.end())
@@ -130,7 +130,7 @@ void CStateMachine::update(void)
 		//次の状態へ遷移
 		this->m_pNowState = itr->second;
 		//次の状態を開始
-		this->m_pNowState->start();
+		this->m_pNowState->enter();
 	}
 }
 
@@ -158,7 +158,7 @@ void CStateMachine::setStartState(const int key)
 	}
 	
 	this->m_pNowState = itr->second;
-	this->m_pNowState->start();
+	this->m_pNowState->enter();
 }
 
 /**

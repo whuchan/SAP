@@ -39,17 +39,17 @@ public:
 	/**
 	* @desc	開始処理
 	*/
-	virtual void start(void) = 0;
+	virtual void enter(void) = 0;
 
 	/**
 	* @desc 更新処理
 	*/
-	virtual void update(void) = 0;
+	virtual void execute(void) = 0;
 
 	/**
 	* @desc 状態が変わるときの処理
 	*/
-	virtual void onChangeEvent(void) = 0;
+	virtual void exit(void) = 0;
 
 	/**
 	* @desc 切り替える条件を取得
@@ -67,6 +67,7 @@ protected:
 
 	//次に進むステートのキー
 	int m_nextRegisterKey = 0;
+
 };
 
 

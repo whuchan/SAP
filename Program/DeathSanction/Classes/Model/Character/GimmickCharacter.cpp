@@ -226,7 +226,7 @@ void CGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		pChara->m_pMove->m_vel.y = 0.0f;
 		pChara->m_pMove->m_accele.y = 0.0f;
 
-		pChara->m_state = (int)CPlayerCharacter::STATE::STAND;
+		pChara->m_state = (int)CPlayerCharacter::STATE::IDLE;
 
 		return;
 	}

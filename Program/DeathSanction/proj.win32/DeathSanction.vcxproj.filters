@@ -112,6 +112,9 @@
     <Filter Include="src\Data\StateMachine">
       <UniqueIdentifier>{37da48dd-1385-441e-9cac-caa193b488ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine\Player">
+      <UniqueIdentifier>{ec786b50-aff0-4b95-8731-3ef24ccd9be0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,6 +212,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\Factory\CharacterFactory.cpp">
       <Filter>src\Model\Character\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerState.cpp">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.cpp">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.cpp">
+      <Filter>src\Data\StateMachine\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +322,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\Factory\CharacterFactory.h">
       <Filter>src\Model\Character\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerState.h">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.h">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.h">
+      <Filter>src\Data\StateMachine\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
