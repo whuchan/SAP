@@ -77,7 +77,7 @@ public:
 	//アニメーションの状態（派生先によってタイプが変化する）
 	int m_intAnimationState = 0;
 
-
+	int m_intCurrentLine = 0;
 
 	//有効フラグ
 	bool m_activeFlag = false;

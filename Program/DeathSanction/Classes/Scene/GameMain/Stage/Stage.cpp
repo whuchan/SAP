@@ -122,6 +122,8 @@ bool CStage::init() {
 */
 void CStage::update(float deltaTime_) {
 
+	
+
 	// esc キーを押したらゲーム終了
 	if (inputflag.m_esc == true) {
 		cocos2d::Director::getInstance()->end();
@@ -164,6 +166,9 @@ void CStage::update(float deltaTime_) {
 	//	ここまでに更新処理のコードを追加
 	//
 	//=========================================================================
+
+	//入力更新処理
+	inputflag.update();
 }
 
 

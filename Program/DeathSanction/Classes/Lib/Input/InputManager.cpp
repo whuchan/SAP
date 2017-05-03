@@ -2,7 +2,6 @@
 //  InputManager.cpp
 //  ShootingGame
 //
-//  Created by 永瀬鈴久 on 2014/11/20.
 //
 //
 
@@ -13,6 +12,30 @@
  *	キーボード入力フラグ
  *
  */
+
+ /**
+ * @desc コンストラクタ
+ */
+CInputFlag::CInputFlag()
+{
+
+}
+
+/**
+* @desc 更新処理
+*/
+void CInputFlag::update()
+{
+	for(InputData &inputData : this->m_arrayInputTrigger)
+	{
+		if (inputData.m_boolUse)
+		{
+			inputData.m_boolTrigger = false;
+		}
+	}
+}
+
+
 /**
  *	@desc	値のクリア
  */
@@ -60,6 +83,13 @@ void CInputFlag::up( kInputType keyType_ ) {
 		
 		default: break ;
 	}
+
+	if (!this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger && 
+		!this->m_arrayInputBuffer[(int)keyType_])
+	{
+		this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger = true;
+		this->m_arrayInputBuffer[(int)keyType_] = true;
+	}
 }
 /**
  *	@desc	キーが離されている時の反映
@@ -85,6 +115,10 @@ void CInputFlag::down( kInputType keyType_ ) {
 		
 		default: break ;
 	}
+
+	this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger= false;
+	this->m_arrayInputTrigger[(int)keyType_].m_boolUse = false;
+	this->m_arrayInputBuffer[(int)keyType_] = false;
 }
 
 /**
@@ -120,6 +154,21 @@ bool CInputFlag::isKeyPressed( kInputType keyType_ ) {
 }
 
 
+/**
+*	@desc	指定したキーのトリガー入力状態を取得
+*	@param	キータイプ
+*	@return	true...押されている
+*/
+bool CInputFlag::getTrigger(kInputType keyType_)
+{
+	if (this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger)
+	{
+		this->m_arrayInputTrigger[(int)keyType_].m_boolUse = true;
+		return true;
+	}
+
+	return false;
+}
 
 
 /*

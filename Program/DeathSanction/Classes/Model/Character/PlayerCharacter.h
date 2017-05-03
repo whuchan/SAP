@@ -20,7 +20,9 @@ public:
 		JUMPING = 0,
 		WALK = 1,
 		HIT = 2,
-		FALING = 3
+		FALING = 3,
+		LINE_UP = 4,
+		LINE_DOWN = 5,
 	};
 
 	//プレイヤーが行えるアクション

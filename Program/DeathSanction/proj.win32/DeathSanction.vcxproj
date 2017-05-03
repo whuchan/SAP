@@ -155,6 +155,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\Physical\Physical.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerState.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.cpp" />
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.cpp" />
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\StateMachine.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
@@ -193,6 +195,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\Physical\Physical.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerState.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.h" />
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.h" />
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\StateMachine.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />

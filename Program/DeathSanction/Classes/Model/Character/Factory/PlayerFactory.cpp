@@ -2,6 +2,8 @@
 #include"Model\Character\BulletCharacter.h"
 #include "Data\StateMachine\Player\PlayerStateIdle.h"
 #include "Data\StateMachine\Player\PlayerStateWalk.h"
+#include "Data\StateMachine\Player\PlayerStateLineUp.h"
+#include "Data\StateMachine\Player\PlayerStateLineDown.h"
 
 
 /**
@@ -392,6 +394,12 @@ void CBasePlayerFactory::settingStateMachine(CPlayerCharacter* pCharacter)
 
 	//歩行状態
 	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::WALK, new CPlayerStateWalk(pCharacter));
+
+	//ラインアップ状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_UP, new CPlayerStateLineUp(pCharacter));
+
+	//ラインダウン状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_DOWN, new CPlayerStateLineDown(pCharacter));
 
 
 	//初期状態の設定

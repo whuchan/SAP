@@ -1,4 +1,5 @@
 #include"PlayerStateIdle.h"
+#include"Model\Character\PlayerCharacter.h"
 #include"cocos2d.h"
 #include "Lib\Input\InputManager.h"
 
@@ -39,21 +40,30 @@ void CPlayerStateIdle::enter(void)
 */
 void CPlayerStateIdle::execute(void)
 {
+#ifdef _DEBUG_PLAYER_STATE
 	log("Player; Idle");
+#endif//_DEBUG_PLAYER_STATE
+	
 
 	if (inputflag.m_d || inputflag.m_a)
 	{
 		this->toWalk();
 		return;
 	}
-
-	if (inputflag.m_w)
+	log("Player; Idle");
+	if (inputflag.getTrigger(kInputType::W) &&
+		this->m_pOwner->m_intCurrentLine < STAGE_MAX_LINE)
 	{
+		
+		//ラインアップ状態へ
+		this->toLineUp();
 		return;
 	}
-
-	if (inputflag.m_s)
+	else if (inputflag.getTrigger(kInputType::S) &&
+		this->m_pOwner->m_intCurrentLine > 0)
 	{
+		//ラインダウン状態へ
+		this->toLineDown();
 		return;
 	}
 }

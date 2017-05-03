@@ -115,6 +115,18 @@
     <Filter Include="src\Data\StateMachine\Player">
       <UniqueIdentifier>{ec786b50-aff0-4b95-8731-3ef24ccd9be0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine\Player\LineUp">
+      <UniqueIdentifier>{75397689-3322-4a92-a406-e76ae6c37395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\LineDown">
+      <UniqueIdentifier>{b70e4542-e014-4e01-a7d6-9f7f73bfa05c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Idle">
+      <UniqueIdentifier>{41ef8efd-02f8-486a-bb89-77ddefc2145d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Walk">
+      <UniqueIdentifier>{279433fc-a0e2-4bac-87a1-db5de8b6b362}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -216,11 +228,17 @@
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerState.cpp">
       <Filter>src\Data\StateMachine\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.cpp">
+      <Filter>src\Data\StateMachine\Player\LineUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.cpp">
+      <Filter>src\Data\StateMachine\Player\LineDown</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.cpp">
-      <Filter>src\Data\StateMachine\Player</Filter>
+      <Filter>src\Data\StateMachine\Player\Idle</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.cpp">
-      <Filter>src\Data\StateMachine\Player</Filter>
+      <Filter>src\Data\StateMachine\Player\Walk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,11 +344,17 @@
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerState.h">
       <Filter>src\Data\StateMachine\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.h">
+      <Filter>src\Data\StateMachine\Player\LineUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.h">
+      <Filter>src\Data\StateMachine\Player\LineDown</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.h">
-      <Filter>src\Data\StateMachine\Player</Filter>
+      <Filter>src\Data\StateMachine\Player\Idle</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.h">
-      <Filter>src\Data\StateMachine\Player</Filter>
+      <Filter>src\Data\StateMachine\Player\Walk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

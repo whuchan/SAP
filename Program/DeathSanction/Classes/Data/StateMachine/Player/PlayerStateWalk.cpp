@@ -40,9 +40,12 @@ void CPlayerStateWalk::enter(void)
 */
 void CPlayerStateWalk::execute(void)
 {
+#ifdef _DEBUG_PLAYER_STATE
+	log("Player: Walk");
+#endif // _DEBUG_PLAYER_STATE
+
 	this->m_pOwner->m_pMove->m_accele.x = 0.0f;
 
-	log("Player: Walk");
 
 	if (inputflag.m_d)
 	{
@@ -53,6 +56,21 @@ void CPlayerStateWalk::execute(void)
 	if (inputflag.m_a)
 	{
 		this->m_pOwner->m_pMove->m_accele.x = -0.7f;
+		return;
+	}
+
+	if (inputflag.getTrigger(kInputType::W) &&
+		this->m_pOwner->m_intCurrentLine < STAGE_MAX_LINE)
+	{
+		//ラインアップ状態へ
+		this->toLineUp();
+		return;
+	}
+	else if (inputflag.getTrigger(kInputType::S) &&
+		this->m_pOwner->m_intCurrentLine > 0)
+	{
+		//ラインダウン状態へ
+		this->toLineDown();
 		return;
 	}
 	

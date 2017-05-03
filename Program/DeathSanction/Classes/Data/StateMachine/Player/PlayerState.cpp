@@ -14,6 +14,8 @@
 #include "PlayerState.h"
 #include "Classes\Model\Character\PlayerCharacter.h"
 
+
+
 //==========================================
 //
 // Class: CPlayerState
@@ -64,6 +66,31 @@ void CPlayerState::toWalk(void)
 	//待機動作を終了
 	this->m_isNext = true;
 }
+
+/**
+*	@desc	ラインアップ状態へ移行
+*/
+void CPlayerState::toLineUp(void)
+{
+	this->m_pOwner->m_state = (int)CPlayerCharacter::STATE::LINE_UP;
+
+	this->m_nextRegisterKey = this->m_pOwner->m_state;
+	//待機動作を終了
+	this->m_isNext = true;
+}
+
+/**
+*	@desc	ラインダウン状態へ移行
+*/
+void CPlayerState::toLineDown(void)
+{
+	this->m_pOwner->m_state = (int)CPlayerCharacter::STATE::LINE_DOWN;
+
+	this->m_nextRegisterKey = this->m_pOwner->m_state;
+	//待機動作を終了
+	this->m_isNext = true;
+}
+
 
 ///**
 // * @desc	ジャンプ状態へ移行
