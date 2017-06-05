@@ -40,7 +40,7 @@ void CPlayerCharacter::update(float deltaTime)
 * @desc 入力処理
 * @tips 移動処理で呼び出す
 */
-void CPlayerCharacter::inputFunc()
+void CPlayerCharacter::inputFunction()
 {
 
 
@@ -50,7 +50,7 @@ void CPlayerCharacter::inputFunc()
 /**
 * @desc 移動処理
 */
-void CPlayerCharacter::moveFunc(float deltaTime)
+void CPlayerCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -81,7 +81,7 @@ void CPlayerCharacter::moveFunc(float deltaTime)
 }
 
 //アニメーション処理
-void CPlayerCharacter::animationFunc(float deltaTime)
+void CPlayerCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -167,7 +167,7 @@ void CPlayerCharacter::checkState(float deltaTime)
 /**
 * @desc 反映処理
 */
-void CPlayerCharacter::applyFunc()
+void CPlayerCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);

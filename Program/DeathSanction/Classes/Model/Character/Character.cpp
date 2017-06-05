@@ -90,10 +90,10 @@ bool CCharacter::init()
 void CCharacter::update(float deltaTime)
 {
 	//移動処理
-	this->moveFunc(deltaTime);
+	this->moveFunction(deltaTime);
 
 	//アニメーション処理
-	this->animationFunc(deltaTime);
+	this->animationFunction(deltaTime);
 
 	//空間との衝突判定処理
 	this->collision();
@@ -102,7 +102,7 @@ void CCharacter::update(float deltaTime)
 	this->checkState(deltaTime);
 
 	//反映処理
-	this->applyFunc();
+	this->applayFunction();
 }
 
 /**

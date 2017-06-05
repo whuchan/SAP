@@ -1,6 +1,6 @@
 #include"LaunchTrigger.h"
 #include"Model\Character\Character.h"
-#include "Model\Character\Factory\EnemyFactory.h"
+#include "Model\Character\Factory\EnemyFactoryManager.h"
 #include "Model\Character\Factory\BulletFactory.h"
 #include "Model\Character\Factory\GimmickFactory.h"
 

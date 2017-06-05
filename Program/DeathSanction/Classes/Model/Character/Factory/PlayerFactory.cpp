@@ -56,7 +56,7 @@ CPlayerCharacter* CPlayerFactory::create(void)
 	* 計算データのままで起動すると１フレームズレが発生するので
 	*　初期化時の最後に値をSpriteに反映する
 	*/
-	pPlayer->applyFunc();
+	pPlayer->applayFunction();
 
 
 	return pPlayer;

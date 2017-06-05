@@ -1,6 +1,7 @@
+#pragma once
 //==========================================
 //
-// File: EnemyState.cpp
+// File: HenchmanTypeAState.h
 //
 // エネミー状態遷移 ヘッダーファイル
 //
@@ -8,21 +9,36 @@
 //						Author Shinya Ueba
 //==========================================
 
+
 //==========================================
 // ヘッダインクルード
 //==========================================
 #include "EnemyState.h"
+#include "Classes\Model\Character\HenchmanTypeAEnemy.h"
+
 
 //==========================================
 //
-// Class: CEnemyState
+// Class: CHenchmanTypeAEnemy
 //
-// エネミー 状態 基底クラス
+// 子分A 状態 基底クラス
 //
 // 2017/05/15
 //						Author Shinya Ueba
 //==========================================
-#include "Model\Character\HenchmanTypeAEnemy.h"
+class CHenchmanTypeAState : public CEnemyState<CHenchmanTypeAEnemy>
+{
+public:
+	/**
+	* @desc	コンストラクタ
+	*/
+	CHenchmanTypeAState(CHenchmanTypeAEnemy* const pOwner);
 
+	/**
+	* @desc	デストラクタ
+	*/
+	~CHenchmanTypeAState(void);
 
+	
+};
 //EOF

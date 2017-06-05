@@ -69,8 +69,6 @@ int CStateBase::getNextKey(void)
 	return this->m_nextRegisterKey;
 }
 
-
-
 //==========================================
 //
 // Class: CStateMachine

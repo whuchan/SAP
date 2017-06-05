@@ -92,10 +92,10 @@ public:
 	}
 
 	//移動処理
-	void moveFunc(float deltaTime)override;
+	void moveFunction(float deltaTime)override;
 
 	//アニメーション処理
-	void animationFunc(float deltaTime)override;
+	void animationFunction(float deltaTime)override;
 
 	//空間との衝突判定処理
 	virtual void collision()override;
@@ -104,7 +104,7 @@ public:
 	void checkState(float deltaTime)override;
 
 	//反映処理
-	void applyFunc()override;
+	void applayFunction()override;
 
 
 

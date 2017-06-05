@@ -47,7 +47,7 @@ bool CBulletCharacter::init(float posX, float posY)
 
 
 //移動処理
-void CBulletCharacter::moveFunc(float deltaTime)
+void CBulletCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -77,7 +77,7 @@ void CBulletCharacter::moveFunc(float deltaTime)
 }
 
 //アニメーション処理
-void CBulletCharacter::animationFunc(float deltaTime)
+void CBulletCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -135,7 +135,7 @@ void CBulletCharacter::checkState(float deltaTime)
 }
 
 //反映処理
-void CBulletCharacter::applyFunc()
+void CBulletCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);

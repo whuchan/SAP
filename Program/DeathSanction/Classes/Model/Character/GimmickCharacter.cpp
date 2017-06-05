@@ -48,7 +48,7 @@ bool CGimmickCharacter::init(float posX, float posY)
 
 
 //移動処理
-void CGimmickCharacter::moveFunc(float deltaTime)
+void CGimmickCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -79,7 +79,7 @@ void CGimmickCharacter::moveFunc(float deltaTime)
 }
 
 //アニメーション処理
-void CGimmickCharacter::animationFunc(float deltaTime)
+void CGimmickCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -124,7 +124,7 @@ void CGimmickCharacter::checkState(float deltaTime)
 }
 
 //反映処理
-void CGimmickCharacter::applyFunc()
+void CGimmickCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);

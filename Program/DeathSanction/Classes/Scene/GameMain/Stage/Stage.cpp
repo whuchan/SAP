@@ -25,7 +25,7 @@
 #include"Model\Map\Map.h"
 #include"Model\Character\Character.h"
 #include"Model\Character\Factory\PlayerFactory.h"
-#include"Model\Character\Factory\EnemyFactory.h"
+#include"Model\Character\Factory\EnemyFactoryManager.h"
 #include"Model\Character\Factory\GimmickFactory.h"
 #include "Data\LaunchData\LaunchData.h"
 #include "Data\LaunchTrigger\LaunchTrigger.h"
@@ -66,7 +66,6 @@ CStage::CStage()
 */
 CStage::~CStage()
 {
-
 	//“G¶¬HêŠÇ—ƒNƒ‰ƒX‚Ì‰ğ•ú
 	CEnemyFactoryManager::removeInstance();
 
