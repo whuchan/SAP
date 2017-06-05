@@ -157,6 +157,21 @@
     <Filter Include="src\Lib\Factory">
       <UniqueIdentifier>{e4b40b44-34c6-4ea2-a708-4e4a48372966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\Character\Damage">
+      <UniqueIdentifier>{a399285f-154f-4f9b-85b3-d7332bb6290d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Title">
+      <UniqueIdentifier>{a078a4cb-0009-4b79-bfb1-185cb2830ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Result">
+      <UniqueIdentifier>{569c9b68-cc4b-4354-9847-a20be9ece257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\LinUp">
+      <UniqueIdentifier>{33f719a8-5658-4a33-8245-3056bc4537d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\LineDown">
+      <UniqueIdentifier>{b25d5eb3-6e2f-4aee-8b75-7a3571290137}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -293,6 +308,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Lib\Factory\Factory.cpp">
       <Filter>src\Lib\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\DamageCharacter.cpp">
+      <Filter>src\Model\Character\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.cpp">
+      <Filter>src\Data\StateMachine\Enemy\LinUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.cpp">
+      <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +457,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Lib\Factory\Factory.h">
       <Filter>src\Lib\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\DamageCharacter.h">
+      <Filter>src\Model\Character\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.h">
+      <Filter>src\Data\StateMachine\Enemy\LinUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.h">
+      <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

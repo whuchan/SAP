@@ -57,6 +57,13 @@ protected:
 	* @param 衝突判定領域データ群
 	*/
 	void settingCollisionAreas(CCharacter* pCharacter)override;
+
+	/**
+	* @desc 状態遷移マシンの設定
+	* @param 敵キャラクターインスタンスのアドレス
+	*/
+	void settingStateMachine(CCharacter* pCharacter)override;
+
 	/**
 	* @desc	 初期化処理
 	* @param 敵キャラクターインスタンスのアドレス

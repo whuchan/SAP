@@ -47,41 +47,25 @@ public:
 
 };
 
-class CCharacterFactory
-{
-public:
-	CCharacterFactory()
-	{
-
-	}
-
-	virtual ~CCharacterFactory()
-	{
-
-	}
-
-	virtual CCharacter* create(float posX, float posY) = 0;
-};
-
 //=======================================================
 //
 // 敵工場(抽象)クラス
 //
 //=======================================================
-class CEnemyFactory:public CCharacterFactory
+class CCharacterFactory
 {
 public:
 	/**
 	* @desc コンストラクタ
 	*/
-	CEnemyFactory()
+	CCharacterFactory()
 	{
 
 	}
 	/**
 	* @desc デストラクタ
 	*/
-	virtual ~CEnemyFactory()
+	virtual ~CCharacterFactory()
 	{
 
 	}
@@ -95,7 +79,7 @@ public:
 	virtual CCharacter* create(float posX, float posY)
 	{
 		//敵キャラクターの生成
-		CCharacter* pCharacter = this->createEnemy();
+		CCharacter* pCharacter = this->createCharacter();
 
 		//アニメーションデータ群の設定
 		this->settingAnimations(pCharacter);
@@ -111,6 +95,9 @@ public:
 		this->settingTexture(pCharacter);
 		//衝突判定データ群の設定
 		this->settingCollisionAreas(pCharacter);
+		//状態遷移マシンの設定
+		this->settingStateMachine(pCharacter);
+
 		//初期設定
 		this->settingInitialize(pCharacter);
 
@@ -123,7 +110,7 @@ protected:
 	* @desc
 	* @param 敵キャラクターインスタンスのアドレス
 	*/
-	virtual CCharacter* createEnemy(void) = 0;
+	virtual CCharacter* createCharacter(void) = 0;
 	/**
 	* @desc	 移動データを設定
 	* @param 敵キャラクターインスタンスのアドレス
@@ -158,9 +145,15 @@ protected:
 	virtual void settingBody(CCharacter* pCharacter) = 0;
 	/**
 	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
+	* @param 敵キャラクターインスタンスのアドレス
 	*/
 	virtual void settingCollisionAreas(CCharacter* pCharacter) = 0;
+	/**
+	* @desc 状態遷移マシンの設定
+	* @param 敵キャラクターインスタンスのアドレス
+	*/
+	virtual	void settingStateMachine(CCharacter* pCharacter) = 0;
+
 	/**
 	* @desc 初期化処理
 	* @param 敵キャラクターインスタンスのアドレス
@@ -175,7 +168,7 @@ protected:
 //
 //=======================================================
 template <class T>
-class CEnemyCreateFactory : public CEnemyFactory
+class CEnemyCreateFactory : public CCharacterFactory
 {
 public:
 	/**
@@ -195,7 +188,7 @@ public:
 	}
 
 protected:
-	virtual CCharacter* createEnemy(void)
+	virtual CCharacter* createCharacter(void)
 	{
 		//敵キャラクターの生成
 		CCharacter* pCharacter = T::create();
@@ -209,6 +202,9 @@ protected:
 		pCharacter->addBody(factory.getBody());
 		//衝突判定データ群の設定
 		pCharacter->addCollisionAreas(factory.getCollisionAreas());
+		//状態遷移マシンの設定
+		pCharacter->addStateMachine(factory.getStateMachine());
+
 
 		return pCharacter;
 	}

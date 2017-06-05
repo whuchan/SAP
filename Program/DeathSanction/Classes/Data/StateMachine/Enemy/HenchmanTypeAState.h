@@ -37,7 +37,7 @@ public:
 	/**
 	* @desc	デストラクタ
 	*/
-	~CHenchmanTypeAState(void);
+	virtual ~CHenchmanTypeAState(void);
 
 	
 };

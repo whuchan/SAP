@@ -1,5 +1,6 @@
 #include"HenchmanTypeAFactory.h"
 #include"Classes\Data\StateMachine\Enemy\HenchmanTypeAState.h"
+#include"Classes\Data\StateMachine\Enemy\HenchmanTypeAStateIdle.h"
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -173,6 +174,31 @@ void CHenchmanTypeAFactory::settingCollisionAreas(CCharacter* pCharacter)
 	//画面端の衝突判定空間を取り付ける
 	pCollisionAreas->push_back(pMapArea);
 }
+
+/**
+* @desc 状態遷移マシンの設定
+* @param 敵キャラクターインスタンスのアドレス
+*/
+void CHenchmanTypeAFactory::settingStateMachine(CCharacter* pCharacter)
+{
+	//待機状態
+	pCharacter->m_stateMachine->registerState((int)CHenchmanTypeAEnemy::STATE::IDLE, new CHenchmanTypeAStateIdle((CHenchmanTypeAEnemy*)pCharacter));
+
+	/*
+	//歩行状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::WALK, new CPlayerStateWalk(pCharacter));
+
+	//ラインアップ状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_UP, new CPlayerStateLineUp(pCharacter));
+
+	//ラインダウン状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_DOWN, new CPlayerStateLineDown(pCharacter));
+	*/
+
+	//初期状態の設定
+	pCharacter->m_stateMachine->setStartState((int)CHenchmanTypeAEnemy::STATE::IDLE);
+}
+
 /**
 * @desc	 初期化処理
 * @param 敵キャラクターインスタンスのアドレス
