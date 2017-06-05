@@ -20,14 +20,11 @@ CEnemyFactoryManager::CEnemyFactoryManager()
 
 	//工場を生成して取り付けていく
 	//連想配列のキーはマップチップIDに設定
-	//クリボー生成工場の取り付け
-	//(*this->m_pFactories)[ENEMY_TYPE::KURIBO] = new CKuriboFactory();
-	//(*this->m_pFactories)[ENEMY_TYPE::NOKONOKO] = new CGreenNokoNokoFactory();
-	//(*this->m_pFactories)[ENEMY_TYPE::PATAPATA] = new CGreenPataPataFactory();
-	//(*this->m_pFactories)[ENEMY_TYPE::KILLERBATTERY] = new CKillerBatteryFactory();
-	//(*this->m_pFactories)[ENEMY_TYPE::KILLER] = new CKillerFactory();
-
-	(*this->m_pFactories)[ENEMY_TYPE::KURIBO] = new CHenchmanTypeAFactory();
+	(*this->m_pFactories)[ENEMY_TYPE::HENCHMAN_TYPE_A]	= new CHenchmanTypeAFactory();
+	(*this->m_pFactories)[ENEMY_TYPE::LEATHERFACE]		= new CHenchmanTypeAFactory();
+	(*this->m_pFactories)[ENEMY_TYPE::KILLER]			= new CHenchmanTypeAFactory();
+	(*this->m_pFactories)[ENEMY_TYPE::KILLERBATTERY]	= new CHenchmanTypeAFactory();
+	(*this->m_pFactories)[ENEMY_TYPE::PATAPATA]			= new CHenchmanTypeAFactory();
 }
 
 /**

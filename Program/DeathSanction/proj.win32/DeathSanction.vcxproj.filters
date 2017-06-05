@@ -172,6 +172,12 @@
     <Filter Include="src\Data\StateMachine\Enemy\LineDown">
       <UniqueIdentifier>{b25d5eb3-6e2f-4aee-8b75-7a3571290137}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\Character\Factory\Damage">
+      <UniqueIdentifier>{0cf8b5d9-6b85-48fa-be24-ef33300c679f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Damage\Player">
+      <UniqueIdentifier>{5d92f2b1-6b8d-4fe8-a695-68d8f7e6a4f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -317,6 +323,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.cpp">
       <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactory.cpp">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.cpp">
+      <Filter>src\Model\Character\Factory\Damage\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +481,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.h">
       <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactory.h">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.h">
+      <Filter>src\Model\Character\Factory\Damage\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

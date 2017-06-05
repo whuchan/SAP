@@ -175,9 +175,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Model\Character\DamageCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\EnemyCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\CharacterFactory.cpp" />
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactory.cpp" />
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactoryManager.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.cpp" />
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Factory\PlayerFactory.cpp" />
     <ClCompile Include="..\Classes\Model\Character\FireBallBulletCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\GimmickCharacter.cpp" />
@@ -226,9 +229,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Model\Character\DamageCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\EnemyCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\CharacterFactory.h" />
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactory.h" />
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactoryManager.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactory.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.h" />
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.h" />
     <ClInclude Include="..\Classes\Model\Character\Factory\PlayerFactory.h" />
     <ClInclude Include="..\Classes\Model\Character\FireBallBulletCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\GimmickCharacter.h" />
