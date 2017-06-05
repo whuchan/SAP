@@ -178,6 +178,15 @@
     <Filter Include="src\Model\Character\Factory\Damage\Player">
       <UniqueIdentifier>{5d92f2b1-6b8d-4fe8-a695-68d8f7e6a4f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\Character\Effect">
+      <UniqueIdentifier>{426e53f8-5536-4dfd-8189-927fc56c1b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Effect">
+      <UniqueIdentifier>{f6488e63-74b4-4d03-8226-051c0d09a0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Effect\Player">
+      <UniqueIdentifier>{90ffea88-42e8-44fa-986c-0837ee2173e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -332,6 +341,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.cpp">
       <Filter>src\Model\Character\Factory\Damage\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\EffectCharacter.cpp">
+      <Filter>src\Model\Character\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EffectFactory.cpp">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EffectFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.cpp">
+      <Filter>src\Model\Character\Factory\Effect\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,6 +511,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.h">
       <Filter>src\Model\Character\Factory\Damage\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\EffectCharacter.h">
+      <Filter>src\Model\Character\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EffectFactory.h">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EffectFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.h">
+      <Filter>src\Model\Character\Factory\Effect\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

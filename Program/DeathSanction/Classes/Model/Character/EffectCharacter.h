@@ -3,17 +3,17 @@
 
 //======================================================
 //
-// 弾キャラクターの基底クラスとなるクラス
+// エフェクトキャラクターの基底クラスとなるクラス
 //
 //======================================================
-class CDamageCharacter : public CCharacter
+class CEffectCharacter : public CCharacter
 {
 public:
 	//コンストラクタ
-	CDamageCharacter();
+	CEffectCharacter();
 
 	//デストラクタ
-	virtual ~CDamageCharacter();
+	virtual ~CEffectCharacter();
 
 	//初期化処理
 	virtual bool init()override;
@@ -40,10 +40,10 @@ public:
 	* だがしかし、cocos2dxの機能である自動でdeleteの機能も使いたい
 	* なのでcreate静的メンバ関数をカスタマイズする
 	*/
-	//CREATE_FUNC(CDamageCharacter);
-	static CDamageCharacter* create()
+	//CREATE_FUNC(CEffectCharacter);
+	static CEffectCharacter* create()
 	{
-		CDamageCharacter* pRet = new(std::nothrow)CDamageCharacter();
+		CEffectCharacter* pRet = new(std::nothrow)CEffectCharacter();
 		if (pRet&&pRet->init())
 		{
 			pRet->autorelease();
@@ -64,9 +64,9 @@ public:
 	* @tips 初期位置を必要とするのは生成の段階ではなく
 	*       initの段階である
 	*/
-	static CDamageCharacter* create(float posX, float posY)
+	static CEffectCharacter* create(float posX, float posY)
 	{
-		CDamageCharacter* pRet = new(std::nothrow)CDamageCharacter();
+		CEffectCharacter* pRet = new(std::nothrow)CEffectCharacter();
 		if (pRet&&pRet->init(posX, posY))
 		{
 			pRet->autorelease();

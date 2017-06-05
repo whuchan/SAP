@@ -17,6 +17,7 @@ enum class CHARACTER_TYPE : int
 	BULLET	= 2,//プレイヤー弾
 	GIMMICK = 3,//ギミック
 	DAMAGE	= 4,//ダメージ
+	EFFECT	= 5,//エフェクト
 };
 
 
