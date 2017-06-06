@@ -187,6 +187,15 @@
     <Filter Include="src\Model\Character\Factory\Effect\Player">
       <UniqueIdentifier>{90ffea88-42e8-44fa-986c-0837ee2173e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\UI">
+      <UniqueIdentifier>{47430b1e-3be1-4750-b2d4-efd7f25f1785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\UI\Player">
+      <UniqueIdentifier>{53f9206a-e87c-49d0-94a9-258839bd99f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Status">
+      <UniqueIdentifier>{d356a3df-1e80-4345-9677-8e2b0618d32c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -353,6 +362,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.cpp">
       <Filter>src\Model\Character\Factory\Effect\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\UI\PlayerHpBar.cpp">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\UI\PlayerStaminaBar.cpp">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Status\Status.cpp">
+      <Filter>src\Data\Status</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +541,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.h">
       <Filter>src\Model\Character\Factory\Effect\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\UI\PlayerHpBar.h">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\UI\PlayerStaminaBar.h">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Status\Status.h">
+      <Filter>src\Data\Status</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

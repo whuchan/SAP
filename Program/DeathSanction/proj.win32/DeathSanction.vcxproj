@@ -165,6 +165,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\StateMachine.cpp" />
+    <ClCompile Include="..\Classes\Data\Status\Status.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Lib\Factory\Factory.cpp" />
     <ClCompile Include="..\Classes\Lib\Input\InputManager.cpp" />
@@ -195,6 +196,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Model\Character\RollBlockGimmickCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Map\Map.cpp" />
+    <ClCompile Include="..\Classes\Model\UI\PlayerHpBar.cpp" />
+    <ClCompile Include="..\Classes\Model\UI\PlayerStaminaBar.cpp" />
     <ClCompile Include="..\Classes\Scene\GameMain\GameMain.cpp" />
     <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage.cpp" />
     <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage1.cpp" />
@@ -223,6 +226,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\StateMachine.h" />
+    <ClInclude Include="..\Classes\Data\Status\Status.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Lib\Factory\Factory.h" />
     <ClInclude Include="..\Classes\Lib\Input\InputManager.h" />
@@ -253,6 +257,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Model\Character\RollBlockGimmickCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\TikuwaBlockGimmickCharacter.h" />
     <ClInclude Include="..\Classes\Model\Map\Map.h" />
+    <ClInclude Include="..\Classes\Model\UI\PlayerHpBar.h" />
+    <ClInclude Include="..\Classes\Model\UI\PlayerStaminaBar.h" />
     <ClInclude Include="..\Classes\Scene\GameMain\GameMain.h" />
     <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage.h" />
     <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage1.h" />

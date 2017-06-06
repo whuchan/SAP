@@ -29,7 +29,8 @@
 #include"Model\Character\Factory\GimmickFactory.h"
 #include "Data\LaunchData\LaunchData.h"
 #include "Data\LaunchTrigger\LaunchTrigger.h"
-
+#include "Model\UI\PlayerHpBar.h"
+#include "Model\UI\PlayerStaminaBar.h"
 
 /*
 *	@desc	コンストラクタ
@@ -90,6 +91,14 @@ bool CStage1::init() {
 	CCharacterAggregate::getInstance()->add(pPlayerChara);
 	//プレイヤーをレイヤーに追加
 	this->m_pMainLayer->addChild(pPlayerChara);
+
+
+	//プレイヤーUIの生成と取り付け
+	CPlayerHpBar* pPlayerHpBar = CPlayerHpBar::create(pPlayerChara,150, WINDOW_TOP - 64);
+	this->m_pUILayer->addChild(pPlayerHpBar);
+	CPlayerStaminaBar* pPlayerStaminaBar = CPlayerStaminaBar::create(pPlayerChara, 150, WINDOW_TOP - 96);
+	this->m_pUILayer->addChild(pPlayerStaminaBar);
+
 
 
 	//スクロールが行われた時に敵の出撃判定を行う

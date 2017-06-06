@@ -438,6 +438,8 @@ void CBasePlayerFactory::settingInitialize(CPlayerCharacter* pPlayer)
 
 	//—LŒøƒtƒ‰ƒO‚ğ—§‚Ä‚é
 	pPlayer->m_activeFlag = true;
+
+	pPlayer->m_status.set(100,100, 100, 100, 100,1);
 }
 
 //=======================================================

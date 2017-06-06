@@ -5,6 +5,7 @@
 #include "Data/Collision/Collision.h"
 #include "Data\Collision\CollisionArea.h"
 #include "Data\StateMachine\StateMachine.h"
+#include "Data\Status\Status.h"
 
 //==============================================
 // キャラクタータイプ
@@ -63,6 +64,9 @@ public:
 	//アクションデータ群マップ配列
 	std::map<int, std::map<int,CAction*>*> m_mapAction;
 
+
+	//ステータス
+	CStatus m_status;
 
 	//状態（派生先によってタイプが変化する）
 	int m_state = 0;
