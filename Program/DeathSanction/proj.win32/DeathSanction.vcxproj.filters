@@ -199,6 +199,12 @@
     <Filter Include="src\Data\StateMachine\Player\Attack1">
       <UniqueIdentifier>{5760e039-2c47-44fd-bc13-a07a7db82aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\Event">
+      <UniqueIdentifier>{55328486-584f-47fc-ba22-ea076950c8f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Event\Factory">
+      <UniqueIdentifier>{7a725831-75d1-419a-9170-72bf51e79b23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -327,9 +333,6 @@
     <ClCompile Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.cpp">
       <Filter>src\Model\Character\Factory\Enemy\Henchman\TypeA</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.cpp">
-      <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.cpp">
       <Filter>src\Data\StateMachine\Enemy\Boss</Filter>
     </ClCompile>
@@ -377,6 +380,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.cpp">
       <Filter>src\Data\StateMachine\Player\Attack1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Event.cpp">
+      <Filter>src\Data\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactoryManager.cpp">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactory.cpp">
+      <Filter>src\Data\Event\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -509,9 +524,6 @@
     <ClInclude Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.h">
       <Filter>src\Model\Character\Factory\Enemy\Henchman\TypeA</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.h">
-      <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.h">
       <Filter>src\Data\StateMachine\Enemy\Boss</Filter>
     </ClInclude>
@@ -559,6 +571,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.h">
       <Filter>src\Data\StateMachine\Player\Attack1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Event.h">
+      <Filter>src\Data\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactoryManger.h">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactory.h">
+      <Filter>src\Data\Event\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -149,6 +149,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\Animation\Animation.cpp" />
     <ClCompile Include="..\Classes\Data\Collision\Collision.cpp" />
     <ClCompile Include="..\Classes\Data\Collision\CollisionArea.cpp" />
+    <ClCompile Include="..\Classes\Data\Event\Event.cpp" />
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactory.cpp" />
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactoryManager.cpp" />
     <ClCompile Include="..\Classes\Data\LaunchData\LaunchData.cpp" />
     <ClCompile Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.cpp" />
     <ClCompile Include="..\Classes\Data\Move\Move.cpp" />
@@ -211,6 +214,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\Animation\Animation.h" />
     <ClInclude Include="..\Classes\Data\Collision\Collision.h" />
     <ClInclude Include="..\Classes\Data\Collision\CollisionArea.h" />
+    <ClInclude Include="..\Classes\Data\Event\Event.h" />
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactory.h" />
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactoryManger.h" />
     <ClInclude Include="..\Classes\Data\LaunchData\LaunchData.h" />
     <ClInclude Include="..\Classes\Data\LaunchTrigger\LaunchTrigger.h" />
     <ClInclude Include="..\Classes\Data\Move\Move.h" />
