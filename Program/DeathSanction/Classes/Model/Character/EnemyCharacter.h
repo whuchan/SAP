@@ -1,6 +1,6 @@
 #pragma once
 #include "Character.h"
-
+#include "Model\Character\DamageCharacter.h"
 //======================================================
 //
 // 敵キャラクターの基底クラスとなるクラス
@@ -162,6 +162,14 @@ public:
 		{
 			pArea->collision(this);
 		}
+
+		//全てのキャラクターとの衝突判定
+		std::vector<CCharacter*>* pCharacters = CCharacterAggregate::getInstance()->get();
+		for (CCharacter* pChara : (*pCharacters))
+		{
+			//キャラクター１との衝突判定
+			this->collision(pChara);
+		}
 	}
 
 	//状態チェック
@@ -202,6 +210,31 @@ public:
 	*/
 	bool collision(CCharacter* pChara)
 	{
+		//敵だったら
+		if (pChara->m_charaType == CHARACTER_TYPE::DAMAGE)
+		{
+			CDamageCharacter* pDamage = (CDamageCharacter*)pChara;
+
+			if (pDamage->getOwner()->m_charaType == CHARACTER_TYPE::PLAYER)
+			{
+
+				//自身の衝突判定
+				CCollisionRect myRect(*this->m_pBody, this->m_pMove->m_pos);
+
+				//敵の衝突判定矩形
+				CCollisionRect eneRect(*pChara->m_pBody, pChara->m_pMove->m_pos);
+
+				if (myRect.collision(&eneRect) == true)
+				{
+					//衝突判定後の処理
+					pChara->hits(this);
+
+					return true;
+				}
+			}
+		}
+
+
 		return true;
 	}
 	

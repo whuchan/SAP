@@ -50,10 +50,12 @@ void CPlayerStateAttack1::execute(float deltaTime)
 	Vec2 luanchPos = this->m_pOwner->m_pMove->m_pos;
 
 
-	CCharacter* pCharacter = CDamageFactoryManager::getInstance()->create(DAMAGE_TYPE::PLAYER_ATTACK_1, luanchPos.x, luanchPos.y);
+	CDamageCharacter* pCharacter = (CDamageCharacter*)CDamageFactoryManager::getInstance()->create(DAMAGE_TYPE::PLAYER_ATTACK_1, luanchPos.x, luanchPos.y);
+	pCharacter->setOwner(this->m_pOwner);
 	CCharacterAggregate::getInstance()->add(pCharacter);
 	Layer* pLayer = CGameMainManager::getInstance()->getStage()->getMainLayer();
 	pLayer->addChild(pCharacter);
+	
 	this->toIdle();
 	
 	return;

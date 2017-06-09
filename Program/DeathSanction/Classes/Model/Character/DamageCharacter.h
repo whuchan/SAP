@@ -139,4 +139,22 @@ public:
 	*/
 	virtual void collisionLeftCallback(int event)override;
 
+
+	/**
+	* @desc 生成者を設定する
+	* @param 生成キャラクターのインスタンス
+	*/
+	void setOwner(CCharacter* const pOwner);
+
+	/**
+	* @desc 生成者を取得する
+	* @return 生成キャラクターのインスタンス
+	*/
+	CCharacter* getOwner(void);
+
+
+private:
+	//生成したキャラクター
+	CCharacter* m_pOwner = NULL;
+
 };

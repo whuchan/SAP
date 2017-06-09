@@ -32,7 +32,7 @@ public:
 	* @desc 敵キャラクターを生成
 	* @param 生成タイプ
 	*/
-	CCharacter* create(DAMAGE_TYPE type, float posX, float posY);
+	CCharacter* create(DAMAGE_TYPE type,float posX, float posY);
 	/**
 	* @desc シングルトンインスタンスの解放
 	*/

@@ -2,6 +2,7 @@
 #include "Lib\Input\InputManager.h"
 #include "Model\Map\Map.h"
 
+
 //コンストラクタ
 CDamageCharacter::CDamageCharacter()
 {
@@ -42,6 +43,7 @@ bool CDamageCharacter::init(float posX, float posY)
 		CCLOG("敵キャラクター初期化に失敗");
 		return false;
 	}
+
 	return true;
 }
 
@@ -103,13 +105,14 @@ void CDamageCharacter::collision()
 		pArea->collision(this);
 	}
 
+	/*
 	//全てのキャラクターとの衝突判定
 	std::vector<CCharacter*>* pCharacters = CCharacterAggregate::getInstance()->get();
 	for (CCharacter* pChara : (*pCharacters))
 	{
 		//キャラクター１との衝突判定
 		this->collision(pChara);
-	}
+	}*/
 }
 
 /**
@@ -186,6 +189,22 @@ void CDamageCharacter::hits(CCharacter* pChara)
 		return;
 	}
 
+
+	
+	if (this->m_pOwner)
+	{
+	//	pChara->m_status.decreaseHP(this->m_status.getAttackPt());
+
+	//	if (pChara->m_status.getHp() <= 0)
+		{
+			pChara->m_isAlive = false;
+		}
+	}
+
+	//自身を消滅させる
+	this->m_isAlive = false;
+
+	/*
 	//プレイヤーの足下の位置
 	float playerFeetPosY = pChara->m_pMove->m_pos.y + pChara->m_pBody->m_bottom;
 
@@ -227,6 +246,7 @@ void CDamageCharacter::hits(CCharacter* pChara)
 		//下だった
 		CCLOG("Lose");
 	}
+	*/
 }
 
 
@@ -273,3 +293,23 @@ void CDamageCharacter::collisionLeftCallback(int event)
 	//有効フラグを下げる
 	this->m_activeFlag = false;
 }
+
+
+/**
+* @desc 生成者を設定する
+* @param 生成キャラクターのインスタンス
+*/
+void CDamageCharacter::setOwner(CCharacter* const pOwner)
+{
+	this->m_pOwner = pOwner;
+}
+
+/**
+* @desc 生成者を取得する
+* @return 生成キャラクターのインスタンス
+*/
+CCharacter* CDamageCharacter::getOwner(void)
+{
+	return this->m_pOwner;
+}
+

@@ -43,6 +43,9 @@ void CPlayerStateIdle::execute(float deltaTime)
 #ifdef _DEBUG_PLAYER_STATE
 	log("Player; Idle");
 #endif//_DEBUG_PLAYER_STATE
+
+	CPlayerCharacter* pPlayer = (CPlayerCharacter*)this->m_pOwner;
+
 	if (inputflag.m_d || inputflag.m_a)
 	{
 		this->toWalk();
@@ -66,8 +69,11 @@ void CPlayerStateIdle::execute(float deltaTime)
 	}
 
 
-	if (inputflag.getTrigger(kInputType::C))
+	if (inputflag.getTrigger(kInputType::C)&&
+		pPlayer->m_status.getStamina() >= 10)
 	{
+		pPlayer->m_status.decreaseStamina(10);
+
 		//UŒ‚‚Pó‘Ô‚Ö
 		this->toAttack1();
 		return;

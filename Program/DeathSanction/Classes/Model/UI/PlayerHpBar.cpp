@@ -40,6 +40,8 @@ bool CPlayerHpBar::init(float posX, float posY)
 	//update()ƒƒ“ƒoŒÄ‚Ño‚µŠÖ”
 	this->scheduleUpdate();
 
+	this->offsetPosition = cocos2d::Vec2(posX, posY);
+
 	return true;
 }
 
@@ -52,6 +54,13 @@ void CPlayerHpBar::update(float deltaTime)
 	}
 
 	float value = this->m_pOwner->m_status.getHp() / this->m_pOwner->m_status.getmaxHp();
+
+
+	this->setScaleX(value);
+
+	cocos2d::Vec2 pos = this->offsetPosition;
+
+	pos.x -= (this->getTextureRect().size.width * (1.0f - value)) * 0.5f;
 
 	this->setScaleX(value);
 }

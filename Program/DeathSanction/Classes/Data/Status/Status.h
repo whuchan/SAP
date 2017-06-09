@@ -11,16 +11,16 @@ public:
 
 private:
 	// ＨＰ
-	int m_hp = 0;
+	float m_hp = 0;
 
 	// 最大ＨＰ
-	int m_maxHp = 0;
+	float m_maxHp = 0;
 
 	// スタミナ
-	int m_stamina = 0;
+	float m_stamina = 0;
 
 	// 最大スタミナ
-	int m_maxStamina = 0;
+	float m_maxStamina = 0;
 
 
 	// 速度
@@ -39,8 +39,8 @@ public:
 	*	@param 移動速度
 	*/
 
-	void set(	int hp, int maxHp,
-				int stamina, int maxStamina,
+	void set(	float hp, float maxHp,
+				float stamina, float maxStamina,
 				int attackPt,int speed) {
 
 		this->m_hp = hp;
@@ -58,17 +58,17 @@ public:
 	}
 
 	// ＨＰの取得
-	int getHp() {
+	float getHp() {
 		return this->m_hp;
 	}
 
 	// 最大ＨＰの取得
-	int getmaxHp() {
+	float getmaxHp() {
 		return this->m_maxHp;
 	}
 
 	// スタミナの取得
-	int getStamina() {
+	float getStamina() {
 		return this->m_stamina;
 	}
 
@@ -100,6 +100,19 @@ public:
 		if (this->m_hp < 0)
 		{
 			this->m_hp = 0;
+		}
+	}
+
+	/**
+	*	@desc Staminaの減少
+	*	@param 減少するスタミナ値（相手のスタミナ）
+	*/
+	void decreaseStamina(int value) {
+		this->m_stamina -= value;
+
+		if (this->m_stamina < 0)
+		{
+			this->m_stamina = 0;
 		}
 	}
 

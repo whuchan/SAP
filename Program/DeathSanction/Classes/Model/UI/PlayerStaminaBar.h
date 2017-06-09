@@ -55,6 +55,8 @@ public:
 public:
 	//参照するキャラクター
 	CCharacter* m_pOwner;
+
+	cocos2d::Vec2 offsetPosition;
 };
 
 //EOF
