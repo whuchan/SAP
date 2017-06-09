@@ -4,6 +4,7 @@
 #include "Data\StateMachine\Player\PlayerStateWalk.h"
 #include "Data\StateMachine\Player\PlayerStateLineUp.h"
 #include "Data\StateMachine\Player\PlayerStateLineDown.h"
+#include "Data\StateMachine\Player\PlayerStateAttack1.h"
 
 
 /**
@@ -421,6 +422,9 @@ void CBasePlayerFactory::settingStateMachine(CPlayerCharacter* pCharacter)
 
 	//ƒ‰ƒCƒ“ƒ_ƒEƒ“ó‘Ô
 	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_DOWN, new CPlayerStateLineDown(pCharacter));
+
+	//UŒ‚‚Pó‘Ô
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::ATTACK_1, new CPlayerStateAttack1(pCharacter));
 
 
 	//‰Šúó‘Ô‚Ìİ’è

@@ -91,6 +91,20 @@ void CPlayerState::toLineDown(void)
 	this->m_isNext = true;
 }
 
+/**
+* @desc	攻撃状態へ移行
+*/
+void CPlayerState::toAttack1(void)
+{
+	this->m_pOwner->m_state = (int)CPlayerCharacter::STATE::ATTACK_1;
+
+	this->m_nextRegisterKey = this->m_pOwner->m_state;
+	//待機動作を終了
+	this->m_isNext = true;
+}
+
+
+
 
 ///**
 // * @desc	ジャンプ状態へ移行

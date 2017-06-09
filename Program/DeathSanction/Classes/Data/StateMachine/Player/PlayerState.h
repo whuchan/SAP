@@ -65,6 +65,11 @@ public:
 	*/
 	void toLineDown(void);
 
+	/**
+	* @desc	攻撃状態へ移行
+	*/
+	void toAttack1(void);
+
 
 	///**
 	// *	@desc	ジャンプ状態へ移行

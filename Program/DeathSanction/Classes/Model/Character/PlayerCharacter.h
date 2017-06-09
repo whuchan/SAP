@@ -16,13 +16,14 @@ public:
 	//プレイヤーの状態
 	enum class STATE :int
 	{
-		IDLE = 0,
-		JUMPING = 0,
-		WALK = 1,
-		HIT = 2,
-		FALING = 3,
-		LINE_UP = 4,
-		LINE_DOWN = 5,
+		IDLE		= 0,
+		JUMPING		= 0,
+		WALK		= 1,
+		HIT			= 2,
+		FALING		= 3,
+		LINE_UP		= 4,
+		LINE_DOWN	= 5,
+		ATTACK_1	= 6,
 	};
 
 	//プレイヤーが行えるアクション

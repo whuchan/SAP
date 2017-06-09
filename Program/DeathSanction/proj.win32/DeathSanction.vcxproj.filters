@@ -196,6 +196,9 @@
     <Filter Include="src\Data\Status">
       <UniqueIdentifier>{d356a3df-1e80-4345-9677-8e2b0618d32c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Attack1">
+      <UniqueIdentifier>{5760e039-2c47-44fd-bc13-a07a7db82aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -371,6 +374,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Data\Status\Status.cpp">
       <Filter>src\Data\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.cpp">
+      <Filter>src\Data\StateMachine\Player\Attack1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +556,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data\Status\Status.h">
       <Filter>src\Data\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.h">
+      <Filter>src\Data\StateMachine\Player\Attack1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
