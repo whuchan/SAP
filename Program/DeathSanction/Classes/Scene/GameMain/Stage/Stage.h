@@ -110,6 +110,19 @@ public:
 	void checkAndDelete(std::vector<Ty*>* pVector);
 
 
+	/**
+	* @desc メインレイヤーの取得
+	* @return メインレイヤーインスタンス
+	*/
+	cocos2d::Layer* getMainLayer();
+
+	/**
+	* @desc UIレイヤーの取得
+	* @return UIレイヤーインスタンス
+	*/
+	cocos2d::Layer* getUILayer();
+
+
 protected:
 
 	//=========================================================================

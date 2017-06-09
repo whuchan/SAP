@@ -6,11 +6,12 @@
 #include "cocos2d.h"
 #include "Constants.h"
 #include "Data\LaunchTrigger\LaunchTrigger.h"
+#include "Scene\GameMain\Stage\Stage.h"
 
 //=========================================================================
 //	前方宣言
 //=========================================================================
-class CStage;
+
 
 //==========================================
 //
@@ -61,6 +62,12 @@ public:
 	* @desc		共有インスタンス破棄
 	*/
 	static void removeInstance(void);
+
+	/**
+	* @desc		現在のステージを取得
+	* @return 　ステージインスタンス
+	*/
+	CStage* getStage();
 
 private:
 	// 共有インスタンス

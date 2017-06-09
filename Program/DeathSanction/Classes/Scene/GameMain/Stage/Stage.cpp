@@ -276,4 +276,23 @@ void CStage::checkAndDelete(std::vector<Ty*>* pVector)
 		}
 	}
 }
+
+/**
+* @desc メインレイヤーの取得
+* @return メインレイヤーインスタンス
+*/
+cocos2d::Layer* CStage::getMainLayer()
+{
+	return this->m_pMainLayer;
+}
+
+/**
+* @desc UIレイヤーの取得
+* @return UIレイヤーインスタンス
+*/
+cocos2d::Layer* CStage::getUILayer()
+{
+	return this->m_pUILayer;
+}
+
 //EOF

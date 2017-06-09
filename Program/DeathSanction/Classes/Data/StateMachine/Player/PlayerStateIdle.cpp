@@ -65,8 +65,10 @@ void CPlayerStateIdle::execute(float deltaTime)
 		return;
 	}
 
+
 	if (inputflag.getTrigger(kInputType::C))
 	{
+		//UŒ‚‚Pó‘Ô‚Ö
 		this->toAttack1();
 		return;
 	}

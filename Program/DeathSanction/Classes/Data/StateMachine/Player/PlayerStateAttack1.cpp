@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Model\Character\Factory\DamageFactoryManager.h"
 #include "Model\Character\Character.h"
+#include "Scene\GameMain\GameMain.h"
 using namespace cocos2d;
 
 //==========================================
@@ -47,9 +48,14 @@ void CPlayerStateAttack1::execute(float deltaTime)
 
 
 	Vec2 luanchPos = this->m_pOwner->m_pMove->m_pos;
-	CCharacterAggregate::getInstance()->add(CDamageFactoryManager::getInstance()->create(DAMAGE_TYPE::PLAYER_ATTACK_1, luanchPos.x, luanchPos.y));
 
+
+	CCharacter* pCharacter = CDamageFactoryManager::getInstance()->create(DAMAGE_TYPE::PLAYER_ATTACK_1, luanchPos.x, luanchPos.y);
+	CCharacterAggregate::getInstance()->add(pCharacter);
+	Layer* pLayer = CGameMainManager::getInstance()->getStage()->getMainLayer();
+	pLayer->addChild(pCharacter);
 	this->toIdle();
+	
 	return;
 }
 
