@@ -205,6 +205,9 @@
     <Filter Include="src\Data\Event\Factory">
       <UniqueIdentifier>{7a725831-75d1-419a-9170-72bf51e79b23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene\StageSelect">
+      <UniqueIdentifier>{e11cffcd-20b1-4311-9c3e-36062aa23f86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -392,6 +395,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Data\Event\Factory\EventFactory.cpp">
       <Filter>src\Data\Event\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\Title.cpp">
+      <Filter>src\Scene\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data\Event\Factory\EventFactory.h">
       <Filter>src\Data\Event\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\Title.h">
+      <Filter>src\Scene\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

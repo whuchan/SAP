@@ -2,10 +2,10 @@
 // ヘッダインクルード
 //==========================================
 #include "AppDelegate.h"
-
 #include "Lib\Sound\SoundManager.h"
 #include "Lib\Input\InputManager.h"
 #include "Scene/GameMain/GameMain.h"
+#include "Scene/Title.h"
 
 USING_NS_CC;
 
@@ -89,7 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = CGameMainManager::getInstance()->createScene((int)CGameMainManager::STAGE_NUMBER::ONE);
+    auto scene = (Scene*)CTitle::createScene();
 
     // run
     director->runWithScene(scene);

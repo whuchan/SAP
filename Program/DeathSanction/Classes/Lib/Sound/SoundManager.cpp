@@ -11,7 +11,6 @@
 //==========================================
 // ヘッダインクルード
 //==========================================
-#include	<AudioEngine.h>
 #include"Lib\Sound\SoundManager.h"
 
 using namespace cocos2d::experimental;

@@ -111,6 +111,9 @@ bool CStage::init() {
 	// この部分を消したりコメントアウトすると update 関数が呼ばれなくなるので注意
 	this->scheduleUpdate();
 
+	
+	
+	
 	return true;
 
 }

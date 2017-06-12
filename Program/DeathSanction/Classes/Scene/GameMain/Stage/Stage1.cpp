@@ -32,6 +32,9 @@
 #include "Model\UI\PlayerHpBar.h"
 #include "Model\UI\PlayerStaminaBar.h"
 
+using namespace cocos2d::experimental;
+
+
 /*
 *	@desc	コンストラクタ
 */
@@ -109,6 +112,11 @@ bool CStage1::init() {
 	//マップの位置を取得
 	//cocos2d::Point pt = this->m_pMainLayer->getPosition();
 	//	pMap->checkGimmickLaunch(pt.x, pt.y);
+
+	// タイトルBGMの再生
+	int musicID = AudioEngine::play2d(SOUND_STAGE_1_BGM, true, 0.0f);
+	// ID設定
+	CSoundManager::getInstance()->setMusicID(BGM_STAGE1, musicID);
 
 	return true;
 

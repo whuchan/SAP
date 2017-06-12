@@ -99,10 +99,23 @@ void ClearAndSwap( Ty p_ ) { p_->clear() ; Ty().swap( *p_ ) ; }
 //-------------------------------------------------------------------------
 #define IMAGE_PLAYER_HP_BAR			"Images/UI/PlayerHp.png"
 #define IMAGE_PLAYER_STAMINA_BAR	"Images/UI/PlayerStamina.png"
+#define IMAGE_UI_PUSH_ENTER			"Images/UI/Enter.png"
+#define IMAGE_TITLE					"Images/UI/Title.png"
+
+
+//=========================================================================
+//	曲名のマクロはここから書く
+//=========================================================================
+#define BGM_TITLE	("TitleBGM")
+#define BGM_STAGE1	("Stage1BGM")
+
 
 //=========================================================================
 //	サウンドファイルのマクロはここから書く
 //=========================================================================
+#define SOUND_TITLE_BGM			"Sound/chimamire.mp3"
+#define SOUND_SYSTEM_DECIDE		"Sound/Decide.wav"
+#define SOUND_STAGE_1_BGM		"Sound/k-sishou.mp3"
 
 //=========================================================================
 //	フォントのマクロはここから書く
