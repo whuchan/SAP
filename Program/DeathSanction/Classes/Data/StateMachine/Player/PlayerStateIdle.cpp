@@ -73,7 +73,7 @@ void CPlayerStateIdle::execute(float deltaTime)
 		pPlayer->m_status.getStamina() >= 10)
 	{
 		pPlayer->m_status.decreaseStamina(10);
-
+		pPlayer->m_staminaCounter = 0.0f;
 		//UŒ‚‚Pó‘Ô‚Ö
 		this->toAttack1();
 		return;

@@ -95,5 +95,11 @@ public:
 		//ジャンプを停止させる
 		(*this->m_mapAction[this->m_intActionState])[(int)ACTION::JUMP]->stop();
 	}
+
+public:
+	//スタミナインターバル
+	float m_staminaInterval = 1.0f;
+	//スタミナカウンター
+	float m_staminaCounter	= 0.0f;
 };
 //EOF

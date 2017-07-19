@@ -295,6 +295,24 @@ std::vector<CCharacter*>* CCharacterAggregate::get(void)
 	return this->m_pCharacters;
 }
 
+/*
+* @desc プレイヤーキャラクターを設定
+* @param プレイヤーキャラクターのインスタンス
+*/
+void CCharacterAggregate::setPlayer(CCharacter* const pPlayer)
+{
+	this->m_pPlayer = pPlayer;
+}
+
+/*
+* @desc プレイヤーキャラクターを取得
+* @return プレイヤーキャラクターのインスタンス
+*/
+CCharacter* CCharacterAggregate::getPlayer(void)
+{
+	return this->m_pPlayer;
+}
+
 /**
 * @desc キャラクター１体を取得
 * @param 添字番号

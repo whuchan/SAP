@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -24,6 +24,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -32,6 +33,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -161,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAState.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateIdle.cpp" />
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerState.cpp" />
     <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.cpp" />
@@ -173,6 +176,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Lib\Factory\Factory.cpp" />
     <ClCompile Include="..\Classes\Lib\Input\InputManager.cpp" />
+    <ClCompile Include="..\Classes\Lib\Math\CustomMath.cpp" />
     <ClCompile Include="..\Classes\Lib\Sound\SoundManager.cpp" />
     <ClCompile Include="..\Classes\Model\Character\BulletCharacter.cpp" />
     <ClCompile Include="..\Classes\Model\Character\Character.cpp" />
@@ -227,6 +231,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAState.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateIdle.h" />
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerState.h" />
     <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.h" />
@@ -239,6 +244,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Lib\Factory\Factory.h" />
     <ClInclude Include="..\Classes\Lib\Input\InputManager.h" />
+    <ClInclude Include="..\Classes\Lib\Math\CustomMath.h" />
     <ClInclude Include="..\Classes\Lib\Sound\SoundManager.h" />
     <ClInclude Include="..\Classes\Model\Character\BulletCharacter.h" />
     <ClInclude Include="..\Classes\Model\Character\Character.h" />

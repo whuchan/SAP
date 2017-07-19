@@ -101,14 +101,13 @@ bool CTitle::init()
 
 
 	// BGM音量調整
-	CSoundManager::getInstance()->setBGMVolume(0.1f);
+	CSoundManager::getInstance()->setBGMVolume(1.0f);
 	// 効果音の音量調整
-	CSoundManager::getInstance()->setSEVolume(0.1f);
+	CSoundManager::getInstance()->setSEVolume(1.0f);
 	// タイトルBGMの再生
 	int musicID = AudioEngine::play2d(SOUND_TITLE_BGM, true, 0.0f);
 	// ID設定
 	CSoundManager::getInstance()->setMusicID(BGM_TITLE, musicID);
-
 
 	return true;
 }
@@ -162,8 +161,8 @@ void CTitle::callbackChangeGameMain(cocos2d::Ref* pSender)
 	AudioEngine::stop(CSoundManager::getInstance()->getMusicID(BGM_TITLE));
 
 	// 効果音再生終了後
-	AudioEngine::setFinishCallback(musicID, [](int musicID, const std::string) {
-
+	AudioEngine::setFinishCallback(musicID, [](int musicID, const std::string)
+	{
 		//シーンを生成する
 		cocos2d::Scene* pScene = CGameMainManager::getInstance()->createScene((int)CGameMainManager::STAGE_NUMBER::ONE);
 		//シーンを切り替える

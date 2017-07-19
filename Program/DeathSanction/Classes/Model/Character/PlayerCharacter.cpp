@@ -34,6 +34,16 @@ void CPlayerCharacter::update(float deltaTime)
 	//キャラクターの更新処理呼び出し
 	CCharacter::update(deltaTime);
 
+
+	if (this->m_staminaCounter <= this->m_staminaInterval)
+	{
+		this->m_staminaCounter += deltaTime;
+	}
+	else
+	{
+		this->m_status.cureStamina(20.0f * deltaTime);
+	}
+
 }
 
 /**

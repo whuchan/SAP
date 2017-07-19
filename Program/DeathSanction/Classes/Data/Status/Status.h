@@ -73,7 +73,7 @@ public:
 	}
 
 	// 最大スタミナの取得
-	int getMaxStamina() {
+	float getMaxStamina() {
 		return this->m_maxStamina;
 	}
 
@@ -107,12 +107,12 @@ public:
 	*	@desc Staminaの減少
 	*	@param 減少するスタミナ値（相手のスタミナ）
 	*/
-	void decreaseStamina(int value) {
+	void decreaseStamina(float value) {
 		this->m_stamina -= value;
 
-		if (this->m_stamina < 0)
+		if (this->m_stamina < 0.0f)
 		{
-			this->m_stamina = 0;
+			this->m_stamina = 0.0f;
 		}
 	}
 
@@ -132,6 +132,18 @@ public:
 		this->m_hp += hp;
 		if (this->m_hp > this->m_maxHp)
 			this->m_hp = this->m_maxHp;
+	}
+
+	/**
+	* @desc スタミナの回復
+	*/
+	void cureStamina(float value)
+	{
+		this->m_stamina += value;
+		if (this->m_stamina >= this->m_maxStamina)
+		{
+			this->m_stamina = this->m_maxStamina;
+		}
 	}
 
 	/**

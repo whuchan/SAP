@@ -140,5 +140,7 @@ protected:
 
 	//出撃スケジュール
 	std::vector<CLaunchTrigger*>* m_pLaunchSchedule = NULL;
+
+	std::string m_musicName;
 };
 

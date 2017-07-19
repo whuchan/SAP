@@ -114,7 +114,7 @@ void ClearAndSwap( Ty p_ ) { p_->clear() ; Ty().swap( *p_ ) ; }
 //	サウンドファイルのマクロはここから書く
 //=========================================================================
 #define SOUND_TITLE_BGM			"Sound/chimamire.mp3"
-#define SOUND_SYSTEM_DECIDE		"Sound/Decide.wav"
+#define SOUND_SYSTEM_DECIDE		"Sound/Decide.mp3"
 #define SOUND_STAGE_1_BGM		"Sound/k-sishou.mp3"
 
 //=========================================================================

@@ -208,6 +208,12 @@
     <Filter Include="src\Scene\StageSelect">
       <UniqueIdentifier>{e11cffcd-20b1-4311-9c3e-36062aa23f86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Henchman\TypeA\Move">
+      <UniqueIdentifier>{172625fa-9595-4c7d-b629-045d220ddfe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib\Math">
+      <UniqueIdentifier>{796354e1-d26c-48d5-b98a-ef79f0d98e41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -398,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\Title.cpp">
       <Filter>src\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.cpp">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Lib\Math\CustomMath.cpp">
+      <Filter>src\Lib\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -592,6 +604,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\Title.h">
       <Filter>src\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.h">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Lib\Math\CustomMath.h">
+      <Filter>src\Lib\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

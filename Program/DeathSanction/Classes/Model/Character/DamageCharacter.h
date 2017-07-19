@@ -157,4 +157,7 @@ private:
 	//生成したキャラクター
 	CCharacter* m_pOwner = NULL;
 
+
+	//
+	int m_lifeTime = 0;
 };

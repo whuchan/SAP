@@ -266,6 +266,9 @@ private:
 	//キャラクターの集まり
 	std::vector<CCharacter*>* m_pCharacters = NULL;
 
+	//プレイヤーインスタンス
+	CCharacter* m_pPlayer = NULL;
+
 public:
 	/**
 	* @desc キャラクターの集まりの参照を設定
@@ -278,6 +281,18 @@ public:
 	* @return キャラクターの集まり
 	*/
 	std::vector<CCharacter*>* get(void);
+
+	/*
+	* @desc プレイヤーキャラクターを設定
+	* @param プレイヤーキャラクターのインスタンス
+	*/
+	void setPlayer(CCharacter* const pPlayer);
+
+	/*
+	* @desc プレイヤーキャラクターを取得
+	* @return プレイヤーキャラクターのインスタンス
+	*/
+	CCharacter* getPlayer(void);
 
 	/**
 	* @desc キャラクター１体を取得

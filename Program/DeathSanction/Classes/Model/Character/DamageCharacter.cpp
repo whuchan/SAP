@@ -135,6 +135,12 @@ void CDamageCharacter::checkState(float deltaTime)
 			this->setScale(-1.0f, 1.0f);
 		}
 	}
+
+	this->m_lifeTime--;
+	if (this->m_lifeTime <= 0)
+	{
+		this->m_activeFlag = false;
+	}
 }
 
 //反映処理
@@ -202,7 +208,7 @@ void CDamageCharacter::hits(CCharacter* pChara)
 	}
 
 	//自身を消滅させる
-	this->m_isAlive = false;
+	this->m_activeFlag = false;
 
 	/*
 	//プレイヤーの足下の位置

@@ -92,6 +92,9 @@ bool CStage1::init() {
 	pPlayerChara->m_tag = TAG_PLAYER_1;
 	//CCharacterAggregateにプレイヤーを追加
 	CCharacterAggregate::getInstance()->add(pPlayerChara);
+	//CCharacterAggregateにプレイヤーを設定
+	CCharacterAggregate::getInstance()->setPlayer(pPlayerChara);
+	
 	//プレイヤーをレイヤーに追加
 	this->m_pMainLayer->addChild(pPlayerChara);
 
@@ -116,7 +119,9 @@ bool CStage1::init() {
 	// タイトルBGMの再生
 	int musicID = AudioEngine::play2d(SOUND_STAGE_1_BGM, true, 0.0f);
 	// ID設定
-	CSoundManager::getInstance()->setMusicID(BGM_STAGE1, musicID);
+	this->m_musicName = BGM_STAGE1;
+	
+	CSoundManager::getInstance()->setMusicID(this->m_musicName, musicID);
 
 	return true;
 
