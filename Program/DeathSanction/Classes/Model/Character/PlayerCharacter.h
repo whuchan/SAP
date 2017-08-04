@@ -16,11 +16,14 @@ public:
 	//プレイヤーの状態
 	enum class STATE :int
 	{
-		STAND = 0,
-		JUMPING = 0,
-		WALK = 1,
-		HIT = 2,
-		FALING = 3
+		IDLE		= 0,
+		JUMPING		= 0,
+		WALK		= 1,
+		HIT			= 2,
+		FALING		= 3,
+		LINE_UP		= 4,
+		LINE_DOWN	= 5,
+		ATTACK_1	= 6,
 	};
 
 	//プレイヤーが行えるアクション
@@ -54,18 +57,18 @@ public:
 	* @desc 入力処理
 	* @tips 移動処理で呼び出す
 	*/
-	void inputFunc();
+	void inputFunction();
 
 	//移動処理
-	void moveFunc()override;
+	void moveFunction(float deltaTime)override;
 	//アニメーション処理
-	void animationFunc()override;
+	void animationFunction(float deltaTime)override;
 	//空間との衝突判定処理
 	virtual void collision()override;
 	//状態チェック
-	void checkState()override;
+	void checkState(float deltaTime)override;
 	//反映処理
-	void applyFunc()override;
+	void applayFunction()override;
 	
 
 	/**
@@ -92,5 +95,11 @@ public:
 		//ジャンプを停止させる
 		(*this->m_mapAction[this->m_intActionState])[(int)ACTION::JUMP]->stop();
 	}
-};
 
+public:
+	//スタミナインターバル
+	float m_staminaInterval = 1.0f;
+	//スタミナカウンター
+	float m_staminaCounter	= 0.0f;
+};
+//EOF

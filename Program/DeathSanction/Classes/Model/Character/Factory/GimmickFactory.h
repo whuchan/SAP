@@ -6,6 +6,8 @@
 #include"../RollBlockGimmickCharacter.h"
 #include"../TikuwaBlockGimmickCharacter.h"
 
+#include "CharacterFactory.h"
+
 #include "Model\Map\Map.h"
 
 //=======================================================

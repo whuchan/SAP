@@ -77,7 +77,7 @@ public:
 	}
 
 	//状態チェック
-	virtual void checkState()override;
+	virtual void checkState(float deltaTime)override;
 
 
 	

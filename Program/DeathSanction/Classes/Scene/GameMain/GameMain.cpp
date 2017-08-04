@@ -96,4 +96,14 @@ void CGameMainManager::removeInstance(void)
 {
 	SAFE_DELETE(CGameMainManager::m_pointerSharedGameMainManager);
 }
+
+/**
+* @desc		現在のステージを取得
+* @return 　ステージインスタンス
+*/
+CStage* CGameMainManager::getStage()
+{
+	return this->m_pointerCurrentStage;
+}
+
 //EOF

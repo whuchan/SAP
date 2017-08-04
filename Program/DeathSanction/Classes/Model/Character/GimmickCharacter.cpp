@@ -48,7 +48,7 @@ bool CGimmickCharacter::init(float posX, float posY)
 
 
 //移動処理
-void CGimmickCharacter::moveFunc()
+void CGimmickCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -70,16 +70,16 @@ void CGimmickCharacter::moveFunc()
 	{
 		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
 		{
-			pointerPhysical->update(this->m_pMove);
+			pointerPhysical->update(deltaTime,this->m_pMove);
 		}
 	}
 
 	//移動計算
-	this->m_pMove->moveBy();
+	this->m_pMove->moveBy(deltaTime);
 }
 
 //アニメーション処理
-void CGimmickCharacter::animationFunc()
+void CGimmickCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -105,7 +105,7 @@ void CGimmickCharacter::collision()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CGimmickCharacter::checkState()
+void CGimmickCharacter::checkState(float deltaTime)
 {
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)
@@ -124,7 +124,7 @@ void CGimmickCharacter::checkState()
 }
 
 //反映処理
-void CGimmickCharacter::applyFunc()
+void CGimmickCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);
@@ -226,7 +226,7 @@ void CGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 		pChara->m_pMove->m_vel.y = 0.0f;
 		pChara->m_pMove->m_accele.y = 0.0f;
 
-		pChara->m_state = (int)CPlayerCharacter::STATE::STAND;
+		pChara->m_state = (int)CPlayerCharacter::STATE::IDLE;
 
 		return;
 	}

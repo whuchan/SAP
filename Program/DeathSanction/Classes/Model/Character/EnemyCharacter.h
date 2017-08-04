@@ -1,23 +1,40 @@
 #pragma once
 #include "Character.h"
-
+#include "Model\Character\DamageCharacter.h"
 //======================================================
 //
 // 敵キャラクターの基底クラスとなるクラス
 //
 //======================================================
-
+template <class T>
 class CEnemyCharacter : public CCharacter
 {
 public:
 	//コンストラクタ
-	CEnemyCharacter();
+	CEnemyCharacter()
+	{
+		//キャラクタータイプを敵キャラクターに設定
+		this->m_charaType = CHARACTER_TYPE::ENEMY;
+	}
 
 	//デストラクタ
-	~CEnemyCharacter();
+	virtual ~CEnemyCharacter()
+	{
+
+	}
 
 	//初期化処理
-	bool init()override;
+	bool init()
+	{
+		//キャラクタークラスの初期化
+		if (CCharacter::init() == false)
+		{
+			CCLOG("プレイヤーキャラクター初期化に失敗");
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	* @desc　初期化処理
@@ -28,7 +45,16 @@ public:
 	* 引数を受け取っているのでinit()メンバ関数も
 	* オーバーロードする必要がある
 	*/
-	bool init(float posX, float posY);
+	bool init(float posX, float posY)
+	{
+		//キャラクタークラスの初期化
+		if (CCharacter::init() == false)
+		{
+			CCLOG("敵キャラクター初期化に失敗");
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	* @desc CREATE_FUNC
@@ -42,9 +68,9 @@ public:
 	* なのでcreate静的メンバ関数をカスタマイズする
 	*/
 	//CREATE_FUNC(CEnemyCharacter);
-	static CEnemyCharacter* create()
+	static  T* create()
 	{
-		CEnemyCharacter* pRet = new(std::nothrow)CEnemyCharacter();
+		T* pRet = new(std::nothrow)T();
 		if (pRet&&pRet->init())
 		{
 			pRet->autorelease();
@@ -65,9 +91,9 @@ public:
 	* @tips 初期位置を必要とするのは生成の段階ではなく
 	*       initの段階である
 	*/
-	static CEnemyCharacter* create(float posX,float posY)
+	static T* create(float posX,float posY)
 	{
-		CEnemyCharacter* pRet = new(std::nothrow)CEnemyCharacter();
+		T* pRet = new(std::nothrow)T();
 		if (pRet&&pRet->init(posX,posY))
 		{
 			pRet->autorelease();
@@ -82,19 +108,98 @@ public:
 	}
 
 	//移動処理
-	void moveFunc()override;
+	void moveFunction(float deltaTime)
+	{
+		// アクション
+		if (this->m_mapAction[this->m_intActionState])
+		{
+			std::map<int, CAction*>::iterator itaratorAction = this->m_mapAction[this->m_intActionState]->begin();
+
+			while (itaratorAction != this->m_mapAction[this->m_intActionState]->end())
+			{
+				if (itaratorAction->second)
+				{
+					itaratorAction->second->update(this);
+				}
+				itaratorAction++;
+			}
+		}
+
+		//物理計算
+		if (this->m_mapPhysical[this->m_intPhysicalState])
+		{
+			for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
+			{
+				pointerPhysical->update(deltaTime, this->m_pMove);
+			}
+		}
+
+		//移動計算
+		this->m_pMove->moveBy(deltaTime);
+	}
 
 	//アニメーション処理
-	void animationFunc()override;
+	void animationFunction(float deltaTime)
+	{
+		//アニメーション
+		if (this->m_mapAnimation[this->m_intAnimationState])
+		{
+			this->m_mapAnimation[this->m_intAnimationState]->update();
+		}
+	}
 
 	//空間との衝突判定処理
-	virtual void collision()override;
+	virtual void collision()
+	{
+		//死んでいたら飛ばす
+		if (this->m_isAlive == false)
+		{
+			return;
+		}
+
+		//空間との衝突判定を行う
+		for (CCollisionArea* pArea : (*this->m_pCollisionAreas))
+		{
+			pArea->collision(this);
+		}
+
+		//全てのキャラクターとの衝突判定
+		std::vector<CCharacter*>* pCharacters = CCharacterAggregate::getInstance()->get();
+		for (CCharacter* pChara : (*pCharacters))
+		{
+			//キャラクター１との衝突判定
+			this->collision(pChara);
+		}
+	}
 
 	//状態チェック
-	void checkState()override;
+	void checkState(float deltaTime)
+	{
+		//向きの判定
+		if (this->m_pMove->m_vel.x != 0)
+		{
+			if (this->m_pMove->m_vel.x > 0)
+			{
+				//右向きに設定
+				this->setScale(1.0f, 1.0f);
+			}
+			else
+			{
+				//左向きに設定
+				this->setScale(-1.0f, 1.0f);
+			}
+		}
+	}
 
 	//反映処理
-	void applyFunc()override;
+	void applayFunction()
+	{
+		//位置データを反映
+		this->setPosition(this->m_pMove->m_pos);
+
+		//チップデータを反映
+		this->setTextureRect(this->m_mapAnimation[this->m_intAnimationState]->getCurrentChip());
+	}
 
 	
 
@@ -103,13 +208,60 @@ public:
 	* @param キャラクターのアドレス
 	* @return true...衝突した
 	*/
-	bool collision(CCharacter* pChara)override;
+	bool collision(CCharacter* pChara)
+	{
+		//敵だったら
+		if (pChara->m_charaType == CHARACTER_TYPE::DAMAGE)
+		{
+			CDamageCharacter* pDamage = (CDamageCharacter*)pChara;
+
+			if (pDamage->getOwner()->m_charaType == CHARACTER_TYPE::PLAYER)
+			{
+
+				//自身の衝突判定
+				CCollisionRect myRect(*this->m_pBody, this->m_pMove->m_pos);
+
+				//敵の衝突判定矩形
+				CCollisionRect eneRect(*pChara->m_pBody, pChara->m_pMove->m_pos);
+
+				if (myRect.collision(&eneRect) == true)
+				{
+					//衝突判定後の処理
+					pChara->hits(this);
+
+					return true;
+				}
+			}
+		}
+
+
+		return true;
+	}
 	
 	/**
 	* @desc 衝突判定後の処理
 	* @param 衝突してきたキャラクタ-
 	*/
-	void hits(CCharacter* pChara)override;
+	void hits(CCharacter* pChara)
+	{
+		//死んでいたら飛ばす
+		if (this->m_isAlive == false)
+		{
+			return;
+		}
+
+		switch (pChara->m_charaType)
+		{
+			//プレイヤーだった場合
+		case CHARACTER_TYPE::PLAYER:	this->hitsPlayerCharacter(pChara);
+			break;
+
+			//弾だった場合
+		case CHARACTER_TYPE::BULLET:	this->hitsBulletCharacter(pChara);
+			break;
+		default:break;
+		}
+	}
 
 protected:
 
@@ -117,12 +269,63 @@ protected:
 	* @desc プレイヤーとの衝突判定後の処理
 	* @param 衝突してきたキャラクタ-
 	*/
-	virtual void hitsPlayerCharacter(CCharacter* pChara);
+	virtual void hitsPlayerCharacter(CCharacter* pChara)
+	{
+		//プレイヤーの足下の位置
+		float playerFeetPosY = pChara->m_pMove->m_pos.y + pChara->m_pBody->m_bottom;
+
+		//敵の中心位置
+		float enePosY = this->m_pMove->m_pos.y;
+
+		//敵より上かどうか
+		float posY = playerFeetPosY - enePosY;
+		if (posY > 0.0f)
+		{
+
+			//敵の死亡フラグを立てる
+			//つまり生きていいるか死んでいるかのフラグにfalseを入れる
+			this->m_isAlive = false;
+
+			//敵死亡アクションを起動する
+			(*this->m_mapAction[this->m_intActionState])[0]->start();
+
+			//=====================================================================
+			// めり込んだ分戻す
+			//=====================================================================
+			//めり込んだ分の計算
+			float boundary = playerFeetPosY - (this->m_pMove->m_pos.y + this->m_pBody->m_top);
+
+			//最終敵に戻す値
+			pChara->m_pMove->m_pos.y -= boundary;
+
+			//=====================================================================
+			// ジャンプアクションの再起動
+			//=====================================================================
+			//ジャンプアクションの再起動
+			(*pChara->m_mapAction[pChara->m_intActionState])[0]->restart(pChara);
+
+		}
+		else
+		{
+
+		}
+	}
 
 	/**
 	* @desc 弾との衝突判定後の処理
 	* @param 衝突してきたキャラクタ-
 	*/
-	virtual void hitsBulletCharacter(CCharacter* pChara);
+	virtual void hitsBulletCharacter(CCharacter* pChara)
+	{
+		//弾の有効フラグを下げる
+		pChara->m_activeFlag = false;
+
+		//敵の死亡フラグを立てる
+		//つまり生きていいるか死んでいるかのフラグにfalseを入れる
+		this->m_isAlive = false;
+
+		//敵死亡アクションを起動する
+		(*this->m_mapAction[this->m_intActionState])[0]->start();
+	}
 
 };

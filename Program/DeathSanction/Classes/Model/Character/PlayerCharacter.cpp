@@ -31,11 +31,18 @@ bool CPlayerCharacter::init()
 
 void CPlayerCharacter::update(float deltaTime)
 {
-	//x軸の加速度の初期化
-	this->m_pMove->m_accele.x = 0.0f;
-
 	//キャラクターの更新処理呼び出し
 	CCharacter::update(deltaTime);
+
+
+	if (this->m_staminaCounter <= this->m_staminaInterval)
+	{
+		this->m_staminaCounter += deltaTime;
+	}
+	else
+	{
+		this->m_status.cureStamina(20.0f * deltaTime);
+	}
 
 }
 
@@ -43,7 +50,7 @@ void CPlayerCharacter::update(float deltaTime)
 * @desc 入力処理
 * @tips 移動処理で呼び出す
 */
-void CPlayerCharacter::inputFunc()
+void CPlayerCharacter::inputFunction()
 {
 
 
@@ -53,7 +60,7 @@ void CPlayerCharacter::inputFunc()
 /**
 * @desc 移動処理
 */
-void CPlayerCharacter::moveFunc()
+void CPlayerCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -75,16 +82,16 @@ void CPlayerCharacter::moveFunc()
 	{
 		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
 		{
-			pointerPhysical->update(this->m_pMove);
+			pointerPhysical->update(deltaTime,this->m_pMove);
 		}
 	}
 
 	//移動計算
-	this->m_pMove->moveBy();
+	this->m_pMove->moveBy(deltaTime);
 }
 
 //アニメーション処理
-void CPlayerCharacter::animationFunc()
+void CPlayerCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -117,8 +124,16 @@ void CPlayerCharacter::collision()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CPlayerCharacter::checkState()
+void CPlayerCharacter::checkState(float deltaTime)
 {
+	if (this->m_stateMachine)
+	{
+		//状態遷移マシンの更新
+		this->m_stateMachine->update(deltaTime);
+	}
+	
+
+	/*
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)
 	{
@@ -156,12 +171,13 @@ void CPlayerCharacter::checkState()
 		//立っている
 		this->m_state = (int)STATE::STAND;
 	}
+	*/
 }
 
 /**
 * @desc 反映処理
 */
-void CPlayerCharacter::applyFunc()
+void CPlayerCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);

@@ -44,19 +44,19 @@ public:
 
 	
 	//移動処理
-	void moveFunc()override;
+	void moveFunction(float deltaTime)override;
 
 	//アニメーション処理
-	void animationFunc()override;
+	void animationFunction(float deltaTime)override;
 
 	//空間との衝突判定処理
 	virtual void collision()override;
 
 	//状態チェック
-	virtual void checkState()override;
+	virtual void checkState(float deltaTime)override;
 
 	//反映処理
-	void applyFunc()override;
+	void applayFunction()override;
 
 
 

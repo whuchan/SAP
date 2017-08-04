@@ -29,6 +29,10 @@
 #include"Model\Character\Factory\GimmickFactory.h"
 #include "Data\LaunchData\LaunchData.h"
 #include "Data\LaunchTrigger\LaunchTrigger.h"
+#include "Model\UI\PlayerHpBar.h"
+#include "Model\UI\PlayerStaminaBar.h"
+
+using namespace cocos2d::experimental;
 
 
 /*
@@ -88,15 +92,36 @@ bool CStage1::init() {
 	pPlayerChara->m_tag = TAG_PLAYER_1;
 	//CCharacterAggregateにプレイヤーを追加
 	CCharacterAggregate::getInstance()->add(pPlayerChara);
+	//CCharacterAggregateにプレイヤーを設定
+	CCharacterAggregate::getInstance()->setPlayer(pPlayerChara);
+	
 	//プレイヤーをレイヤーに追加
 	this->m_pMainLayer->addChild(pPlayerChara);
 
 
+	//プレイヤーUIの生成と取り付け
+	CPlayerHpBar* pPlayerHpBar = CPlayerHpBar::create(pPlayerChara,150, WINDOW_TOP - 64);
+	this->m_pUILayer->addChild(pPlayerHpBar);
+	CPlayerStaminaBar* pPlayerStaminaBar = CPlayerStaminaBar::create(pPlayerChara, 150, WINDOW_TOP - 96);
+	this->m_pUILayer->addChild(pPlayerStaminaBar);
+
+
+
 	//スクロールが行われた時に敵の出撃判定を行う
 	CMap* pMap = CMapManager::getInstance()->getMap();
+
+	//スクロールが行われた時にギミックの出撃判定を行う
+
 	//マップの位置を取得
-	cocos2d::Point pt = this->m_pMainLayer->getPosition();
-	pMap->checkGimmickLaunch(pt.x, pt.y);
+	//cocos2d::Point pt = this->m_pMainLayer->getPosition();
+	//	pMap->checkGimmickLaunch(pt.x, pt.y);
+
+	// タイトルBGMの再生
+	int musicID = AudioEngine::play2d(SOUND_STAGE_1_BGM, true, 0.0f);
+	// ID設定
+	this->m_musicName = BGM_STAGE1;
+	
+	CSoundManager::getInstance()->setMusicID(this->m_musicName, musicID);
 
 	return true;
 

@@ -21,9 +21,9 @@ public:
 	/**
 	* @desc ˆÚ“®
 	*/
-	virtual void moveBy()
+	virtual void moveBy(float deltaTime)
 	{
 		//‘¬“x‚É‚æ‚éˆÚ“®
-		this->m_pos += m_vel;
+		this->m_pos += m_vel * deltaTime;
 	}
 };

@@ -25,7 +25,7 @@
 #include"Model\Map\Map.h"
 #include"Model\Character\Character.h"
 #include"Model\Character\Factory\PlayerFactory.h"
-#include"Model\Character\Factory\EnemyFactory.h"
+#include"Model\Character\Factory\EnemyFactoryManager.h"
 #include"Model\Character\Factory\GimmickFactory.h"
 #include "Data\LaunchData\LaunchData.h"
 #include "Data\LaunchTrigger\LaunchTrigger.h"
@@ -66,7 +66,6 @@ CStage::CStage()
 */
 CStage::~CStage()
 {
-
 	//敵生成工場管理クラスの解放
 	CEnemyFactoryManager::removeInstance();
 
@@ -112,6 +111,9 @@ bool CStage::init() {
 	// この部分を消したりコメントアウトすると update 関数が呼ばれなくなるので注意
 	this->scheduleUpdate();
 
+	
+	
+	
 	return true;
 
 }
@@ -121,6 +123,8 @@ bool CStage::init() {
 *	@param	１フレーム経過時間
 */
 void CStage::update(float deltaTime_) {
+
+	
 
 	// esc キーを押したらゲーム終了
 	if (inputflag.m_esc == true) {
@@ -132,6 +136,9 @@ void CStage::update(float deltaTime_) {
 	//	ここから更新処理のコードを追加
 	//
 	//=========================================================================
+	CSoundManager::getInstance()->fadeIn(this->m_musicName);
+
+
 
 	//=========================================================
 	// 出撃スケジューラーの起動
@@ -164,6 +171,9 @@ void CStage::update(float deltaTime_) {
 	//	ここまでに更新処理のコードを追加
 	//
 	//=========================================================================
+
+	//入力更新処理
+	inputflag.update();
 }
 
 
@@ -191,7 +201,9 @@ void CStage::scroll()
 		//スクロールが行われた時に敵の出撃判定を行う
 		CMap* pMap = CMapManager::getInstance()->getMap();
 		pMap->checkEnemyLaunch(pt.x, pt.y);
-		pMap->checkGimmickLaunch(pt.x, pt.y);
+
+		//スクロールが行われた時にギミックの出撃判定を行う
+		//		pMap->checkGimmickLaunch(pt.x, pt.y);
 	}
 	else if (pt.x < (WINDOW_RIGHT / 3.0) - pPlayerChara->m_pMove->m_pos.x)
 	{
@@ -270,4 +282,23 @@ void CStage::checkAndDelete(std::vector<Ty*>* pVector)
 		}
 	}
 }
+
+/**
+* @desc メインレイヤーの取得
+* @return メインレイヤーインスタンス
+*/
+cocos2d::Layer* CStage::getMainLayer()
+{
+	return this->m_pMainLayer;
+}
+
+/**
+* @desc UIレイヤーの取得
+* @return UIレイヤーインスタンス
+*/
+cocos2d::Layer* CStage::getUILayer()
+{
+	return this->m_pUILayer;
+}
+
 //EOF

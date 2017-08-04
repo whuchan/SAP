@@ -37,12 +37,6 @@
     <Filter Include="src\Model\Character\Factory\Enemy">
       <UniqueIdentifier>{ed922a88-af02-45fb-b407-401f67575b77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Model\Character\Factory\Bullet">
-      <UniqueIdentifier>{b2247e0d-7b8e-4680-b7a2-f23bca55f863}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Model\Character\Factory\Gimmick">
-      <UniqueIdentifier>{7531cf63-0d45-421f-aa88-7b6efad7a4fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Model\Character\Bullet">
       <UniqueIdentifier>{248e8f9f-3390-498a-a1ca-3048d45739b5}</UniqueIdentifier>
     </Filter>
@@ -115,6 +109,111 @@
     <Filter Include="src\Scene\GameMain\Stage\Stage1">
       <UniqueIdentifier>{7cda6ad0-b470-442f-b5e0-8a4aaefb61fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Data\StateMachine">
+      <UniqueIdentifier>{37da48dd-1385-441e-9cac-caa193b488ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player">
+      <UniqueIdentifier>{ec786b50-aff0-4b95-8731-3ef24ccd9be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\LineUp">
+      <UniqueIdentifier>{75397689-3322-4a92-a406-e76ae6c37395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\LineDown">
+      <UniqueIdentifier>{b70e4542-e014-4e01-a7d6-9f7f73bfa05c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Idle">
+      <UniqueIdentifier>{41ef8efd-02f8-486a-bb89-77ddefc2145d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Walk">
+      <UniqueIdentifier>{279433fc-a0e2-4bac-87a1-db5de8b6b362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy">
+      <UniqueIdentifier>{0aab5e3a-e357-4fdf-8d85-cdab1518d5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Henchman">
+      <UniqueIdentifier>{99dac5cd-439d-4393-9a8b-fd0016a6f7a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Henchman\TypeA">
+      <UniqueIdentifier>{39bbf0b5-0e9d-4d30-82f2-00119498de03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Henchman\TypeA\Idle">
+      <UniqueIdentifier>{83923bcb-c7d7-4ab7-956d-3c1844be6282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Enemy\Henchman">
+      <UniqueIdentifier>{816ed142-e6ee-4826-ad4f-fac836179a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Enemy\Henchman\TypeA">
+      <UniqueIdentifier>{7573ea2d-226c-4f96-954a-e7f2d8198ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Enemy\Henchman">
+      <UniqueIdentifier>{4f3805fb-26f3-4782-bf8f-8b1f0611cc9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Enemy\Henchman\TypeA">
+      <UniqueIdentifier>{13db0a24-74f8-4339-944f-9393d3a8d8d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Boss">
+      <UniqueIdentifier>{f1937b18-ebc3-477e-9c20-39fd824c13f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib\Factory">
+      <UniqueIdentifier>{e4b40b44-34c6-4ea2-a708-4e4a48372966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Damage">
+      <UniqueIdentifier>{a399285f-154f-4f9b-85b3-d7332bb6290d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Title">
+      <UniqueIdentifier>{a078a4cb-0009-4b79-bfb1-185cb2830ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Result">
+      <UniqueIdentifier>{569c9b68-cc4b-4354-9847-a20be9ece257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\LinUp">
+      <UniqueIdentifier>{33f719a8-5658-4a33-8245-3056bc4537d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\LineDown">
+      <UniqueIdentifier>{b25d5eb3-6e2f-4aee-8b75-7a3571290137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Damage">
+      <UniqueIdentifier>{0cf8b5d9-6b85-48fa-be24-ef33300c679f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Damage\Player">
+      <UniqueIdentifier>{5d92f2b1-6b8d-4fe8-a695-68d8f7e6a4f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Effect">
+      <UniqueIdentifier>{426e53f8-5536-4dfd-8189-927fc56c1b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Effect">
+      <UniqueIdentifier>{f6488e63-74b4-4d03-8226-051c0d09a0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Character\Factory\Effect\Player">
+      <UniqueIdentifier>{90ffea88-42e8-44fa-986c-0837ee2173e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\UI">
+      <UniqueIdentifier>{47430b1e-3be1-4750-b2d4-efd7f25f1785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\UI\Player">
+      <UniqueIdentifier>{53f9206a-e87c-49d0-94a9-258839bd99f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Status">
+      <UniqueIdentifier>{d356a3df-1e80-4345-9677-8e2b0618d32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Player\Attack1">
+      <UniqueIdentifier>{5760e039-2c47-44fd-bc13-a07a7db82aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Event">
+      <UniqueIdentifier>{55328486-584f-47fc-ba22-ea076950c8f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\Event\Factory">
+      <UniqueIdentifier>{7a725831-75d1-419a-9170-72bf51e79b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\StageSelect">
+      <UniqueIdentifier>{e11cffcd-20b1-4311-9c3e-36062aa23f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data\StateMachine\Enemy\Henchman\TypeA\Move">
+      <UniqueIdentifier>{172625fa-9595-4c7d-b629-045d220ddfe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lib\Math">
+      <UniqueIdentifier>{796354e1-d26c-48d5-b98a-ef79f0d98e41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -134,12 +233,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactory.cpp">
       <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Model\Character\Factory\BulletFactory.cpp">
-      <Filter>src\Model\Character\Factory\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Model\Character\Factory\GimmickFactory.cpp">
-      <Filter>src\Model\Character\Factory\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Model\Character\BulletCharacter.cpp">
       <Filter>src\Model\Character\Bullet</Filter>
@@ -213,6 +306,111 @@
     <ClCompile Include="..\Classes\Scene\GameMain\Stage\Stage1.cpp">
       <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\StateMachine.cpp">
+      <Filter>src\Data\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\CharacterFactory.cpp">
+      <Filter>src\Model\Character\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerState.cpp">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.cpp">
+      <Filter>src\Data\StateMachine\Player\LineUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.cpp">
+      <Filter>src\Data\StateMachine\Player\LineDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.cpp">
+      <Filter>src\Data\StateMachine\Player\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.cpp">
+      <Filter>src\Data\StateMachine\Player\Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyState.cpp">
+      <Filter>src\Data\StateMachine\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateIdle.cpp">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAState.cpp">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\HenchmanTypeAEnemy.cpp">
+      <Filter>src\Model\Character\Enemy\Henchman\TypeA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.cpp">
+      <Filter>src\Model\Character\Factory\Enemy\Henchman\TypeA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.cpp">
+      <Filter>src\Data\StateMachine\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Lib\Factory\Factory.cpp">
+      <Filter>src\Lib\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\DamageCharacter.cpp">
+      <Filter>src\Model\Character\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.cpp">
+      <Filter>src\Data\StateMachine\Enemy\LinUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.cpp">
+      <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactory.cpp">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\DamageFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.cpp">
+      <Filter>src\Model\Character\Factory\Damage\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\EffectCharacter.cpp">
+      <Filter>src\Model\Character\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EffectFactory.cpp">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EffectFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.cpp">
+      <Filter>src\Model\Character\Factory\Effect\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\UI\PlayerHpBar.cpp">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\UI\PlayerStaminaBar.cpp">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Status\Status.cpp">
+      <Filter>src\Data\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.cpp">
+      <Filter>src\Data\StateMachine\Player\Attack1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Event.cpp">
+      <Filter>src\Data\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.cpp">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactoryManager.cpp">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\Event\Factory\EventFactory.cpp">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\Title.cpp">
+      <Filter>src\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.cpp">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Lib\Math\CustomMath.cpp">
+      <Filter>src\Lib\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -235,12 +433,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactory.h">
       <Filter>src\Model\Character\Factory\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Model\Character\Factory\BulletFactory.h">
-      <Filter>src\Model\Character\Factory\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Model\Character\Factory\GimmickFactory.h">
-      <Filter>src\Model\Character\Factory\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Model\Character\BulletCharacter.h">
       <Filter>src\Model\Character\Bullet</Filter>
@@ -313,6 +505,111 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\GameMain\Stage\Stage1.h">
       <Filter>src\Scene\GameMain\Stage\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\StateMachine.h">
+      <Filter>src\Data\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\CharacterFactory.h">
+      <Filter>src\Model\Character\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerState.h">
+      <Filter>src\Data\StateMachine\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineUp.h">
+      <Filter>src\Data\StateMachine\Player\LineUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateLineDown.h">
+      <Filter>src\Data\StateMachine\Player\LineDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateIdle.h">
+      <Filter>src\Data\StateMachine\Player\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateWalk.h">
+      <Filter>src\Data\StateMachine\Player\Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyState.h">
+      <Filter>src\Data\StateMachine\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateIdle.h">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAState.h">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\HenchmanTypeAEnemy.h">
+      <Filter>src\Model\Character\Enemy\Henchman\TypeA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\HenchmanTypeAFactory.h">
+      <Filter>src\Model\Character\Factory\Enemy\Henchman\TypeA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\LeatherFaceState.h">
+      <Filter>src\Data\StateMachine\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Lib\Factory\Factory.h">
+      <Filter>src\Lib\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\DamageCharacter.h">
+      <Filter>src\Model\Character\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineUp.h">
+      <Filter>src\Data\StateMachine\Enemy\LinUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\EnemyStateLineDown.h">
+      <Filter>src\Data\StateMachine\Enemy\LineDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactory.h">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\DamageFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerAttack1Factory.h">
+      <Filter>src\Model\Character\Factory\Damage\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\EffectCharacter.h">
+      <Filter>src\Model\Character\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EffectFactory.h">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EffectFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\PlayerEffectHit1Factory.h">
+      <Filter>src\Model\Character\Factory\Effect\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\UI\PlayerHpBar.h">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\UI\PlayerStaminaBar.h">
+      <Filter>src\Model\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Status\Status.h">
+      <Filter>src\Data\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Player\PlayerStateAttack1.h">
+      <Filter>src\Data\StateMachine\Player\Attack1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Event.h">
+      <Filter>src\Data\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Model\Character\Factory\EnemyFactoryManager.h">
+      <Filter>src\Model\Character\Factory\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactoryManger.h">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\Event\Factory\EventFactory.h">
+      <Filter>src\Data\Event\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\Title.h">
+      <Filter>src\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data\StateMachine\Enemy\HenchmanTypeAStateMove.h">
+      <Filter>src\Data\StateMachine\Enemy\Henchman\TypeA\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Lib\Math\CustomMath.h">
+      <Filter>src\Lib\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

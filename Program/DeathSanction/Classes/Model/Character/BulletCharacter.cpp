@@ -47,7 +47,7 @@ bool CBulletCharacter::init(float posX, float posY)
 
 
 //移動処理
-void CBulletCharacter::moveFunc()
+void CBulletCharacter::moveFunction(float deltaTime)
 {
 	// アクション
 	if (this->m_mapAction[this->m_intActionState])
@@ -69,15 +69,15 @@ void CBulletCharacter::moveFunc()
 	{
 		for (CPhysical* pointerPhysical : (*this->m_mapPhysical[this->m_intPhysicalState]))
 		{
-			pointerPhysical->update(this->m_pMove);
+			pointerPhysical->update(deltaTime,this->m_pMove);
 		}
 	}
 	//移動計算
-	this->m_pMove->moveBy();
+	this->m_pMove->moveBy(deltaTime);
 }
 
 //アニメーション処理
-void CBulletCharacter::animationFunc()
+void CBulletCharacter::animationFunction(float deltaTime)
 {
 	//アニメーション
 	if (this->m_mapAnimation[this->m_intAnimationState])
@@ -116,7 +116,7 @@ void CBulletCharacter::collision()
 * @desc 状態チェック
 * @tips 値をチェックして現在の状態を変更する
 */
-void CBulletCharacter::checkState()
+void CBulletCharacter::checkState(float deltaTime)
 {
 	//向きの判定
 	if (this->m_pMove->m_vel.x != 0)
@@ -135,7 +135,7 @@ void CBulletCharacter::checkState()
 }
 
 //反映処理
-void CBulletCharacter::applyFunc()
+void CBulletCharacter::applayFunction()
 {
 	//位置データを反映
 	this->setPosition(this->m_pMove->m_pos);

@@ -14,7 +14,7 @@ CTikuwaBlockGimmickCharacter::~CTikuwaBlockGimmickCharacter()
 }
 
 //状態チェック
-void CTikuwaBlockGimmickCharacter::checkState()
+void CTikuwaBlockGimmickCharacter::checkState(float deltaTime)
 {
 
 

@@ -63,68 +63,68 @@ void CActionMoveStraight::stop(void)
 * @param 弾タイプ
 * @param 弾発射間隔
 */
-CActionShotBullet::CActionShotBullet(int type, int interval)
-{
-	//弾タイプ
-	this->m_type = type;
-	//弾発射間隔
-	this->m_interval = interval;
-}
+//CActionShotBullet::CActionShotBullet(int type, int interval)
+//{
+//	//弾タイプ
+//	this->m_type = type;
+//	//弾発射間隔
+//	this->m_interval = interval;
+//}
+//
+///**
+//* @desc アクション開始
+//*/
+//void CActionShotBullet::start(void)
+//{
+//	//アクション開始
+//	this->m_inAction = true;
+//}
+//
+///**
+//* @desc 更新処理
+//* @param アクションを行う対象のキャラクター
+//*/
+//void CActionShotBullet::update(CCharacter* pChara)
+//{
+//
+//	
+//
+//	if (this->m_inAction != false)
+//	{
+//		if(this->m_counter > 0 )
+//		{
+//			this->m_counter--;
+//
+//			if (this->m_counter <= 0)
+//			{
+//				this->stop();
+//			}
+//		}
+//		else
+//		{
+//			//敵出撃データ（出撃の情報）の生成
+//			CBulletLaunchData* pLaunchData = new CBulletLaunchData((BULLET_TYPE)this->m_type, pChara->m_pMove->m_pos, pChara->m_shotLaunchVector);
+//
+//			//出撃トリガーを生成し、敵出撃データを設定
+//			CBulletLaunchTrigger* pTrigger = new CBulletLaunchTrigger(pLaunchData);
+//
+//			//出撃トリガーを出撃スケジュールとして追加する
+//			CLaunchScheduler::getInstance()->m_pLauncher->add(pTrigger);
+//
+//			//カウンターをリセット
+//			this->m_counter = this->m_interval;
+//		}
+//	}
+//}
 
-/**
-* @desc アクション開始
-*/
-void CActionShotBullet::start(void)
-{
-	//アクション開始
-	this->m_inAction = true;
-}
-
-/**
-* @desc 更新処理
-* @param アクションを行う対象のキャラクター
-*/
-void CActionShotBullet::update(CCharacter* pChara)
-{
-
-	
-
-	if (this->m_inAction != false)
-	{
-		if(this->m_counter > 0 )
-		{
-			this->m_counter--;
-
-			if (this->m_counter <= 0)
-			{
-				this->stop();
-			}
-		}
-		else
-		{
-			//敵出撃データ（出撃の情報）の生成
-			CBulletLaunchData* pLaunchData = new CBulletLaunchData((BULLET_TYPE)this->m_type, pChara->m_pMove->m_pos, pChara->m_shotLaunchVector);
-
-			//出撃トリガーを生成し、敵出撃データを設定
-			CBulletLaunchTrigger* pTrigger = new CBulletLaunchTrigger(pLaunchData);
-
-			//出撃トリガーを出撃スケジュールとして追加する
-			CLaunchScheduler::getInstance()->m_pLauncher->add(pTrigger);
-
-			//カウンターをリセット
-			this->m_counter = this->m_interval;
-		}
-	}
-}
-
-/**
-* @desc アクション終了
-*/
-void CActionShotBullet::stop(void)
-{
-	//アクション終了
-	this->m_inAction = false;
-}
+///**
+//* @desc アクション終了
+//*/
+//void CActionShotBullet::stop(void)
+//{
+//	//アクション終了
+//	this->m_inAction = false;
+//}
 
 
 //=======================================================

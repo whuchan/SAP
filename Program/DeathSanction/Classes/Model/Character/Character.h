@@ -4,6 +4,8 @@
 #include "Data/ActionController/ActionController.h"
 #include "Data/Collision/Collision.h"
 #include "Data\Collision\CollisionArea.h"
+#include "Data\StateMachine\StateMachine.h"
+#include "Data\Status\Status.h"
 
 //==============================================
 // キャラクタータイプ
@@ -15,6 +17,8 @@ enum class CHARACTER_TYPE : int
 	ENEMY	= 1,//敵
 	BULLET	= 2,//プレイヤー弾
 	GIMMICK = 3,//ギミック
+	DAMAGE	= 4,//ダメージ
+	EFFECT	= 5,//エフェクト
 };
 
 
@@ -61,8 +65,14 @@ public:
 	std::map<int, std::map<int,CAction*>*> m_mapAction;
 
 
+	//ステータス
+	CStatus m_status;
+
 	//状態（派生先によってタイプが変化する）
 	int m_state = 0;
+
+	//状態遷移マシン
+	CStateMachine* m_stateMachine = NULL;
 
 	//適用させる物理演算の状態（派生先によってタイプが変化する）
 	int m_intPhysicalState = 0;
@@ -73,7 +83,7 @@ public:
 	//アニメーションの状態（派生先によってタイプが変化する）
 	int m_intAnimationState = 0;
 
-
+	int m_intCurrentLine = 0;
 
 	//有効フラグ
 	bool m_activeFlag = false;
@@ -90,15 +100,15 @@ public:
 
 protected:
 	//移動処理
-	virtual void moveFunc() = 0;
+	virtual void moveFunction(float deltaTime) = 0;
 	//アニメーション処理
-	virtual void animationFunc() = 0;
+	virtual void animationFunction(float deltaTime) = 0;
 	//空間との衝突判定処理
 	virtual void collision() = 0;
 	//状態チェック
-	virtual void checkState() = 0;
+	virtual void checkState(float deltaTime) = 0;
 	//反映処理
-	virtual void applyFunc() = 0;
+	virtual void applayFunction() = 0;
 
 public:
 
@@ -188,6 +198,11 @@ public:
 	*/
 	void addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas);
 
+	/**
+	* @desc	状態遷移マシンの追加
+	* @param　状態遷移マシン
+	*/
+	void addStateMachine(CStateMachine* pStateMachine);
 
 
 	/**
@@ -251,6 +266,9 @@ private:
 	//キャラクターの集まり
 	std::vector<CCharacter*>* m_pCharacters = NULL;
 
+	//プレイヤーインスタンス
+	CCharacter* m_pPlayer = NULL;
+
 public:
 	/**
 	* @desc キャラクターの集まりの参照を設定
@@ -263,6 +281,18 @@ public:
 	* @return キャラクターの集まり
 	*/
 	std::vector<CCharacter*>* get(void);
+
+	/*
+	* @desc プレイヤーキャラクターを設定
+	* @param プレイヤーキャラクターのインスタンス
+	*/
+	void setPlayer(CCharacter* const pPlayer);
+
+	/*
+	* @desc プレイヤーキャラクターを取得
+	* @return プレイヤーキャラクターのインスタンス
+	*/
+	CCharacter* getPlayer(void);
 
 	/**
 	* @desc キャラクター１体を取得
@@ -291,38 +321,4 @@ public:
 	*/
 	int getSize(void);
 };
-
-
-//===============================================
-//
-// CCharacter生成工場クラス（抽象クラス）
-//
-//===============================================
-class CCharacterPartsFactory
-{
-public:
-	/**
-	* コンストラクタ
-	*/
-	CCharacterPartsFactory() 
-	{
-
-	}
-	/**
-	* デストラクタ
-	*/
-	virtual ~CCharacterPartsFactory()
-	{
-	
-	}
-//==============================================================
-//
-// 純粋仮想関数
-//
-//==============================================================
-	virtual CMove*						getMove(void)		= 0;
-	virtual CBody*						getBody(void)		= 0;
-	virtual std::vector<CCollisionArea*>* getCollisionAreas(void) = 0;
-};
-
-
+//EOF

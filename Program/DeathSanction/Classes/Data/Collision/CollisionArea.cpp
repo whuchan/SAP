@@ -697,3 +697,79 @@ void CCollisionAreaMap::collision(CCharacter* pChara)
 		}
 	}
 }
+
+/**
+* @desc 衝突判定
+* @param 衝突判定のキャラクター
+*/
+void CCollisionAreaLine::collision(CCharacter* pChara)
+{
+	//領域分繰り返す
+	for (CCollisionTerritory* pTerritory : (*this->m_pTerritories))
+	{
+		//基準点分繰り返す
+		for (CCollisionBasePoint* pBasePt : (*this->m_pBasePoints))
+		{
+			//基準点の中に登録されている衝突判定領域タイプが一致したらその基準点で衝突判定を行う
+			if (pBasePt->m_type == pTerritory->m_type)
+			{
+				pTerritory->collision(pChara, pBasePt->m_pt);
+			}
+		}
+	}
+}
+
+
+//======================================
+// 下にあるラインとの衝突判定
+//======================================
+/**
+* @desc 衝突判定
+* @param 衝突対象
+* @param 基準点
+*/
+void CCollisionTerritoryLineBottom::collision(CCharacter* pChara, cocos2d::Point basePt)
+{
+
+	//下に移動しているかどうかをチェック
+	if (pChara->m_pMove->m_vel.y < 0.0f)
+	{
+		enum LINE
+		{
+			FRONT = 0,
+			CENTER = 1,
+			BACK = 2,
+		};
+
+		float floatGround = 0.0f;
+
+		switch (pChara->m_intCurrentLine)
+		{
+		case FRONT:		floatGround = 32.0f;
+						break;
+		case CENTER:
+						floatGround = 96.0f;
+						break;
+		case BACK:		
+						floatGround = 160.0f;
+						break;
+		}
+		//下にライン端があるかどうかをチェック
+		if ((pChara->m_pMove->m_pos.y + pChara->m_pBody->m_bottom) < floatGround)
+		{
+			//イベントコールバックの呼び出し
+			this->callEventCallback(pChara);
+
+			//めり込んだ分の計算
+			float boundary = (pChara->m_pMove->m_pos.y + pChara->m_pBody->m_bottom) - floatGround;
+
+			//最終的に戻す値
+			pChara->m_pMove->m_pos.y -= boundary;
+
+			//リセットする値
+			pChara->m_pMove->m_vel.y = 0.0f;
+			pChara->m_pMove->m_accele.y = 0.0f;
+		}
+	}
+}
+//EOF

@@ -16,7 +16,7 @@ CNoteBlockGimmickCharacter::~CNoteBlockGimmickCharacter()
 }
 
 //状態チェック
-void CNoteBlockGimmickCharacter::checkState()
+void CNoteBlockGimmickCharacter::checkState(float deltaTime)
 {
 	switch (this->m_state)
 	{

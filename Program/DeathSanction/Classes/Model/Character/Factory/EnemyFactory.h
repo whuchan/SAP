@@ -1,4 +1,5 @@
 #pragma once
+#include "CharacterFactory.h"
 #include"../EnemyCharacter.h"
 #include "Model\Map\Map.h"
 
@@ -38,452 +39,370 @@ public:
 	*/
 	std::vector<CCollisionArea*>* getCollisionAreas(void)override;
 
-};
-
-//=======================================================
-//
-// 敵工場(抽象)クラス
-//
-//=======================================================
-class CEnemyFactory
-{
-public:
 	/**
-	* @desc コンストラクタ
+	* @desc 状態遷移マシンの取得
+	* @return 状態遷移マシンのインスタンス
 	*/
-	CEnemyFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	virtual ~CEnemyFactory();
-
-	/**
-	* @desc 敵キャラクターインスタンス生成
-	* @return 敵キャラクターインスタンス
-	*/
-	virtual CEnemyCharacter* create(float posX,float posY);
-
-protected:
-
-	/**
-	* @desc
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual CEnemyCharacter* createEnemy(void) = 0;
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	virtual void settingMove(CEnemyCharacter* pCharacter, float posX, float posY) = 0;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingTexture(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingAnimations(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc 物理演算データ群の設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingPhysicals(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc アクションデータ群の設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingActions(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc 実体データの設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingBody(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	virtual void settingCollisionAreas(CEnemyCharacter* pCharacter) = 0;
-	/**
-	* @desc 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	virtual void settingInitialize(CEnemyCharacter* pCharacter) = 0;
+	virtual CStateMachine* getStateMachine(void)override;
 
 };
+
 
 //=======================================================
 //
 // 敵生成工場
 //
 //=======================================================
-class CEnemyCreateFactory : public CEnemyFactory
+template <class T>
+class CEnemyCreateFactory : public CCharacterFactory
 {
 public:
 	/**
 	* @desc コンストラクタ
 	*/
-	CEnemyCreateFactory();
+	CEnemyCreateFactory()
+	{
+
+	}
+	
 	/**
 	* @desc デストラクタ
 	*/
-	virtual ~CEnemyCreateFactory();
+	virtual ~CEnemyCreateFactory()
+	{
+
+	}
 
 protected:
-	virtual CEnemyCharacter* createEnemy(void)override;
+	virtual CCharacter* createCharacter(void)
+	{
+		//敵キャラクターの生成
+		CCharacter* pCharacter = T::create();
 
+		//敵キャラクター部品生成工場の生成
+		CEnemyPartsFactory factory;
+
+		//移動データの設定
+		pCharacter->addMove(factory.getMove());
+		//実体データの設定
+		pCharacter->addBody(factory.getBody());
+		//衝突判定データ群の設定
+		pCharacter->addCollisionAreas(factory.getCollisionAreas());
+		//状態遷移マシンの設定
+		pCharacter->addStateMachine(factory.getStateMachine());
+
+
+		return pCharacter;
+	}
 };
 
 
-//=======================================================
+////=======================================================
+////
+//// クリボー工場クラス
+////
+////=======================================================
+//class CKuriboFactory : public CEnemyCreateFactory
+//{
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	*/
+//	CKuriboFactory();
+//	/**
+//	* @desc デストラクタ
+//	*/
+//	~CKuriboFactory();
+//protected:
+//	/**
+//	* @desc	 移動データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	* @param 初期座標X
+//	* @param 初期座標Y
+//	*/
+//	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
+//	/**
+//	* @desc	 テクスチャーを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingTexture(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アニメーションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingAnimations(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 物理演算データ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingPhysicals(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アクションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingActions(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 実体データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingBody(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc 衝突判定領域データ群の設定
+//	* @param 衝突判定領域データ群
+//	*/
+//	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 初期化処理
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingInitialize(CEnemyCharacter* pCharacter)override;
+//};
 //
-// クリボー工場クラス
+////=======================================================
+////
+//// 緑ノコノコ生成工場クラス
+////
+////=======================================================
+//class CGreenNokoNokoFactory : public CEnemyCreateFactory
+//{
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	*/
+//	CGreenNokoNokoFactory();
+//	/**
+//	* @desc デストラクタ
+//	*/
+//	~CGreenNokoNokoFactory();
+//protected:
+//	/**
+//	* @desc	 移動データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	* @param 初期座標X
+//	* @param 初期座標Y
+//	*/
+//	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
+//	/**
+//	* @desc	 テクスチャーを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingTexture(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アニメーションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingAnimations(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 物理演算データ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingPhysicals(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アクションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingActions(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 実体データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingBody(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc 衝突判定領域データ群の設定
+//	* @param 衝突判定領域データ群
+//	*/
+//	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 初期化処理
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingInitialize(CEnemyCharacter* pCharacter)override;
+//};
 //
-//=======================================================
-class CKuriboFactory : public CEnemyCreateFactory
-{
-public:
-	/**
-	* @desc コンストラクタ
-	*/
-	CKuriboFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	~CKuriboFactory();
-protected:
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingTexture(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingAnimations(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 物理演算データ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingPhysicals(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アクションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingActions(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 実体データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingBody(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingInitialize(CEnemyCharacter* pCharacter)override;
-};
+////=======================================================
+////
+//// 緑パタパタ生成工場クラス
+////
+////=======================================================
+//class CGreenPataPataFactory : public CEnemyCreateFactory
+//{
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	*/
+//	CGreenPataPataFactory();
+//	/**
+//	* @desc デストラクタ
+//	*/
+//	~CGreenPataPataFactory();
+//protected:
+//	/**
+//	* @desc	 移動データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	* @param 初期座標X
+//	* @param 初期座標Y
+//	*/
+//	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
+//	/**
+//	* @desc	 テクスチャーを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingTexture(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アニメーションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingAnimations(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 物理演算データ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingPhysicals(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アクションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingActions(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 実体データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingBody(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc 衝突判定領域データ群の設定
+//	* @param 衝突判定領域データ群
+//	*/
+//	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 初期化処理
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingInitialize(CEnemyCharacter* pCharacter)override;
+//};
+//
+//
+////=======================================================
+////
+//// キラー生成工場クラス
+////
+////=======================================================
+//class CKillerFactory : public CEnemyCreateFactory
+//{
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	*/
+//	CKillerFactory();
+//	/**
+//	* @desc デストラクタ
+//	*/
+//	~CKillerFactory();
+//protected:
+//	/**
+//	* @desc	 移動データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	* @param 初期座標X
+//	* @param 初期座標Y
+//	*/
+//	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
+//	/**
+//	* @desc	 テクスチャーを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingTexture(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アニメーションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingAnimations(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 物理演算データ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingPhysicals(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アクションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingActions(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 実体データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingBody(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc 衝突判定領域データ群の設定
+//	* @param 衝突判定領域データ群
+//	*/
+//	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 初期化処理
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingInitialize(CEnemyCharacter* pCharacter)override;
+//};
+//
+////=======================================================
+////
+//// キラー発射砲台生成工場クラス
+////
+////=======================================================
+//class CKillerBatteryFactory : public CEnemyCreateFactory
+//{
+//public:
+//	/**
+//	* @desc コンストラクタ
+//	*/
+//	CKillerBatteryFactory();
+//	/**
+//	* @desc デストラクタ
+//	*/
+//	~CKillerBatteryFactory();
+//protected:
+//	/**
+//	* @desc	 移動データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	* @param 初期座標X
+//	* @param 初期座標Y
+//	*/
+//	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
+//	/**
+//	* @desc	 テクスチャーを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingTexture(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アニメーションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingAnimations(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 物理演算データ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingPhysicals(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 アクションデータ群を設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingActions(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 実体データを設定
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingBody(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc 衝突判定領域データ群の設定
+//	* @param 衝突判定領域データ群
+//	*/
+//	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
+//	/**
+//	* @desc	 初期化処理
+//	* @param 敵キャラクターインスタンスのアドレス
+//	*/
+//	void settingInitialize(CEnemyCharacter* pCharacter)override;
+//};
+//
 
-//=======================================================
-//
-// 緑ノコノコ生成工場クラス
-//
-//=======================================================
-class CGreenNokoNokoFactory : public CEnemyCreateFactory
-{
-public:
-	/**
-	* @desc コンストラクタ
-	*/
-	CGreenNokoNokoFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	~CGreenNokoNokoFactory();
-protected:
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingTexture(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingAnimations(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 物理演算データ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingPhysicals(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アクションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingActions(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 実体データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingBody(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingInitialize(CEnemyCharacter* pCharacter)override;
-};
 
-//=======================================================
-//
-// 緑パタパタ生成工場クラス
-//
-//=======================================================
-class CGreenPataPataFactory : public CEnemyCreateFactory
-{
-public:
-	/**
-	* @desc コンストラクタ
-	*/
-	CGreenPataPataFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	~CGreenPataPataFactory();
-protected:
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingTexture(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingAnimations(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 物理演算データ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingPhysicals(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アクションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingActions(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 実体データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingBody(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingInitialize(CEnemyCharacter* pCharacter)override;
-};
-
-
-//=======================================================
-//
-// キラー生成工場クラス
-//
-//=======================================================
-class CKillerFactory : public CEnemyCreateFactory
-{
-public:
-	/**
-	* @desc コンストラクタ
-	*/
-	CKillerFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	~CKillerFactory();
-protected:
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingTexture(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingAnimations(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 物理演算データ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingPhysicals(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アクションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingActions(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 実体データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingBody(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingInitialize(CEnemyCharacter* pCharacter)override;
-};
-
-//=======================================================
-//
-// キラー発射砲台生成工場クラス
-//
-//=======================================================
-class CKillerBatteryFactory : public CEnemyCreateFactory
-{
-public:
-	/**
-	* @desc コンストラクタ
-	*/
-	CKillerBatteryFactory();
-	/**
-	* @desc デストラクタ
-	*/
-	~CKillerBatteryFactory();
-protected:
-	/**
-	* @desc	 移動データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	* @param 初期座標X
-	* @param 初期座標Y
-	*/
-	void settingMove(CEnemyCharacter* pCharacter, float posX, float posY)override;
-	/**
-	* @desc	 テクスチャーを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingTexture(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アニメーションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingAnimations(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 物理演算データ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingPhysicals(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 アクションデータ群を設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingActions(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 実体データを設定
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingBody(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc 衝突判定領域データ群の設定
-	* @param 衝突判定領域データ群
-	*/
-	void settingCollisionAreas(CEnemyCharacter* pCharacter)override;
-	/**
-	* @desc	 初期化処理
-	* @param 敵キャラクターインスタンスのアドレス
-	*/
-	void settingInitialize(CEnemyCharacter* pCharacter)override;
-};
-
-
-
-//=======================================================
-//
-// 敵工事管理クラス
-//
-// シングルトン
-//
-//=======================================================
-class CEnemyFactoryManager
-{
-private:
-	/*
-	* @desc コンストラクタ
-	*/
-	CEnemyFactoryManager();
-public:
-	/**
-	* @desc デストラクタ
-	*/
-	~CEnemyFactoryManager();
-
-	/**
-	* @desc シングルトン：：インスタンスの取得
-	* @return シングルトンインスタンス
-	*/
-	static CEnemyFactoryManager* getInstance(void);
-	/**
-	* @desc 敵キャラクターを生成
-	* @param 生成タイプ
-	*/
-	CEnemyCharacter* create(ENEMY_TYPE type, float posX, float posY);
-	/**
-	* @desc シングルトンインスタンスの解放
-	*/
-	static void removeInstance();
-
-private:
-	//敵生成工場群
-	std::map<ENEMY_TYPE,CEnemyFactory*>* m_pFactories = NULL;
-	//シングルトンインスタンス
-	static CEnemyFactoryManager* m_pSharedManager;
-};
+//EOF

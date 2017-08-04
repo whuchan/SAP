@@ -1,6 +1,6 @@
 #include"LaunchTrigger.h"
 #include"Model\Character\Character.h"
-#include "Model\Character\Factory\EnemyFactory.h"
+#include "Model\Character\Factory\EnemyFactoryManager.h"
 #include "Model\Character\Factory\BulletFactory.h"
 #include "Model\Character\Factory\GimmickFactory.h"
 
@@ -48,110 +48,110 @@ CCharacter* CEnemyLaunchTrigger::action()
 }
 
 
-//=============================================================
+////=============================================================
+////
+//// ギミック出撃トリガー
+//// ギミック出撃データをトリガーにして敵出撃というイベントを実行させる
+////
+////=============================================================
+////デストラクタ
+//CGimmickLaunchTrigger::~CGimmickLaunchTrigger()
+//{
+//	SAFE_DELETE(this->m_pLaunchData);
+//}
 //
-// ギミック出撃トリガー
-// ギミック出撃データをトリガーにして敵出撃というイベントを実行させる
+///**
+//* @desc イベントを実行できるかどうか
+//* @return true...実行可能
+//*/
+//bool CGimmickLaunchTrigger::isTrigger()
+//{
+//	if (this->m_pLaunchData == NULL)
+//	{
+//		return false;
+//	}
+//	return true;
+//}
 //
-//=============================================================
-//デストラクタ
-CGimmickLaunchTrigger::~CGimmickLaunchTrigger()
-{
-	SAFE_DELETE(this->m_pLaunchData);
-}
-
-/**
-* @desc イベントを実行できるかどうか
-* @return true...実行可能
-*/
-bool CGimmickLaunchTrigger::isTrigger()
-{
-	if (this->m_pLaunchData == NULL)
-	{
-		return false;
-	}
-	return true;
-}
-
-/**
-* @desc 設定されている敵出撃データを元に敵を生成する
-*/
-CCharacter* CGimmickLaunchTrigger::action()
-{
-	//敵を生成
-	CCharacter* pGimmickChara = CGimmickFactoryManager::getInstance()->create(
-		this->m_pLaunchData->m_type,
-		this->m_pLaunchData->m_pos.x,
-		this->m_pLaunchData->m_pos.y);
-
-	//発射し終わったかどうかのフラグを立てる
-	this->m_activeFlag = false;
-
-	return pGimmickChara;
-}
-
-
-
-//=============================================
+///**
+//* @desc 設定されている敵出撃データを元に敵を生成する
+//*/
+//CCharacter* CGimmickLaunchTrigger::action()
+//{
+//	//敵を生成
+//	CCharacter* pGimmickChara = CGimmickFactoryManager::getInstance()->create(
+//		this->m_pLaunchData->m_type,
+//		this->m_pLaunchData->m_pos.x,
+//		this->m_pLaunchData->m_pos.y);
 //
-// 弾出撃トリガー
-//　弾出撃データをトリガーとして弾出撃というイベントを実行させる
+//	//発射し終わったかどうかのフラグを立てる
+//	this->m_activeFlag = false;
 //
-//=============================================
-
-/**
-* @desc コンストラクタ
-* @param 敵出撃データ
-* @tips 敵出撃データをトリガーとして設定する
-*/
-CBulletLaunchTrigger::CBulletLaunchTrigger(CBulletLaunchData* pLaunchData)
-	: m_pLaunchData(pLaunchData)
-{
-
-}
-
-//デストラクタ
-CBulletLaunchTrigger::~CBulletLaunchTrigger()
-{
-
-	SAFE_DELETE(this->m_pLaunchData);
-}
-
-
-/**
-* @desc 設定されているトリガーがイベントを行えるかどうか
-* @param true...イベントの実行が可能
-* @tips イベントの実行可能条件は派生クラスによって変化する
-*/
-
-
-bool CBulletLaunchTrigger::isTrigger()
-{
-	if (this->m_pLaunchData == NULL)
-	{
-		return false;
-	}
-	return true;
-}
-
-/**
-* @desc トリガーイベントの実行
-*		ここでのイベントはキャラクターの生成
-*/
-CCharacter* CBulletLaunchTrigger::action()
-{
-	//敵を生成
-	CCharacter* pBulletChara = CBulletFactoryManager::getInstance()->create(
-																			this->m_pLaunchData->m_type,
-																			this->m_pLaunchData->m_pos.x,
-																			this->m_pLaunchData->m_pos.y,
-																			this->m_pLaunchData->m_shotLaunchVector);
-
-	//発射し終わったかどうかのフラグを立てる
-	this->m_activeFlag = false;
-
-	return pBulletChara;
-}
+//	return pGimmickChara;
+//}
+//
+//
+//
+////=============================================
+////
+//// 弾出撃トリガー
+////　弾出撃データをトリガーとして弾出撃というイベントを実行させる
+////
+////=============================================
+//
+///**
+//* @desc コンストラクタ
+//* @param 敵出撃データ
+//* @tips 敵出撃データをトリガーとして設定する
+//*/
+//CBulletLaunchTrigger::CBulletLaunchTrigger(CBulletLaunchData* pLaunchData)
+//	: m_pLaunchData(pLaunchData)
+//{
+//
+//}
+//
+////デストラクタ
+//CBulletLaunchTrigger::~CBulletLaunchTrigger()
+//{
+//
+//	SAFE_DELETE(this->m_pLaunchData);
+//}
+//
+//
+///**
+//* @desc 設定されているトリガーがイベントを行えるかどうか
+//* @param true...イベントの実行が可能
+//* @tips イベントの実行可能条件は派生クラスによって変化する
+//*/
+//
+//
+//bool CBulletLaunchTrigger::isTrigger()
+//{
+//	if (this->m_pLaunchData == NULL)
+//	{
+//		return false;
+//	}
+//	return true;
+//}
+//
+///**
+//* @desc トリガーイベントの実行
+//*		ここでのイベントはキャラクターの生成
+//*/
+//CCharacter* CBulletLaunchTrigger::action()
+//{
+//	//敵を生成
+//	CCharacter* pBulletChara = CBulletFactoryManager::getInstance()->create(
+//																			this->m_pLaunchData->m_type,
+//																			this->m_pLaunchData->m_pos.x,
+//																			this->m_pLaunchData->m_pos.y,
+//																			this->m_pLaunchData->m_shotLaunchVector);
+//
+//	//発射し終わったかどうかのフラグを立てる
+//	this->m_activeFlag = false;
+//
+//	return pBulletChara;
+//}
 
 
 

@@ -9,6 +9,9 @@ CCharacter::CCharacter()
 //デストラクタ
 CCharacter::~CCharacter()
 {
+	//状態遷移マシンの削除
+	SAFE_DELETE(this->m_stateMachine);
+
 	for (CCollisionArea* pCollisionArea : (*this->m_pCollisionAreas))
 	{
 		SAFE_DELETE(pCollisionArea);
@@ -87,19 +90,19 @@ bool CCharacter::init()
 void CCharacter::update(float deltaTime)
 {
 	//移動処理
-	this->moveFunc();
+	this->moveFunction(deltaTime);
 
 	//アニメーション処理
-	this->animationFunc();
+	this->animationFunction(deltaTime);
 
 	//空間との衝突判定処理
 	this->collision();
 
 	//状態チェック
-	this->checkState();
+	this->checkState(deltaTime);
 
 	//反映処理
-	this->applyFunc();
+	this->applayFunction();
 }
 
 /**
@@ -175,6 +178,23 @@ void CCharacter::addCollisionAreas(std::vector<CCollisionArea*>* pCollisionAreas
 	//新しいデータを設定する
 	this->m_pCollisionAreas = pCollisionAreas;
 }
+
+/**
+* @desc	状態遷移マシンの追加
+* @param　状態遷移マシン
+*/
+void CCharacter::addStateMachine(CStateMachine* pStateMachine)
+{
+	//既にデータが入っていたら警告する
+	if (this->m_stateMachine != NULL)
+	{
+		CCLOG("もう既に設定されています");
+		return;
+	}
+	//新しいデータを設定する
+	this->m_stateMachine = pStateMachine;
+}
+
 
 /**
 * @desc 移動データの取得
@@ -273,6 +293,24 @@ void CCharacterAggregate::set(std::vector<CCharacter*>* pCharacters)
 std::vector<CCharacter*>* CCharacterAggregate::get(void)
 {
 	return this->m_pCharacters;
+}
+
+/*
+* @desc プレイヤーキャラクターを設定
+* @param プレイヤーキャラクターのインスタンス
+*/
+void CCharacterAggregate::setPlayer(CCharacter* const pPlayer)
+{
+	this->m_pPlayer = pPlayer;
+}
+
+/*
+* @desc プレイヤーキャラクターを取得
+* @return プレイヤーキャラクターのインスタンス
+*/
+CCharacter* CCharacterAggregate::getPlayer(void)
+{
+	return this->m_pPlayer;
 }
 
 /**

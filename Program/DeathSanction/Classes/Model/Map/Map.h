@@ -18,18 +18,17 @@ enum class BLOCK_TYPE : int
 //================================================================
 enum class ENEMY_TYPE :int
 {
-	NONE		= 0,		//何もなし
-	KURIBO		= 102,	//クリボー
-	NOKONOKO	= 108,//ノコノコ
-	PATAPATA	= 109,//パタパタ
-	KILLERBATTERY = 124,//キラー砲台
-	KILLER		= 1124,//キラー
+	NONE			= 0,		//何もなし
+	HENCHMAN_TYPE_A = 102,	//クリボー
+	LEATHERFACE		= 108,//ノコノコ
+	PATAPATA		= 109,//パタパタ
+	KILLERBATTERY	= 124,//キラー砲台
+	KILLER			= 1124,//キラー
 };
 
 //================================================================
 // ギミックの種類
 //================================================================
-
 enum class GIMMICK_TYPE :int
 {
 	NONE		= 0,		//何もなし
@@ -43,12 +42,43 @@ enum class GIMMICK_TYPE :int
 	HATENA		= 159,		//キャラクター出現
 };
 
+//================================================================
+// ダメージの種類
+// ブロック番号に依存
+//================================================================
+enum class DAMAGE_TYPE :int
+{
+	NONE = 0,		//何もなし
+	PLAYER_ATTACK_1 = 1,
+};
+
+//================================================================
+// エフェクトの種類
+// ブロック番号に依存
+//================================================================
+enum class EFFECT_TYPE :int
+{
+	NONE = 0,		//何もなし
+	PLAYER_HIT_1 = 1,
+};
+
+//================================================================
+// イベントの種類
+// ブロック番号に依存
+//================================================================
+enum class EVENT_TYPE :int
+{
+	NONE = 0,		//何もなし
+	BOSS_LATHERFACE = 1,//ボスレザーフェイス
+};
+
+
 
 //================================================================
 // 前方宣言
 //================================================================
 class CEnemyLaunchData;
-class CGimmickLaunchData;
+//class CGimmickLaunchData;
 
 //================================================================
 // マップクラス
@@ -147,7 +177,7 @@ public:
 	/**
 	* @desc ギミックの出撃判定
 	*/
-	void checkGimmickLaunch(float posX, float posY);
+//	void checkGimmickLaunch(float posX, float posY);
 
 
 	/**
@@ -160,7 +190,7 @@ public:
 	* @desc ギミック出撃後の敵出撃レイヤーのタイルの削除
 	* @param ギミック出撃データ
 	*/
-	void removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData);
+//	void removeLaunchGimmickBlock(CGimmickLaunchData* pLaunchData);
 
 
 private:
@@ -170,7 +200,7 @@ private:
 
 	//ギミック出撃ライン(マップの２次元配列上のタイルのｘ位置)
 	//０は画面の左端
-	int m_lauchGimmickLine = 0;
+//	int m_lauchGimmickLine = 0;
 };
 
 //==============================================================

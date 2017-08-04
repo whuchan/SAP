@@ -35,7 +35,7 @@ void CHatenaBlockGimmickCharacter::hitsPlayerCharacter(CCharacter* pChara)
 			//==================================
 			//敵出撃データ（出撃の情報）の生成
 			CEnemyLaunchData* pLaunchData = new CEnemyLaunchData(
-				ENEMY_TYPE::NOKONOKO,
+				ENEMY_TYPE::HENCHMAN_TYPE_A,
 				this->m_pMove->m_pos
 			);
 

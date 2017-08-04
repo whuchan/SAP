@@ -10,6 +10,12 @@
 #include "cocos2d.h"
 #include "Constants.h"
 
+struct InputData
+{
+	bool m_boolTrigger = false;
+	bool m_boolUse = false;
+};
+
 /*
  *	入力タイプ
  */
@@ -27,6 +33,8 @@ enum class kInputType : int {
 	A		= 9,
 	S		= 10,
 	D		= 11,
+	W		= 12,
+	MAX_INPUT_TYPE
 } ;
 
 /*
@@ -45,9 +53,24 @@ public:
 	bool m_x = false ;		// x キー
 	bool m_c = false ;		// c キー
 	
+	bool m_w = false;		// w キー
 	bool m_a = false ;		// a キー
 	bool m_s = false ;		// s キー
 	bool m_d = false ;		// d キー
+
+	InputData m_arrayInputTrigger[(int)kInputType::MAX_INPUT_TYPE] = {};
+	bool m_arrayInputBuffer[(int)kInputType::MAX_INPUT_TYPE] = {};
+
+	/**
+	* @desc コンストラクタ
+	*/
+	CInputFlag();
+
+	/**
+	* @desc 更新処理
+	*/
+	void update();
+
 
 	/**
 	 *	@desc	値のクリア
@@ -73,6 +96,13 @@ public:
 	 *			キーボードタイプでは使用する必要はない
 	 */
 	virtual bool isKeyPressed( kInputType keyType_ ) ;
+
+	/**
+	*	@desc	指定したキーのトリガー入力状態を取得
+	*	@param	キータイプ
+	*	@return	true...押されている
+	*/
+	bool getTrigger(kInputType keyType_);
 } ;
 
 

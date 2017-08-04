@@ -2,7 +2,6 @@
 //  InputManager.cpp
 //  ShootingGame
 //
-//  Created by 永瀬鈴久 on 2014/11/20.
 //
 //
 
@@ -13,6 +12,30 @@
  *	キーボード入力フラグ
  *
  */
+
+ /**
+ * @desc コンストラクタ
+ */
+CInputFlag::CInputFlag()
+{
+
+}
+
+/**
+* @desc 更新処理
+*/
+void CInputFlag::update()
+{
+	for(InputData &inputData : this->m_arrayInputTrigger)
+	{
+		if (inputData.m_boolUse)
+		{
+			inputData.m_boolTrigger = false;
+		}
+	}
+}
+
+
 /**
  *	@desc	値のクリア
  */
@@ -28,6 +51,7 @@ void CInputFlag::clear() {
 	this->m_x = false ;
 	this->m_c = false ;
 	
+	this->m_w = false;
 	this->m_a = false ;
 	this->m_s = false ;
 	this->m_d = false ;
@@ -52,11 +76,19 @@ void CInputFlag::up( kInputType keyType_ ) {
 		case kInputType::X : this->m_x = true ; break ;
 		case kInputType::C : this->m_c = true ; break ;
 		
+		case kInputType::W: this->m_w = true; break;
 		case kInputType::A : this->m_a = true ; break ;
 		case kInputType::S : this->m_s = true ; break ;
 		case kInputType::D : this->m_d = true ; break ;
 		
 		default: break ;
+	}
+
+	if (!this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger && 
+		!this->m_arrayInputBuffer[(int)keyType_])
+	{
+		this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger = true;
+		this->m_arrayInputBuffer[(int)keyType_] = true;
 	}
 }
 /**
@@ -76,12 +108,17 @@ void CInputFlag::down( kInputType keyType_ ) {
 		case kInputType::X : this->m_x = false ; break ;
 		case kInputType::C : this->m_c = false ; break ;
 		
+		case kInputType::W: this->m_z = false; break;
 		case kInputType::A : this->m_a = false ; break ;
 		case kInputType::S : this->m_s = false ; break ;
 		case kInputType::D : this->m_d = false ; break ;
 		
 		default: break ;
 	}
+
+	this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger= false;
+	this->m_arrayInputTrigger[(int)keyType_].m_boolUse = false;
+	this->m_arrayInputBuffer[(int)keyType_] = false;
 }
 
 /**
@@ -105,6 +142,7 @@ bool CInputFlag::isKeyPressed( kInputType keyType_ ) {
 		case kInputType::X : return this->m_x ; break ;
 		case kInputType::C : return this->m_c ; break ;
 		
+		case kInputType::W: return this->m_w; break;
 		case kInputType::A : return this->m_a ; break ;
 		case kInputType::S : return this->m_s ; break ;
 		case kInputType::D : return this->m_d ; break ;
@@ -116,6 +154,21 @@ bool CInputFlag::isKeyPressed( kInputType keyType_ ) {
 }
 
 
+/**
+*	@desc	指定したキーのトリガー入力状態を取得
+*	@param	キータイプ
+*	@return	true...押されている
+*/
+bool CInputFlag::getTrigger(kInputType keyType_)
+{
+	if (this->m_arrayInputTrigger[(int)keyType_].m_boolTrigger)
+	{
+		this->m_arrayInputTrigger[(int)keyType_].m_boolUse = true;
+		return true;
+	}
+
+	return false;
+}
 
 
 /*
@@ -218,6 +271,12 @@ kInputType CInputManager::changeToInputTypeFromKeyCode( cocos2d::EventKeyboard::
 	{
 		// C キーを返す
 		return kInputType::C ;
+	}
+	// A キーかどうか判定
+	else if (cocos2d::EventKeyboard::KeyCode::KEY_W == keyCode_)
+	{
+		// A キーを返す
+		return kInputType::W;
 	}
 	// A キーかどうか判定
 	else if ( cocos2d::EventKeyboard::KeyCode::KEY_A == keyCode_ )

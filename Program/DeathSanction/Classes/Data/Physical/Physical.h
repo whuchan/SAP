@@ -1,5 +1,6 @@
 #pragma once
 #include "Data/Move//Move.h"
+#include "cocos2d.h"
 
 //===============================================
 //•¨—‰‰ŽZƒNƒ‰ƒX
@@ -11,7 +12,7 @@ public:
 	{
 
 	}
-	virtual void update(CMove* pMove) = 0;
+	virtual void update(float deltaTime,CMove* pMove) = 0;
 };
 
 //===============================================
@@ -21,23 +22,23 @@ class CPhysicalGravity : public CPhysical
 {
 public:
 	//d—ÍŒW”
-	constexpr static const float GRAVITY = -0.5f;
+	constexpr static const float GRAVITY = -980.0f;
 
 private:
 	float m_gravity = 0.0f;
 
 public:
-	CPhysicalGravity(float gravity = -0.5f)
+	CPhysicalGravity(float gravity = GRAVITY)
 	{
 		this->m_gravity = gravity;
 	}
 
 
-	void update(CMove* pMove)override
+	void update(float deltaTime,CMove* pMove)override
 	{
 		//‚™Ž²‚Ì‘¬“x‚ðŒvŽZid—ÍŒvŽZj
 		//pMove->m_vel.y += pMove->m_accele.y + CPhysicalGravity::GRAVITY;
-		pMove->m_vel.y += pMove->m_accele.y + this->m_gravity;
+		pMove->m_vel.y += (pMove->m_accele.y + this->m_gravity) * deltaTime;
 	}
 };
 
@@ -63,7 +64,7 @@ public:
 	/**
 	* @desc XVˆ—(–€ŽC‚ÌŒvŽZ)
 	*/
-	void update(CMove* pMove)override
+	void update(float deltaTime,CMove* pMove)override
 	{
 		//–€ŽC
 		float friction = 0.0f;
@@ -93,7 +94,7 @@ public:
 		}
 
 		//‚˜Ž²‚Ì‘¬“x‚ðŒvŽZ(–€ŽCŒvŽZ)
-		pMove->m_vel.x += pMove->m_accele.x + friction;
+		pMove->m_vel.x += (pMove->m_accele.x + friction) * deltaTime;
 
 		//xŽ²‚ÌÅ‚‘¬“x‚ðŒvŽZ
 		if (pMove->m_vel.x < -this->m_maxSpeed)

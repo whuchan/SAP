@@ -1,6 +1,6 @@
 #pragma once
 #include "Model\Map\Map.h"
-#include "Model\Character\BulletCharacter.h"
+//#include "Model\Character\BulletCharacter.h"
 
 //==============================================
 //　敵出撃データ
@@ -21,6 +21,7 @@ public:
 	}
 };
 
+/*
 //==============================================
 //　弾出撃データ
 //==============================================
@@ -42,22 +43,23 @@ public:
 
 	}
 };
+*/
 
-//==============================================
-//　ギミック出撃データ
-//==============================================
-class CGimmickLaunchData
-{
-public:
-	//ギミックのタイプ
-	GIMMICK_TYPE m_type;
-	//出撃位置
-	cocos2d::Point m_pos;
-
-	//コンストラクタ
-	CGimmickLaunchData(GIMMICK_TYPE type, cocos2d::Point pos)
-		:m_type(type), m_pos(pos)
-	{
-
-	}
-};
+////==============================================
+////　ギミック出撃データ
+////==============================================
+//class CGimmickLaunchData
+//{
+//public:
+//	//ギミックのタイプ
+//	GIMMICK_TYPE m_type;
+//	//出撃位置
+//	cocos2d::Point m_pos;
+//
+//	//コンストラクタ
+//	CGimmickLaunchData(GIMMICK_TYPE type, cocos2d::Point pos)
+//		:m_type(type), m_pos(pos)
+//	{
+//
+//	}
+//};

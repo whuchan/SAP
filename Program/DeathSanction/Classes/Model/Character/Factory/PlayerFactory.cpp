@@ -1,5 +1,10 @@
 #include"PlayerFactory.h"
 #include"Model\Character\BulletCharacter.h"
+#include "Data\StateMachine\Player\PlayerStateIdle.h"
+#include "Data\StateMachine\Player\PlayerStateWalk.h"
+#include "Data\StateMachine\Player\PlayerStateLineUp.h"
+#include "Data\StateMachine\Player\PlayerStateLineDown.h"
+#include "Data\StateMachine\Player\PlayerStateAttack1.h"
 
 
 /**
@@ -41,6 +46,8 @@ CPlayerCharacter* CPlayerFactory::create(void)
 	this->settingTexture(pPlayer);
 	//衝突判定データ群の設定
 	this->settingCollisionAreas(pPlayer);
+	//状態遷移マシンの設定
+	this->settingStateMachine(pPlayer);
 	//初期設定
 	this->settingInitialize(pPlayer);
 
@@ -50,7 +57,7 @@ CPlayerCharacter* CPlayerFactory::create(void)
 	* 計算データのままで起動すると１フレームズレが発生するので
 	*　初期化時の最後に値をSpriteに反映する
 	*/
-	pPlayer->applyFunc();
+	pPlayer->applayFunction();
 
 
 	return pPlayer;
@@ -98,7 +105,8 @@ CPlayerCharacter*  CPlayerCreateFactory::createPlayer(void)
 	//衝突判定データ群の設定
 	pPlayer->addCollisionAreas(pFactory->getCollisionAreas());
 
-
+	//状態遷移マシンの設定
+	pPlayer->addStateMachine(pFactory->getStateMachine());
 
 	//プレイヤーキャラクター部品生成工場の解放
 	SAFE_DELETE(pFactory);
@@ -155,6 +163,15 @@ std::vector<CCollisionArea*>* CPlayerPartsFactory::getCollisionAreas(void)
 
 
 /**
+* @desc 状態遷移マシンの取得
+* @return 状態遷移マシンのインスタンス
+*/
+CStateMachine* CPlayerPartsFactory::getStateMachine()
+{
+	return new CStateMachine();
+}
+
+/**
 * @desc コンストラクタ
 */
 CBasePlayerFactory::CBasePlayerFactory()
@@ -206,7 +223,7 @@ void CBasePlayerFactory::settingAnimations(CPlayerCharacter* pPlayer)
 	//直立アニメーションに設定する為のチップデータの設定
 	pointerAnimation->addChipData(new CChip(0, 0, 64, 64));
 
-	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::STAND] = pointerAnimation;
+	pPlayer->m_mapAnimation[(int)CPlayerCharacter::STATE::IDLE] = pointerAnimation;
 
 	pointerAnimation = new CChipListAnimation(10, true);
 
@@ -245,7 +262,7 @@ void CBasePlayerFactory::settingPhysicals(CPlayerCharacter* pPlayer)
 
 	//重力演算の設定
 	pointerPhysical->push_back(new CPhysicalGravity());
-	pointerPhysical->push_back(new CPhysicalFriction(6.0f));
+	//pointerPhysical->push_back(new CPhysicalFriction(2.0f));
 	//重力演算の設定
 	pPlayer->m_mapPhysical[pPlayer->m_intPhysicalState] = pointerPhysical;
 }
@@ -264,16 +281,18 @@ void CBasePlayerFactory::settingActions(CPlayerCharacter* pPlayer)
 	(*mapAction)[(int)CPlayerCharacter::ACTION::JUMP] = new CActionJump(3.0f, 4);
 
 	//通常弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_NORMAL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20);
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_NORMAL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::NORMAL, 20);
 
-	//カスタム弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_CUSTOM_BULLET] = new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20);
+	////カスタム弾発射アクションを設定
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_CUSTOM_BULLET] = new CActionShotBullet((int)BULLET_TYPE::CUSTOM, 20);
 
-	//ファイアーボール弾発射アクションを設定
-	(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_FIREBALL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20);
+	////ファイアーボール弾発射アクションを設定
+	//(*mapAction)[(int)CPlayerCharacter::ACTION::SHOT_FIREBALL_BULLET] = new CActionShotBullet((int)BULLET_TYPE::FIREBALL, 20);
 
 	pPlayer->m_mapAction[pPlayer->m_intActionState] = mapAction;
 }
+
+
 /**
 * @desc	 実体データを設定
 * @param プレイヤーキャラクターインスタンスのアドレス
@@ -318,52 +337,100 @@ void CBasePlayerFactory::settingCollisionAreas(CPlayerCharacter* pCharacter)
 	//画面端の衝突空間を取り付ける
 	pCollisionAreas->push_back(pEndOfScreenArea);
 
+	////========================================
+	//// マップ衝突空間の生成
+	////========================================
+	//CCollisionArea* pMapArea = new CCollisionAreaMap();
+
+	////マップチップ衝突空間に領域を設定
+
+	////下のマップチップ領域を生成
+	//CCollisionTerritory* pMapChipBottomTerritory = new CCollisionTerritoryMapChipBottom();
+	////下のマップチップ領域と衝突した際のイベントコールバックを設定
+	//pMapChipBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
+	////下のマップチップ領域を設定
+	//pMapArea->addTerritory(pMapChipBottomTerritory);
+	////上のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipTop());
+	////右のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipRight());
+	////左のマップチップ領域を設定
+	//pMapArea->addTerritory(new CCollisionTerritoryMapChipLeft());
+
+
+	////基準点の設定
+	////下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
+	////下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
+
+	////上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(16, 32)));
+	////上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(-16, 32)));
+
+	////右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, 16)));
+	////右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, -16)));
+
+	////左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, 16)));
+	////左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
+	//pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, -16)));
+
+
 	//========================================
-	// マップ衝突空間の生成
+	// ライン衝突空間の生成
 	//========================================
-	CCollisionArea* pMapArea = new CCollisionAreaMap();
+	CCollisionArea* pLineArea = new CCollisionAreaLine();
 
 	//マップチップ衝突空間に領域を設定
 
 	//下のマップチップ領域を生成
-	CCollisionTerritory* pMapChipBottomTerritory = new CCollisionTerritoryMapChipBottom();
+	CCollisionTerritory* pLineBottomTerritory = new CCollisionTerritoryLineBottom();
 	//下のマップチップ領域と衝突した際のイベントコールバックを設定
-	pMapChipBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
+	pLineBottomTerritory->setEventCallback(&CCharacter::collisionBottomCallback);
 	//下のマップチップ領域を設定
-	pMapArea->addTerritory(pMapChipBottomTerritory);
-	//上のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipTop());
-	//右のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipRight());
-	//左のマップチップ領域を設定
-	pMapArea->addTerritory(new CCollisionTerritoryMapChipLeft());
+	pLineArea->addTerritory(pLineBottomTerritory);
 
-
-	//基準点の設定
 	//下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
+	pLineArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(16, -32)));
 	//下のマップチップ衝突空間に衝突を行う下の基準点を設定（下に落ちないようXを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
+	pLineArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::BOTTOM, cocos2d::Point(-16, -32)));
 
-	//上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(16, 32)));
-	//上のマップチップ衝突空間に衝突を行う下の基準点を設定（Xを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::TOP, cocos2d::Point(-16, 32)));
-
-	//右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, 16)));
-	//右のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::RIGHT, cocos2d::Point(32, -16)));
-
-	//左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, 16)));
-	//左のマップチップ衝突空間に衝突を行う下の基準点を設定（Yを少しずらす）
-	pMapArea->addBasePoint(new CCollisionBasePoint(TERRITORY_TYPE::LEFT, cocos2d::Point(-32, -16)));
 
 
 	//画面端の衝突判定空間を取り付ける
-	pCollisionAreas->push_back(pMapArea);
+	pCollisionAreas->push_back(pLineArea);
 }
+
+/**
+* @desc 状態遷移マシンの設定
+* @param 取り付けるキャラクターインスタンスのアドレス
+*/
+void CBasePlayerFactory::settingStateMachine(CPlayerCharacter* pCharacter)
+{
+	//待機状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::IDLE, new CPlayerStateIdle(pCharacter));
+
+	//歩行状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::WALK, new CPlayerStateWalk(pCharacter));
+
+	//ラインアップ状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_UP, new CPlayerStateLineUp(pCharacter));
+
+	//ラインダウン状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::LINE_DOWN, new CPlayerStateLineDown(pCharacter));
+
+	//攻撃１状態
+	pCharacter->m_stateMachine->registerState((int)CPlayerCharacter::STATE::ATTACK_1, new CPlayerStateAttack1(pCharacter));
+
+
+	//初期状態の設定
+	pCharacter->m_stateMachine->setStartState((int)CPlayerCharacter::STATE::IDLE);
+}
+
 /**
 * @desc	 初期化処理
 * @param プレイヤーキャラクターインスタンスのアドレス
@@ -375,6 +442,8 @@ void CBasePlayerFactory::settingInitialize(CPlayerCharacter* pPlayer)
 
 	//有効フラグを立てる
 	pPlayer->m_activeFlag = true;
+
+	pPlayer->m_status.set(100,100, 100, 100, 100,1);
 }
 
 //=======================================================

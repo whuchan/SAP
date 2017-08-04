@@ -81,46 +81,46 @@ public:
 //=======================================================
 //　弾発射アクション
 //=======================================================
-class CActionShotBullet : public CAction
-{
-private:
-	//アクション中かどうかのフラグ true...アクション中
-	bool m_inAction = false;
-
-	//弾発射インターバル
-	int m_interval = 0;
-
-	//弾発射カウンター
-	int m_counter = 0;
-
-	//弾タイプ
-	int m_type;
-
-public:
-
-	/**
-	* @desc コンストラクタ
-	* @param 弾タイプ
-	* @param 弾発射間隔
-	*/
-	CActionShotBullet(int type, int interval);
-
-	/**
-	* @desc アクション開始
-	*/
-	void start(void)override;
-
-	/**
-	* @desc 更新処理
-	* @param アクションを行う対象のキャラクター
-	*/
-	void update(CCharacter* pChara)override;
-
-	/**
-	* @desc アクション終了
-	*/
-	void stop(void)override;
-};
+//class CActionShotBullet : public CAction
+//{
+//private:
+//	//アクション中かどうかのフラグ true...アクション中
+//	bool m_inAction = false;
+//
+//	//弾発射インターバル
+//	int m_interval = 0;
+//
+//	//弾発射カウンター
+//	int m_counter = 0;
+//
+//	//弾タイプ
+//	int m_type;
+//
+//public:
+//
+//	/**
+//	* @desc コンストラクタ
+//	* @param 弾タイプ
+//	* @param 弾発射間隔
+//	*/
+//	CActionShotBullet(int type, int interval);
+//
+//	/**
+//	* @desc アクション開始
+//	*/
+//	void start(void)override;
+//
+//	/**
+//	* @desc 更新処理
+//	* @param アクションを行う対象のキャラクター
+//	*/
+//	void update(CCharacter* pChara)override;
+//
+//	/**
+//	* @desc アクション終了
+//	*/
+//	void stop(void)override;
+//};
 
 
 //=======================================================
