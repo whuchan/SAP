@@ -4,6 +4,10 @@
 #include "Constants.h"
 #include "cocos2d.h"
 
+
+/**
+* @class イベント基底クラス
+*/
 class CEvent
 {
 public:
